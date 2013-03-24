@@ -25,7 +25,10 @@
 		7167B83816FCF89600A3C2A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7167B80F16FCF89600A3C2A2 /* UIKit.framework */; };
 		7167B83916FCF89600A3C2A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7167B81116FCF89600A3C2A2 /* Foundation.framework */; };
 		7167B84116FCF89600A3C2A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7167B83F16FCF89600A3C2A2 /* InfoPlist.strings */; };
-		7167B84416FCF89600A3C2A2 /* DPTextFieldDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7167B84316FCF89600A3C2A2 /* DPTextFieldDemoTests.m */; };
+		71C8ABCA16FD06A00086EF86 /* DPTextFieldSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABC916FD06A00086EF86 /* DPTextFieldSpecs.m */; };
+		71C8ABCC16FD08030086EF86 /* DPTextFieldToolbarSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABCB16FD08030086EF86 /* DPTextFieldToolbarSpecs.m */; };
+		71C8ABCF16FD09200086EF86 /* DPTextFieldToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABCE16FD09200086EF86 /* DPTextFieldToolbar.m */; };
+		71C8ABD216FEB19A0086EF86 /* DPMockTextFieldToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABD116FEB19A0086EF86 /* DPMockTextFieldToolbar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,8 +67,12 @@
 		7167B83616FCF89600A3C2A2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		7167B83E16FCF89600A3C2A2 /* DPTextFieldDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DPTextFieldDemoTests-Info.plist"; sourceTree = "<group>"; };
 		7167B84016FCF89600A3C2A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7167B84216FCF89600A3C2A2 /* DPTextFieldDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPTextFieldDemoTests.h; sourceTree = "<group>"; };
-		7167B84316FCF89600A3C2A2 /* DPTextFieldDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldDemoTests.m; sourceTree = "<group>"; };
+		71C8ABC916FD06A00086EF86 /* DPTextFieldSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldSpecs.m; sourceTree = "<group>"; };
+		71C8ABCB16FD08030086EF86 /* DPTextFieldToolbarSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldToolbarSpecs.m; sourceTree = "<group>"; };
+		71C8ABCD16FD09200086EF86 /* DPTextFieldToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPTextFieldToolbar.h; sourceTree = "<group>"; };
+		71C8ABCE16FD09200086EF86 /* DPTextFieldToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldToolbar.m; sourceTree = "<group>"; };
+		71C8ABD016FEB19A0086EF86 /* DPMockTextFieldToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPMockTextFieldToolbar.h; sourceTree = "<group>"; };
+		71C8ABD116FEB19A0086EF86 /* DPMockTextFieldToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPMockTextFieldToolbar.m; sourceTree = "<group>"; };
 		A32D55A04B0145CBA17400E2 /* libPods-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +106,8 @@
 			children = (
 				713D8A0916FD025C00F568DE /* DPTextField.h */,
 				713D8A0A16FD025C00F568DE /* DPTextField.m */,
+				71C8ABCD16FD09200086EF86 /* DPTextFieldToolbar.h */,
+				71C8ABCE16FD09200086EF86 /* DPTextFieldToolbar.m */,
 			);
 			name = DPTextField;
 			path = ../DPTextField;
@@ -169,8 +178,10 @@
 		7167B83C16FCF89600A3C2A2 /* DPTextFieldDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				7167B84216FCF89600A3C2A2 /* DPTextFieldDemoTests.h */,
-				7167B84316FCF89600A3C2A2 /* DPTextFieldDemoTests.m */,
+				71C8ABD016FEB19A0086EF86 /* DPMockTextFieldToolbar.h */,
+				71C8ABD116FEB19A0086EF86 /* DPMockTextFieldToolbar.m */,
+				71C8ABC916FD06A00086EF86 /* DPTextFieldSpecs.m */,
+				71C8ABCB16FD08030086EF86 /* DPTextFieldToolbarSpecs.m */,
 				7167B83D16FCF89600A3C2A2 /* Supporting Files */,
 			);
 			path = DPTextFieldDemoTests;
@@ -316,6 +327,7 @@
 				7167B82016FCF89600A3C2A2 /* DPAppDelegate.m in Sources */,
 				7167B82F16FCF89600A3C2A2 /* DPViewController.m in Sources */,
 				713D8A0B16FD025C00F568DE /* DPTextField.m in Sources */,
+				71C8ABCF16FD09200086EF86 /* DPTextFieldToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +335,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7167B84416FCF89600A3C2A2 /* DPTextFieldDemoTests.m in Sources */,
+				71C8ABCA16FD06A00086EF86 /* DPTextFieldSpecs.m in Sources */,
+				71C8ABCC16FD08030086EF86 /* DPTextFieldToolbarSpecs.m in Sources */,
+				71C8ABD216FEB19A0086EF86 /* DPMockTextFieldToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DPTextFieldToolbar.h"
 
 @interface DPTextField : UITextField
+
+@property (readonly, nonatomic) DPTextFieldToolbar *toolbar;
+@property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
+@property (weak, nonatomic) IBOutlet UIResponder *previousField, *nextField;
 
 @end
