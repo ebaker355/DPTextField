@@ -20,7 +20,6 @@
 		7167B82616FCF89600A3C2A2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7167B82516FCF89600A3C2A2 /* Default-568h@2x.png */; };
 		7167B82916FCF89600A3C2A2 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7167B82716FCF89600A3C2A2 /* MainStoryboard_iPhone.storyboard */; };
 		7167B82C16FCF89600A3C2A2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7167B82A16FCF89600A3C2A2 /* MainStoryboard_iPad.storyboard */; };
-		7167B82F16FCF89600A3C2A2 /* DPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7167B82E16FCF89600A3C2A2 /* DPViewController.m */; };
 		7167B83716FCF89600A3C2A2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7167B83616FCF89600A3C2A2 /* SenTestingKit.framework */; };
 		7167B83816FCF89600A3C2A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7167B80F16FCF89600A3C2A2 /* UIKit.framework */; };
 		7167B83916FCF89600A3C2A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7167B81116FCF89600A3C2A2 /* Foundation.framework */; };
@@ -29,6 +28,7 @@
 		71C8ABCC16FD08030086EF86 /* DPTextFieldToolbarSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABCB16FD08030086EF86 /* DPTextFieldToolbarSpecs.m */; };
 		71C8ABCF16FD09200086EF86 /* DPTextFieldToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABCE16FD09200086EF86 /* DPTextFieldToolbar.m */; };
 		71C8ABD216FEB19A0086EF86 /* DPMockTextFieldToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABD116FEB19A0086EF86 /* DPMockTextFieldToolbar.m */; };
+		71C8ABD516FFDC500086EF86 /* DPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABD416FFDC500086EF86 /* DPViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +61,6 @@
 		7167B82516FCF89600A3C2A2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7167B82816FCF89600A3C2A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		7167B82B16FCF89600A3C2A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		7167B82D16FCF89600A3C2A2 /* DPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPViewController.h; sourceTree = "<group>"; };
-		7167B82E16FCF89600A3C2A2 /* DPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPViewController.m; sourceTree = "<group>"; };
 		7167B83516FCF89600A3C2A2 /* DPTextFieldDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DPTextFieldDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7167B83616FCF89600A3C2A2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		7167B83E16FCF89600A3C2A2 /* DPTextFieldDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DPTextFieldDemoTests-Info.plist"; sourceTree = "<group>"; };
@@ -73,6 +71,8 @@
 		71C8ABCE16FD09200086EF86 /* DPTextFieldToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldToolbar.m; sourceTree = "<group>"; };
 		71C8ABD016FEB19A0086EF86 /* DPMockTextFieldToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPMockTextFieldToolbar.h; sourceTree = "<group>"; };
 		71C8ABD116FEB19A0086EF86 /* DPMockTextFieldToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPMockTextFieldToolbar.m; sourceTree = "<group>"; };
+		71C8ABD316FFDC500086EF86 /* DPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPViewController.h; sourceTree = "<group>"; };
+		71C8ABD416FFDC500086EF86 /* DPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPViewController.m; sourceTree = "<group>"; };
 		A32D55A04B0145CBA17400E2 /* libPods-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -152,10 +152,10 @@
 			children = (
 				7167B81E16FCF89600A3C2A2 /* DPAppDelegate.h */,
 				7167B81F16FCF89600A3C2A2 /* DPAppDelegate.m */,
-				7167B82716FCF89600A3C2A2 /* MainStoryboard_iPhone.storyboard */,
+				71C8ABD316FFDC500086EF86 /* DPViewController.h */,
+				71C8ABD416FFDC500086EF86 /* DPViewController.m */,
 				7167B82A16FCF89600A3C2A2 /* MainStoryboard_iPad.storyboard */,
-				7167B82D16FCF89600A3C2A2 /* DPViewController.h */,
-				7167B82E16FCF89600A3C2A2 /* DPViewController.m */,
+				7167B82716FCF89600A3C2A2 /* MainStoryboard_iPhone.storyboard */,
 				7167B81616FCF89600A3C2A2 /* Supporting Files */,
 			);
 			path = DPTextFieldDemo;
@@ -325,9 +325,9 @@
 			files = (
 				7167B81C16FCF89600A3C2A2 /* main.m in Sources */,
 				7167B82016FCF89600A3C2A2 /* DPAppDelegate.m in Sources */,
-				7167B82F16FCF89600A3C2A2 /* DPViewController.m in Sources */,
 				713D8A0B16FD025C00F568DE /* DPTextField.m in Sources */,
 				71C8ABCF16FD09200086EF86 /* DPTextFieldToolbar.m in Sources */,
+				71C8ABD516FFDC500086EF86 /* DPViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

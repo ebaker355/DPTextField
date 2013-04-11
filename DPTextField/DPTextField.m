@@ -36,6 +36,7 @@
 
 - (void)customizeControl {
     _toolbar = [[DPTextFieldToolbar alloc] init];
+    [self setInputAccessoryView:_toolbar];
 
     UISegmentedControl *prevNextControl = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"Previous", @"Previous"), NSLocalizedString(@"Next", @"Next")]];
     [prevNextControl setMomentary:YES];
@@ -43,6 +44,8 @@
     [prevNextControl setEnabled:NO forSegmentAtIndex:0];
     [prevNextControl setEnabled:NO forSegmentAtIndex:1];
     _previousNextBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:prevNextControl];
+
+    _doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 }
 
 - (void)setPreviousField:(UIResponder *)previousField {
@@ -55,6 +58,10 @@
     _nextField = nextField;
     UISegmentedControl *prevNextControl = (UISegmentedControl *)[self.previousNextBarButtonItem customView];
     [prevNextControl setEnabled:(nil != nextField) forSegmentAtIndex:1];
+}
+
+- (void)done:(id)sender {
+    
 }
 
 @end

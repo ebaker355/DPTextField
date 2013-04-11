@@ -13,6 +13,8 @@
 
 @property (readonly, nonatomic) DPTextFieldToolbar *toolbar;
 @property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
+@property (readonly, nonatomic) UIBarButtonItem *doneBarButtonItem;
+
 @property (weak, nonatomic) IBOutlet UIResponder *previousField, *nextField;
 
 @end

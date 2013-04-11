@@ -20,9 +20,13 @@ describe(@"DPTextField", ^{
     });
 
     __block DPTextField *textField;
+    __block DPTextField *prevTextField;
+    __block DPTextField *nextTextField;
 
     beforeEach(^{
         textField = [[DPTextField alloc] init];
+        prevTextField = [[DPTextField alloc] init];
+        nextTextField = [[DPTextField alloc] init];
     });
 
 #pragma mark - Toolbar tests
@@ -38,6 +42,10 @@ describe(@"DPTextField", ^{
 
     it(@"should use a DPTextFieldToolbar", ^{
         [[[textField toolbar] should] beKindOfClass:[DPTextFieldToolbar class]];
+    });
+
+    it(@"should set the toolbar as its inputAccessoryView", ^{
+        [[[textField inputAccessoryView] should] beIdenticalTo:[textField toolbar]];
     });
 
     it(@"should have a readonly previousNextBarButtonItem property", ^{
@@ -59,6 +67,15 @@ describe(@"DPTextField", ^{
         [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:1]) should] beNo];
     });
 
+    it(@"should have a readonly doneBarButtonItem property", ^{
+        [[textField should] respondToSelector:@selector(doneBarButtonItem)];
+        [[textField shouldNot] respondToSelector:@selector(setDoneBarButtonItem:)];
+    });
+
+    it(@"should instantiate the doneBarButtonItem when inited", ^{
+        [[textField doneBarButtonItem] shouldNotBeNil];
+    });
+
 #pragma mark - Previous and Next field tests
 
     it(@"should have a previousField property", ^{
@@ -73,10 +90,7 @@ describe(@"DPTextField", ^{
 
     context(@"with only a previous field assigned", ^{
 
-        __block DPTextField *prevTextField;
-
         beforeEach(^{
-            prevTextField = [[DPTextField alloc] init];
             [textField setPreviousField:prevTextField];
         });
 
@@ -92,11 +106,8 @@ describe(@"DPTextField", ^{
     });
 
     context(@"with only a next field assigned", ^{
-        
-        __block DPTextField *nextTextField;
 
         beforeEach(^{
-            nextTextField = [[DPTextField alloc] init];
             [textField setNextField:nextTextField];
         });
 
@@ -107,6 +118,19 @@ describe(@"DPTextField", ^{
 
         it(@"should disable the previous button, and enable the next button", ^{
             [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:0]) should] beNo];
+            [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:1]) should] beYes];
+        });
+    });
+
+    context(@"with a previous field and a next field assigned", ^{
+
+        beforeEach(^{
+            [textField setPreviousField:prevTextField];
+            [textField setNextField:nextTextField];
+        });
+
+        it(@"should enable the previous button and the next button", ^{
+            [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:0]) should] beYes];
             [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:1]) should] beYes];
         });
     });
