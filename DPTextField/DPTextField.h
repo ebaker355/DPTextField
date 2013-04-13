@@ -8,12 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol DPTextFieldDelegate <NSObject>
-@required
-@property (assign, nonatomic) id<UITextFieldDelegate> delegate;
-@end
-
 @interface DPTextField : UITextField
+@property (readonly, nonatomic) id<UITextFieldDelegate> customDelegate;
+
 @property (weak, nonatomic) IBOutlet UIResponder *previousField, *nextField;
 
 @property (assign, nonatomic) BOOL inputAccessoryViewHidden;

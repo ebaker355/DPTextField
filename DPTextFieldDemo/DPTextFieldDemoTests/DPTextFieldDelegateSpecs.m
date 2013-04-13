@@ -26,9 +26,8 @@ describe(@"A DPTextField's delegate", ^{
     it(@"should wrap delegates set externally", ^{
         id delegateMock = [KWMock mockForProtocol:@protocol(UITextFieldDelegate)];
         [field setDelegate:delegateMock];
-        id<DPTextFieldDelegate>fieldDelegate = (id<DPTextFieldDelegate>)[field delegate];
-        id originalDelegate = [fieldDelegate delegate];
-        [[originalDelegate should] beIdenticalTo:delegateMock];
+        id customDelegate = [field customDelegate];
+        [[customDelegate should] beIdenticalTo:delegateMock];
     });
 });
 

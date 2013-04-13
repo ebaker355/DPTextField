@@ -181,6 +181,10 @@ const NSUInteger kNextButtonIndex       = 1;
     }
 }
 
+- (id<UITextFieldDelegate>)customDelegate {
+    return [[self internalDelegate] delegate];
+}
+
 #pragma mark - Responder status
 
 - (BOOL)becomeFirstResponder {

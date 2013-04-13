@@ -66,19 +66,23 @@ be enabled/disabled via the `doneBarButtonItemEnabled` property.
 In order for a DPTextField to gain a measure of control over its superclass
 object, it must instantiate its own internal delegate object that conforms to
 the `UITextFieldDelegate` protocol. This does not prevent you from assigning
-your own custom delegate object, either in code or in Interface Builder. The
-internal delegate will defer to your custom delegate.
+your own custom delegate object, either in code or in Interface Builder, exactly
+the way you would with a standard UITextField, using the `setDelegate:` method.
+The internal delegate will defer to your custom delegate.
 
-The only caveat is if you want to get a reference back to your custom delegate
-from the DPTextField control (which you should rarely, if ever, need to do). If
-you simply call the DPTextField's `delegate` property, you'll receive its
-internal delegate instance. In order to retrieve your custom delegate, use code
-like this:
+The only caveat, however, is if you want to get a reference back to your custom
+delegate from the DPTextField control (which you should rarely, if ever, need to
+do). If you simply call the DPTextField's `delegate` property, you'll receive
+its internal delegate instance. In order to retrieve your custom delegate, use
+the `customDelegate` property, like this:
 
 ```
 // assuming 'field' is a DPTextField instance...
-id<DPTextFieldDelegate>fieldDelegate = (id<DPTextFieldDelegate>)[field delegate];
-id<UITextFieldDelegate>myDelegate = [fieldDelegate delegate];
 
-// myDelegate now references your custom delegate object
+id<UITextFieldDelegate> myDelegate = [[NSObject alloc] init];
+[field setDelegate:myDelegate];     // Or wire up in IB.
+
+id delegate = [field delegate];     // Returns internal delegate!
+
+id customDelegate = [field customDelegate]; // Returns myDelegate.
 ```
