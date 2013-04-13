@@ -25,18 +25,17 @@ submitting a form
 
 ### The toolbar
 
-DPTextField uses a custom toolbar as its `UITextField inputAccessoryView` view.
-The toolbar is accessible through `DPTextField`'s `toolbar` property. The
-toolbar correctly resizes itself in response to device orientation changes
-(iPhone only). The toolbar's appearance can be customized any way you like. By
-default, it will appear with a standard styled `UIToolbar` for normal keyboards,
-and with a black transluscent style for alert keyboards. At any time, the
-toolbar can be hidden.
+DPTextField uses a `UIToolbar` as its `inputAccessoryView`. The toolbar
+correctly resizes itself in response to device orientation changes (iPhone
+only). The toolbar's appearance can be customized any way you like. By default,
+it will appear with a standard styled `UIToolbar` for normal keyboards, and with
+a black transluscent style for alert keyboards. At any time, the toolbar can be
+hidden by setting the `inputAccessoryViewHidden` property to `YES`.
 
 ```
 DPTextField *field = [[DPTextField alloc] init];
 [field.toolbar setBarStyle:UIBarStyleBlackOpaque];
-[field setToolbarHidden:YES];
+[field setInputAccessoryViewHidden:YES];
 ```
 
 ### Previous/Next buttons

@@ -17,7 +17,7 @@ describe(@"The text field toolbar", ^{
 
     beforeEach(^{
         field = [[DPTextField alloc] initWithFrame:CGRectMake(0, 0, 100, 32)];
-        toolbar = [field toolbar];
+        toolbar = (UIToolbar *)[field inputAccessoryView];
     });
 
     context(@"when the text field is the first responder", ^{

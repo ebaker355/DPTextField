@@ -16,7 +16,6 @@
 
 @property (weak, nonatomic) IBOutlet UIResponder *previousField, *nextField;
 
-@property (readonly, nonatomic) UIToolbar *toolbar;
-@property (assign, nonatomic) BOOL toolbarHidden;
+@property (assign, nonatomic) BOOL inputAccessoryViewHidden;
 
 @end

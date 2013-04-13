@@ -129,6 +129,12 @@
                             <outlet property="delegate" destination="oj2-D8-3fc" id="L6Z-dh-0ga"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="field1" destination="FSX-eb-QlG" id="vT3-BG-hlI"/>
+                        <outlet property="field2" destination="bBD-mJ-DUH" id="H6v-hP-dfc"/>
+                        <outlet property="field3" destination="g4H-0z-RtA" id="9ZB-Wa-uSw"/>
+                        <outlet property="field4" destination="X88-JH-Ekv" id="G2F-zY-pmp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NaX-OG-ORL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -145,6 +151,12 @@
         </class>
         <class className="DPViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DPViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="field1" candidateClass="DPTextField"/>
+                <relationship kind="outlet" name="field2" candidateClass="DPTextField"/>
+                <relationship kind="outlet" name="field3" candidateClass="DPTextField"/>
+                <relationship kind="outlet" name="field4" candidateClass="DPTextField"/>
+            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

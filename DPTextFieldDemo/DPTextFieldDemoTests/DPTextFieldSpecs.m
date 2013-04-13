@@ -19,38 +19,37 @@ describe(@"A DPTextField", ^{
     });
 
     it(@"should use correct default settings", ^{
-        [[@([field toolbarHidden]) should] beNo];
+        [[@([field inputAccessoryViewHidden]) should] beNo];
     });
 
     it(@"should use a UIToolbar as its inputAccessoryView", ^{
-        [[@([field toolbarHidden]) should] beNo];
-        [[field toolbar] shouldNotBeNil];
+        [[@([field inputAccessoryViewHidden]) should] beNo];
         [[field inputAccessoryView] shouldNotBeNil];
-        [[[field toolbar] should] beIdenticalTo:[field inputAccessoryView]];
-        [[[field toolbar] should] beKindOfClass:[UIToolbar class]];
+        [[field inputAccessoryView] shouldNotBeNil];
+        [[[field inputAccessoryView] should] beKindOfClass:[UIToolbar class]];
     });
 
     it(@"should be able to show and hide the toolbar", ^{
-        [[@([field toolbarHidden]) should] beNo];
-        [[field toolbar] shouldNotBeNil];
+        [[@([field inputAccessoryViewHidden]) should] beNo];
+        [[field inputAccessoryView] shouldNotBeNil];
 
-        [field setToolbarHidden:YES];
-        [[field toolbar] shouldBeNil];
+        [field setInputAccessoryViewHidden:YES];
+        [[field inputAccessoryView] shouldBeNil];
 
-        [field setToolbarHidden:NO];
-        [[field toolbar] shouldNotBeNil];
+        [field setInputAccessoryViewHidden:NO];
+        [[field inputAccessoryView] shouldNotBeNil];
     });
 
     it(@"should style the toolbar to match the keyboard", ^{
-        [field setToolbarHidden:YES];
+        [field setInputAccessoryViewHidden:YES];
         [field setKeyboardAppearance:UIKeyboardAppearanceDefault];
-        [field setToolbarHidden:NO];
-        [[@([[field toolbar] barStyle]) should] equal:@(UIBarStyleDefault)];
+        [field setInputAccessoryViewHidden:NO];
+        [[@([(UIToolbar *)[field inputAccessoryView] barStyle]) should] equal:@(UIBarStyleDefault)];
 
-        [field setToolbarHidden:YES];
+        [field setInputAccessoryViewHidden:YES];
         [field setKeyboardAppearance:UIKeyboardAppearanceAlert];
-        [field setToolbarHidden:NO];
-        [[@([[field toolbar] barStyle]) should] equal:@(UIBarStyleBlackTranslucent)];
+        [field setInputAccessoryViewHidden:NO];
+        [[@([(UIToolbar *)[field inputAccessoryView] barStyle]) should] equal:@(UIBarStyleBlackTranslucent)];
     });
 
     context(@"with a previous and next field", ^{
@@ -64,7 +63,7 @@ describe(@"A DPTextField", ^{
 
         it(@"should include a Previous|Next segmented control in the toolbar", ^{
             BOOL foundPrevNextButtons = NO;
-            for (UIBarButtonItem *item in [[field toolbar] items]) {
+            for (UIBarButtonItem *item in [(UIToolbar *)[field inputAccessoryView] items]) {
                 // Look for bar button items with a UISegmentedControl as their custom view.
                 if ([[item customView] isKindOfClass:[UISegmentedControl class]]) {
                     UISegmentedControl *segControl = (UISegmentedControl *)[item customView];

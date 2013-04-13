@@ -19,7 +19,7 @@ const NSUInteger kNextButtonIndex       = 1;
 @synthesize previousField = _previousField;
 @synthesize nextField = _nextField;
 @synthesize previousNextBarButtonItem = _previousNextBarButtonItem;
-@synthesize toolbarHidden = _toolbarHidden;
+@synthesize inputAccessoryViewHidden = _inputAccessoryViewHidden;
 @synthesize resizeToolbarWhenKeyboardFrameChanges = _resizeToolbarWhenKeyboardFrameChanges;
 
 #pragma mark - Initialization
@@ -50,7 +50,7 @@ const NSUInteger kNextButtonIndex       = 1;
 
 - (void)configureControl {
     // Set option defaults.
-    [self setToolbarHidden:NO];
+    [self setInputAccessoryViewHidden:NO];
 }
 
 - (void)setPreviousField:(UIResponder *)previousField {
@@ -74,7 +74,7 @@ const NSUInteger kNextButtonIndex       = 1;
     if ([self canBecomeFirstResponder]) {
         result = [super becomeFirstResponder];
         if (result) {
-            if (![self toolbarHidden]) {
+            if (![self inputAccessoryViewHidden]) {
                 [self setResizeToolbarWhenKeyboardFrameChanges:YES];
             }
         }
@@ -104,7 +104,7 @@ const NSUInteger kNextButtonIndex       = 1;
 }
 
 - (void)updateToolbarAnimated:(BOOL)animated {
-    if ([self toolbarHidden]) return;
+    if ([self inputAccessoryViewHidden]) return;
     
     NSMutableArray *barItems = [NSMutableArray array];
 
@@ -129,14 +129,14 @@ const NSUInteger kNextButtonIndex       = 1;
     return (UIToolbar *)[self inputAccessoryView];
 }
 
-- (void)setToolbarHidden:(BOOL)toolbarHidden {
-    _toolbarHidden = toolbarHidden;
-    if (_toolbarHidden) {
+- (void)setInputAccessoryViewHidden:(BOOL)inputAccessoryViewHidden {
+    _inputAccessoryViewHidden = inputAccessoryViewHidden;
+    if (_inputAccessoryViewHidden) {
         [self setInputAccessoryView:nil];
     } else {
         [self installToolbar];
     }
-    [self setResizeToolbarWhenKeyboardFrameChanges:!_toolbarHidden];
+    [self setResizeToolbarWhenKeyboardFrameChanges:!_inputAccessoryViewHidden];
 }
 
 - (void)setResizeToolbarWhenKeyboardFrameChanges:(BOOL)resizeToolbarWhenKeyboardFrameChanges {
