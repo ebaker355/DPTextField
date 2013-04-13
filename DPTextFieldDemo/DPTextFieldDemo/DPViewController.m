@@ -9,7 +9,7 @@
 #import "DPViewController.h"
 #import "DPTextField.h"
 
-@interface DPViewController ()
+@interface DPViewController () <DPTextFieldAutoFillDataSource>
 @property (weak, nonatomic) IBOutlet DPTextField *field1;
 @property (weak, nonatomic) IBOutlet DPTextField *field2;
 @property (weak, nonatomic) IBOutlet DPTextField *field3;
@@ -25,6 +25,19 @@
 //    [self.field3 setInputAccessoryViewHidden:YES];
 
     [self.field2 setMaximumLength:4];
+}
+
+#pragma mark - DPTextFieldAutoFillDataSource
+
+- (NSArray *)textField:(DPTextField *)textField autoFillStringsForString:(NSString *)string {
+    return @[ @"One", @"Two", @"Three", @"Four", @"Five", @"Six", @"Seven", @"Eight", @"Nine", @"Ten", @"One" ];
+}
+
+- (NSUInteger)minimumLengthForAutoFillQueryForTextField:(DPTextField *)textField {
+    if (self.field1 == textField) {
+        return 2;
+    }
+    return 0;
 }
 
 @end

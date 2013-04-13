@@ -74,6 +74,52 @@ property to `YES` has no effect if the `autoFillDataSource` property is nil.)
 The same is true for the button's enabled state. Also, if the data source does
 not provide any matching strings, the button cannot be enabled.
 
+The `DPTextFieldAutoFillDataSource` protocol provides several methods to
+customize the auto-fill behavior, but only one method is required. The data
+source must provide its own algorithm to determine which auto-fill strings are
+appropriate to match the text entered in the field. This is an example of the
+required method that implements a 2-pass algorithm. The first pass finds matches
+that _begin with_ the entered text. The second pass find matches that _contain_
+the entered text. There is no need to worry about duplicates in the matches
+array. DPTextField will automatically filter any duplicates. It will not,
+however, sort the matches. So its a good idea to pre-sort.
+
+```
+// Return all appropriate auto-fill strings for the given string.
+- (NSArray *)textField:(DPTextField *)textField autoFillStringsForString:(NSString *)string {
+    NSArray *autoFillStrings = [source allAvailableAutoFillStrings];    // Read from some serialized source
+    
+    NSMutableArray *matches = [NSMutableArray array];
+    
+    // Pre-sort the autoFillStrings array.
+    NSArray *sortedAutoFillStrings = [autoFillStrings sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [(NSString *)obj1 compare:(NSString *)obj2];
+    }];
+    
+    // If the search string is nil or empty, just return all auto-fill strings.
+    if (nil != string && [string length] > 0) {
+        // Match the given string.
+
+        // First pass, find strings with a matching prefix.
+        for (NSString *possibleMatch in sortedAutoFillStrings) {
+            NSRange range = [possibleMatch rangeOfString:string options:NSCaseInsensitiveSearch];
+            if (0 == range.location) {
+                [matches addObject:possibleMatch];
+            }
+        }
+
+        // Second pass, find strings that contain string.
+        for (NSString *possibleMatch in sortedAutoFillStrings) {
+            NSRange range = [possibleMatch rangeOfString:string options:NSCaseInsensitiveSearch];
+            if (NSNotFound != range.location) {
+                [matches addObject:possibleMatch];
+            }
+        }
+    }
+    return matches;
+}
+```
+
 ## About the delegate...
 
 In order for a DPTextField to gain a measure of control over its superclass

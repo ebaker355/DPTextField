@@ -29,6 +29,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
+                                                        <outlet property="autoFillDataSource" destination="oj2-D8-3fc" id="fzO-mH-Rd4"/>
                                                         <outlet property="delegate" destination="oj2-D8-3fc" id="xHt-Ug-Fyh"/>
                                                         <outlet property="nextField" destination="bBD-mJ-DUH" id="msA-Xh-esT"/>
                                                     </connections>
@@ -56,6 +57,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
                                                     <connections>
+                                                        <outlet property="autoFillDataSource" destination="oj2-D8-3fc" id="asd-bC-kc3"/>
                                                         <outlet property="nextField" destination="g4H-0z-RtA" id="QHD-ev-ynC"/>
                                                         <outlet property="previousField" destination="FSX-eb-QlG" id="1iE-1a-NvR"/>
                                                     </connections>
@@ -142,6 +144,28 @@
             <point key="canvasLocation" x="300" y="69"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="DPTextField" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DPTextField.h"/>
+            <relationships>
+                <relationship kind="outlet" name="autoFillDataSource"/>
+                <relationship kind="outlet" name="nextField" candidateClass="UIResponder"/>
+                <relationship kind="outlet" name="previousField" candidateClass="UIResponder"/>
+            </relationships>
+        </class>
+        <class className="DPViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DPViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="field1" candidateClass="DPTextField"/>
+                <relationship kind="outlet" name="field2" candidateClass="DPTextField"/>
+                <relationship kind="outlet" name="field3" candidateClass="DPTextField"/>
+                <relationship kind="outlet" name="field4" candidateClass="DPTextField"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

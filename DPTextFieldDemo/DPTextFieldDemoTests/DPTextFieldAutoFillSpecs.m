@@ -16,7 +16,7 @@ SPEC_BEGIN(DPTextFieldAutoFillSpecs)
 describe(@"DPTextField auto fill", ^{
 	__block DPTextField *field;
     beforeEach(^{
-        field = [[DPTextField alloc] init];
+        field = [[DPTextField alloc] initWithFrame:CGRectMake(0, 0, 100, 23)];
     });
 
     context(@"without a data source", ^{
@@ -38,6 +38,25 @@ describe(@"DPTextField auto fill", ^{
         it(@"should not allow the autofill button to be enabled", ^{
             [field setAutoFillBarButtonEnabled:YES];
             [[@([field autoFillBarButtonEnabled]) should] beNo];
+        });
+    });
+
+    context(@"with a data source", ^{
+        __block id mockDataSource;
+        beforeEach(^{
+            NSArray *strings = @[@"One", @"Two", @"Three"];
+
+            mockDataSource = [KWMock mockForProtocol:@protocol(DPTextFieldAutoFillDataSource)];
+            [mockDataSource stub:@selector(textField:autoFillStringsForString:) andReturn:strings withArguments:field, @""];
+
+            [mockDataSource stub:@selector(minimumLengthForAutoFillQueryForTextField:) andReturn:@0 withArguments:field];
+            [field setAutoFillDataSource:mockDataSource];
+        });
+
+        it(@"should use the assigned data source", ^{
+            id dataSource = [field autoFillDataSource];
+            [dataSource shouldNotBeNil];
+            [[dataSource should] beIdenticalTo:mockDataSource];
         });
     });
 });

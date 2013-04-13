@@ -90,6 +90,7 @@ const NSUInteger kNextButtonIndex       = 1;
 
 @interface DPTextField ()
 @property (strong, nonatomic) DPTextFieldInternalDelegate *internalDelegate;
+@property (strong, nonatomic) NSMutableArray *autoFillStrings;
 @property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
 @end
 
@@ -98,6 +99,7 @@ const NSUInteger kNextButtonIndex       = 1;
 @synthesize nextField = _nextField;
 @synthesize inputAccessoryViewHidden = _inputAccessoryViewHidden;
 @synthesize previousNextBarButtonItem = _previousNextBarButtonItem;
+@synthesize autoFillDataSource = _autoFillDataSource;
 @synthesize autoFillBarButtonItem = _autoFillBarButtonItem;
 @synthesize autoFillBarButtonHidden = _autoFillBarButtonHidden;
 @synthesize autoFillBarButtonEnabled = _autoFillBarButtonEnabled;
@@ -198,6 +200,12 @@ const NSUInteger kNextButtonIndex       = 1;
             if (![self inputAccessoryViewHidden]) {
                 [self setResizeToolbarWhenKeyboardFrameChanges:YES];
             }
+
+            // Watch for text changes.
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self];
+
+            // Initialize auto-fill.
+            [self queryAutoFillDataSource];
         }
         return result;
     }
@@ -207,6 +215,9 @@ const NSUInteger kNextButtonIndex       = 1;
 - (BOOL)resignFirstResponder {
     if ([self canResignFirstResponder]) {
         [self setResizeToolbarWhenKeyboardFrameChanges:NO];
+
+        // Stop watching text changes.
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self];
     }
     return [super resignFirstResponder];
 }
@@ -288,7 +299,7 @@ const NSUInteger kNextButtonIndex       = 1;
     return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 }
 
-#pragma mark - Previous|Next toolbar buttons
+#pragma mark - Previous|Next toolbar buttons and functionality
 
 - (BOOL)previousBarButtonEnabled {
     if (nil != _previousNextBarButtonItem) {
@@ -372,7 +383,7 @@ const NSUInteger kNextButtonIndex       = 1;
     }
 }
 
-#pragma mark - Auto-fill toolbar button
+#pragma mark - Auto-fill toolbar button and functionality
 
 - (UIBarButtonItem *)autoFillBarButtonItem {
     if (nil == _autoFillBarButtonItem) {
@@ -400,10 +411,106 @@ const NSUInteger kNextButtonIndex       = 1;
 
 - (void)setAutoFillBarButtonEnabled:(BOOL)autoFillBarButtonEnabled {
     if (nil == _autoFillDataSource) return;
-    // TODO: check if the button should be allowed to be enabled
+    [_autoFillBarButtonItem setEnabled:autoFillBarButtonEnabled];
+    if (autoFillBarButtonEnabled) {
+        [self updateAutoFillBarButtonItemEnabledState];
+    }
 }
 
-#pragma mark - Done toolbar button
+- (void)setAutoFillDataSource:(id<DPTextFieldAutoFillDataSource>)autoFillDataSource {
+    _autoFillDataSource = autoFillDataSource;
+    if (nil != _autoFillDataSource && nil == _autoFillStrings) {
+        _autoFillStrings = [[NSMutableArray alloc] init];
+    }
+    [self queryAutoFillDataSource];
+}
+
+- (void)queryAutoFillDataSource {
+    if (nil == _autoFillDataSource && nil != _autoFillStrings) {
+        [_autoFillStrings removeAllObjects];
+        _autoFillStrings = nil;
+    } else {
+        // Reset strings.
+        [_autoFillStrings removeAllObjects];
+
+        // See if we have enough characters to query the data source.
+        NSUInteger minChars = 0;
+        if ([_autoFillDataSource respondsToSelector:@selector(minimumLengthForAutoFillQueryForTextField:)]) {
+            minChars = [_autoFillDataSource minimumLengthForAutoFillQueryForTextField:self];
+        }
+
+        NSString *string = [[self text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (nil != string && [string length] >= minChars) {
+            [_autoFillStrings addObjectsFromArray:[self filterAutoFillStrings:[_autoFillDataSource textField:self autoFillStringsForString:string]]];
+        } else {
+            [_autoFillStrings removeAllObjects];
+        }
+    }
+
+    [self updateAutoFillBarButtonItemEnabledState];
+}
+
+- (NSArray *)filterAutoFillStrings:(NSArray *)strings {
+    NSMutableArray *filtered = [[NSMutableArray alloc] init];
+    for (NSString *string in strings) {
+        NSString *filteredString = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (NO == [filtered containsObject:filteredString]) {
+            [filtered addObject:filteredString];
+        }
+    }
+    return filtered;
+}
+
+- (void)updateAutoFillBarButtonItemEnabledState {
+    // If there is only one matching auto-fill string, and its an exact match
+    // with the text already entered, then disable the AutoFill button.
+    if (1 == [_autoFillStrings count]) {
+        NSString *string = [_autoFillStrings lastObject];
+        if (NSOrderedSame == [[self text] compare:string options:NSCaseInsensitiveSearch]) {
+            [self setAutoFillBarButtonEnabled:NO];
+        }
+    } else {
+        [_autoFillBarButtonItem setEnabled:([_autoFillStrings count] > 0)];
+    }
+}
+
+- (void)autoFill:(id)sender {
+    // If there is only one auto-fill string match, then simply apply it.
+    if (1 == [_autoFillStrings count]) {
+        [self applyAutoFillString:[_autoFillStrings lastObject]];
+        // Do not allow the same string to be continually auto-filled.
+        [_autoFillBarButtonItem setEnabled:NO];
+    } else {
+        [self presentAutoFillInputView];
+    }
+}
+
+- (void)applyAutoFillString:(NSString *)string {
+    [self setText:string];
+    // We seem to have to post this notification manually.
+    [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:self userInfo:nil];
+
+    // Close the auto-fill input view if presented.
+    if (nil != [self inputView]) {
+        [self cancelAutoFill:self];
+    }
+
+    [self queryAutoFillDataSource];
+}
+
+- (void)presentAutoFillInputView {
+    NSLog(@"presetAutoFill with string: %@", _autoFillStrings);
+}
+
+- (void)dismissAutoFillInputView {
+
+}
+
+- (void)cancelAutoFill:(id)sender {
+
+}
+
+#pragma mark - Done toolbar button and functionality
 
 - (UIBarButtonItem *)doneBarButtonItem {
     if (nil == _doneBarButtonItem) {
@@ -427,6 +534,12 @@ const NSUInteger kNextButtonIndex       = 1;
 
 - (void)done:(id)sender {
     [self resignFirstResponder];
+}
+
+#pragma mark - Notifications
+
+- (void)textDidChange:(NSNotification *)notification {
+    [self queryAutoFillDataSource];
 }
 
 @end
