@@ -29,8 +29,52 @@
 
 #pragma mark - DPTextFieldAutoFillDataSource
 
+- (NSArray *)allAvailableAutoFillStrings {
+    return @[ @"Zero", @"One",
+              @"Two", @"Twenty",
+              @"Three", @"Thirty",
+              @"Four", @"Forty",
+              @"Five", @"Fifty",
+              @"Six", @"Sixty",
+              @"Seven", @"Seventy",
+              @"Eight", @"Eighty",
+              @"Nine", @"Ninety",
+              @"Ten", @"One hundred",
+              @"One thousand", @"Ten thousand" ];
+}
+
+// Return all appropriate auto-fill strings for the given string.
 - (NSArray *)textField:(DPTextField *)textField autoFillStringsForString:(NSString *)string {
-    return @[ @"One", @"Two", @"Three", @"Four", @"Five", @"Six", @"Seven", @"Eight", @"Nine", @"Ten", @"One" ];
+    NSArray *autoFillStrings = [self allAvailableAutoFillStrings];    // Read from some serialized source
+
+    NSMutableArray *matches = [NSMutableArray array];
+
+    // Pre-sort the autoFillStrings array.
+    NSArray *sortedAutoFillStrings = [autoFillStrings sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [(NSString *)obj1 compare:(NSString *)obj2];
+    }];
+
+    // If the search string is nil or empty, just return all auto-fill strings.
+    if (nil != string && [string length] > 0) {
+        // Match the given string.
+
+        // First pass, find strings with a matching prefix.
+        for (NSString *possibleMatch in sortedAutoFillStrings) {
+            NSRange range = [possibleMatch rangeOfString:string options:NSCaseInsensitiveSearch];
+            if (0 == range.location) {
+                [matches addObject:possibleMatch];
+            }
+        }
+
+        // Second pass, find strings that contain string.
+        for (NSString *possibleMatch in sortedAutoFillStrings) {
+            NSRange range = [possibleMatch rangeOfString:string options:NSCaseInsensitiveSearch];
+            if (NSNotFound != range.location) {
+                [matches addObject:possibleMatch];
+            }
+        }
+    }
+    return matches;
 }
 
 - (NSUInteger)minimumLengthForAutoFillQueryForTextField:(DPTextField *)textField {

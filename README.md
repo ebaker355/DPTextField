@@ -69,7 +69,7 @@ source can be set in code, or wired up in Interface Builder, and must adopt the
 
 When a data source is provided, the AutoFill toolbar button will appear in the
 keyboard toolbar. The button can be manually hidden, if appropriate, by setting
-the `autoFillBarButtonItemHidden` boolean property. (Note that settings this
+the `autoFillBarButtonItemHidden` boolean property. (Note that setting this
 property to `YES` has no effect if the `autoFillDataSource` property is nil.)
 The same is true for the button's enabled state. Also, if the data source does
 not provide any matching strings, the button cannot be enabled.

@@ -466,9 +466,7 @@ const NSUInteger kNextButtonIndex       = 1;
     // with the text already entered, then disable the AutoFill button.
     if (1 == [_autoFillStrings count]) {
         NSString *string = [_autoFillStrings lastObject];
-        if (NSOrderedSame == [[self text] compare:string options:NSCaseInsensitiveSearch]) {
-            [self setAutoFillBarButtonEnabled:NO];
-        }
+        [_autoFillBarButtonItem setEnabled:(!(NSOrderedSame == [[self text] compare:string options:NSCaseInsensitiveSearch]))];
     } else {
         [_autoFillBarButtonItem setEnabled:([_autoFillStrings count] > 0)];
     }
