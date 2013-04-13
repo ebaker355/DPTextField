@@ -38,7 +38,7 @@ DPTextField *field = [[DPTextField alloc] init];
 [field setInputAccessoryViewHidden:YES];
 ```
 
-### Previous|Next buttons
+### Previous|Next and Done toolbar buttons
 
 A DPTextField has IBOutlets for sibling fields, called `previousField` and
 `nextField`. These can be connected to other `UIResponder` controls using
@@ -50,7 +50,13 @@ if allowed.
 
 The previous and next buttons are only enabled when the outlets are connected.
 If neither outlet is connected, the buttons are not displayed in the toolbar.
-The buttons can also be manually enabled/disabled by set the
-`previousBarButtonEnabled` and `nextBarButtonEnabled` boolean properties. (Note
-that settings these properties to YES only enables the button if the respective
-outlet is connected.)
+The buttons can also be manually enabled/disabled by setting the
+`previousBarButtonEnabled` and `nextBarButtonEnabled` boolean properties. This
+is useful for preventing a field from resigining first responder if it failes a
+validation check. (Note that setting these properties to YES only enables the
+bar button if the field's respective outlet is connected to another control.)
+
+A Done button is also displayed in the toolbar by default. When tapped, it
+simply tells the DPTextField to `resignFirstResponder`. It can be removed by
+setting the `doneBarButtonItemHidden` property to `YES`. Alternatively, it can
+be enabled/disabled via the `doneBarButtonItemEnabled` property.

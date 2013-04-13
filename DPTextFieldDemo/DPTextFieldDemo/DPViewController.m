@@ -20,7 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.field3 setInputAccessoryViewHidden:YES];
+//    [self.field1 setDoneBarButtonHidden:YES];
+//    [self.field2 setDoneBarButtonEnabled:NO];
+//    [self.field3 setInputAccessoryViewHidden:YES];
 }
 
 @end

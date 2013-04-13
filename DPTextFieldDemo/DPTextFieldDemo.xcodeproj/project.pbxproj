@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6686D31739684593ADA2C512 /* libPods-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A32D55A04B0145CBA17400E2 /* libPods-test.a */; };
+		712C9F961718EDC500B73161 /* DPTextFieldDoneButtonSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 712C9F951718EDC500B73161 /* DPTextFieldDoneButtonSpecs.m */; };
 		713D8A0B16FD025C00F568DE /* DPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 713D8A0A16FD025C00F568DE /* DPTextField.m */; };
 		7167B81016FCF89600A3C2A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7167B80F16FCF89600A3C2A2 /* UIKit.framework */; };
 		7167B81216FCF89600A3C2A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7167B81116FCF89600A3C2A2 /* Foundation.framework */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		4F7C04364C3A41FEBEB458DC /* Pods-test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.xcconfig"; path = "Pods/Pods-test.xcconfig"; sourceTree = SOURCE_ROOT; };
+		712C9F951718EDC500B73161 /* DPTextFieldDoneButtonSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldDoneButtonSpecs.m; sourceTree = "<group>"; };
 		713D8A0916FD025C00F568DE /* DPTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPTextField.h; sourceTree = "<group>"; };
 		713D8A0A16FD025C00F568DE /* DPTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextField.m; sourceTree = "<group>"; };
 		7167B80C16FCF89600A3C2A2 /* DPTextFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DPTextFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +174,7 @@
 		7167B83C16FCF89600A3C2A2 /* DPTextFieldDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				712C9F951718EDC500B73161 /* DPTextFieldDoneButtonSpecs.m */,
 				71C8742317188C29002C0B8B /* DPTextFieldPreviousNextButtonSpecs.m */,
 				71C8ABC916FD06A00086EF86 /* DPTextFieldSpecs.m */,
 				71C874251718BDB4002C0B8B /* DPTextFieldToolbarSpecs.m */,
@@ -330,6 +333,7 @@
 				71C8ABCA16FD06A00086EF86 /* DPTextFieldSpecs.m in Sources */,
 				71C8742417188C29002C0B8B /* DPTextFieldPreviousNextButtonSpecs.m in Sources */,
 				71C874261718BDB4002C0B8B /* DPTextFieldToolbarSpecs.m in Sources */,
+				712C9F961718EDC500B73161 /* DPTextFieldDoneButtonSpecs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

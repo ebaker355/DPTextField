@@ -13,14 +13,17 @@ const NSUInteger kNextButtonIndex       = 1;
 
 @interface DPTextField ()
 @property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
+@property (readonly, nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
 @end
 
 @implementation DPTextField
 @synthesize previousField = _previousField;
 @synthesize nextField = _nextField;
-@synthesize previousNextBarButtonItem = _previousNextBarButtonItem;
 @synthesize inputAccessoryViewHidden = _inputAccessoryViewHidden;
+@synthesize previousNextBarButtonItem = _previousNextBarButtonItem;
+@synthesize doneBarButtonItem = _doneBarButtonItem;
+@synthesize doneBarButtonHidden = _doneBarButtonHidden;
 @synthesize resizeToolbarWhenKeyboardFrameChanges = _resizeToolbarWhenKeyboardFrameChanges;
 
 #pragma mark - Initialization
@@ -114,6 +117,10 @@ const NSUInteger kNextButtonIndex       = 1;
         [barItems addObject:barItem];
     }
 
+    if (NO == [self doneBarButtonHidden]) {
+        [barItems addObjectsFromArray:@[[self flexibleSpaceBarButtonItem], [self doneBarButtonItem]]];
+    }
+
     [[self toolbar] setItems:barItems animated:animated];
 }
 
@@ -148,6 +155,10 @@ const NSUInteger kNextButtonIndex       = 1;
     } else {
         [[NSNotificationCenter defaultCenter] removeObserver:self.toolbar name:UIKeyboardDidChangeFrameNotification object:nil];
     }
+}
+
+- (UIBarButtonItem *)flexibleSpaceBarButtonItem {
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 }
 
 #pragma mark - Previous|Next toolbar buttons
@@ -232,6 +243,32 @@ const NSUInteger kNextButtonIndex       = 1;
     if ([self canResignFirstResponder] && [aField canBecomeFirstResponder]) {
         [aField becomeFirstResponder];
     }
+}
+
+#pragma mark - Done toolbar button
+
+- (UIBarButtonItem *)doneBarButtonItem {
+    if (nil == _doneBarButtonItem) {
+        _doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+    }
+    return _doneBarButtonItem;
+}
+
+- (void)setDoneBarButtonHidden:(BOOL)doneBarButtonHidden {
+    _doneBarButtonHidden = doneBarButtonHidden;
+    [self updateToolbarAnimated:YES];
+}
+
+- (BOOL)doneBarButtonEnabled {
+    return [[self doneBarButtonItem] isEnabled];
+}
+
+- (void)setDoneBarButtonEnabled:(BOOL)doneBarButtonEnabled {
+    [[self doneBarButtonItem] setEnabled:doneBarButtonEnabled];
+}
+
+- (void)done:(id)sender {
+    [self resignFirstResponder];
 }
 
 @end
