@@ -90,8 +90,6 @@ const NSUInteger kNextButtonIndex       = 1;
 
 @interface DPTextField ()
 @property (strong, nonatomic) DPTextFieldInternalDelegate *internalDelegate;
-@property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
-@property (readonly, nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
 @end
 
@@ -100,6 +98,9 @@ const NSUInteger kNextButtonIndex       = 1;
 @synthesize nextField = _nextField;
 @synthesize inputAccessoryViewHidden = _inputAccessoryViewHidden;
 @synthesize previousNextBarButtonItem = _previousNextBarButtonItem;
+@synthesize autoFillBarButtonItem = _autoFillBarButtonItem;
+@synthesize autoFillBarButtonHidden = _autoFillBarButtonHidden;
+@synthesize autoFillBarButtonEnabled = _autoFillBarButtonEnabled;
 @synthesize doneBarButtonItem = _doneBarButtonItem;
 @synthesize doneBarButtonHidden = _doneBarButtonHidden;
 @synthesize resizeToolbarWhenKeyboardFrameChanges = _resizeToolbarWhenKeyboardFrameChanges;
@@ -228,11 +229,21 @@ const NSUInteger kNextButtonIndex       = 1;
     
     NSMutableArray *barItems = [NSMutableArray array];
 
+    // Previous|Next buttons
     UIBarButtonItem *barItem = [self previousNextBarButtonItem];
     if (nil != barItem) {
         [barItems addObject:barItem];
     }
 
+    // AutoFill button
+    if (nil != [self autoFillDataSource]) {
+        if ([barItems count] > 0) {
+            [barItems addObject:[self flexibleSpaceBarButtonItem]];
+        }
+        [barItems addObject:[self autoFillBarButtonItem]];
+    }
+
+    // Done button
     if (NO == [self doneBarButtonHidden]) {
         [barItems addObjectsFromArray:@[[self flexibleSpaceBarButtonItem], [self doneBarButtonItem]]];
     }
@@ -359,6 +370,37 @@ const NSUInteger kNextButtonIndex       = 1;
     if ([self canResignFirstResponder] && [aField canBecomeFirstResponder]) {
         [aField becomeFirstResponder];
     }
+}
+
+#pragma mark - Auto-fill toolbar button
+
+- (UIBarButtonItem *)autoFillBarButtonItem {
+    if (nil == _autoFillBarButtonItem) {
+        _autoFillBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"AutoFill", @"AutoFill") style:UIBarButtonItemStyleBordered target:self action:@selector(autoFill:)];
+    }
+    return _autoFillBarButtonItem;
+}
+
+- (BOOL)autoFillBarButtonHidden {
+    if (nil == _autoFillDataSource) return YES;
+    return _autoFillBarButtonHidden;
+}
+
+- (void)setAutoFillBarButtonHidden:(BOOL)autoFillBarButtonHidden {
+    if (nil == _autoFillDataSource) return;
+    _autoFillBarButtonHidden = autoFillBarButtonHidden;
+    [self updateToolbarAnimated:YES];
+}
+
+- (BOOL)autoFillBarButtonEnabled {
+    if (nil == _autoFillDataSource) return NO;
+    if ([self autoFillBarButtonHidden]) return NO;
+    return [[self autoFillBarButtonItem] isEnabled];
+}
+
+- (void)setAutoFillBarButtonEnabled:(BOOL)autoFillBarButtonEnabled {
+    if (nil == _autoFillDataSource) return;
+    // TODO: check if the button should be allowed to be enabled
 }
 
 #pragma mark - Done toolbar button

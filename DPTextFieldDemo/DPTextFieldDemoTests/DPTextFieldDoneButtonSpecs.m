@@ -10,8 +10,6 @@
 #import "DPTextField.h"
 
 @interface DPTextField ()
-@property (readonly, nonatomic) UIBarButtonItem *doneBarButtonItem;
-
 - (void)done:(id)sender;
 @end
 

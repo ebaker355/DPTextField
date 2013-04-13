@@ -9,10 +9,6 @@
 #import "Kiwi.h"
 #import "DPTextField.h"
 
-@interface DPTextField ()
-@property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
-@end
-
 SPEC_BEGIN(DPTextFieldPreviousNextButtonSpecs)
 
 describe(@"The previous and next toolbar buttons", ^{

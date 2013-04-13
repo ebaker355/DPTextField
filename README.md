@@ -61,6 +61,19 @@ simply tells the DPTextField to `resignFirstResponder`. It can be removed by
 setting the `doneBarButtonItemHidden` property to `YES`. Alternatively, it can
 be enabled/disabled via the `doneBarButtonItemEnabled` property.
 
+### AutoFill
+
+A DPTextField accepts a data source to provide auto-fill strings. The data
+source can be set in code, or wired up in Interface Builder, and must adopt the
+`DPTextFieldAutoFillDataSource` protocol.
+
+When a data source is provided, the AutoFill toolbar button will appear in the
+keyboard toolbar. The button can be manually hidden, if appropriate, by setting
+the `autoFillBarButtonItemHidden` boolean property. (Note that settings this
+property to `YES` has no effect if the `autoFillDataSource` property is nil.)
+The same is true for the button's enabled state. Also, if the data source does
+not provide any matching strings, the button cannot be enabled.
+
 ## About the delegate...
 
 In order for a DPTextField to gain a measure of control over its superclass

@@ -7,15 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DPTextFieldAutoFillDataSource.h"
 
 @interface DPTextField : UITextField
 @property (readonly, nonatomic) id<UITextFieldDelegate> customDelegate;
 
-@property (weak, nonatomic) IBOutlet UIResponder *previousField, *nextField;
-
 @property (assign, nonatomic) BOOL inputAccessoryViewHidden;
+
+@property (weak, nonatomic) IBOutlet UIResponder *previousField, *nextField;
+@property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
 @property (assign, nonatomic) BOOL previousBarButtonEnabled, nextBarButtonEnabled;
 
+@property (assign, nonatomic) IBOutlet id<DPTextFieldAutoFillDataSource> autoFillDataSource;
+@property (readonly, nonatomic) UIBarButtonItem *autoFillBarButtonItem;
+@property (assign, nonatomic) BOOL autoFillBarButtonHidden;
+@property (assign, nonatomic) BOOL autoFillBarButtonEnabled;
+
+@property (readonly, nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (assign, nonatomic) BOOL doneBarButtonHidden;
 @property (assign, nonatomic) BOOL doneBarButtonEnabled;
 
