@@ -11,7 +11,85 @@
 const NSUInteger kPreviousButtonIndex   = 0;
 const NSUInteger kNextButtonIndex       = 1;
 
+#pragma mark - DPTextFieldInternalDelegate
+
+@interface DPTextFieldInternalDelegate : NSObject <UITextFieldDelegate>
+@property (assign, nonatomic) id<UITextFieldDelegate> delegate;
+@end
+
+@implementation DPTextFieldInternalDelegate
+@synthesize delegate;
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (nil != delegate && [delegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
+        return [delegate textFieldShouldBeginEditing:textField];
+    }
+    return (nil != textField);
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (nil != delegate && [delegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
+        [delegate textFieldDidBeginEditing:textField];
+    }
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (nil != delegate && [delegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
+        return [delegate textFieldShouldEndEditing:textField];
+    }
+    return (nil != textField);
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (nil != delegate && [delegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
+        [delegate textFieldDidEndEditing:textField];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    // If our delegate responds to this message, check its response first.
+    if (nil != delegate && [delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
+        if (NO == [delegate textField:textField shouldChangeCharactersInRange:range replacementString:string]) {
+            return NO;
+        }
+    }
+
+    // Either our delegate doesn't respond, or said YES.
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        DPTextField *field = (DPTextField *)textField;
+        // Check field length restriction.
+        NSUInteger maxLength = [field maximumLength];
+        if (maxLength > 0) {
+            NSUInteger newLength = field.text.length + string.length - range.length;
+            if (newLength > maxLength) {
+                return NO;
+            }
+        }
+    }
+
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if (nil != delegate && [delegate respondsToSelector:@selector(textFieldShouldClear:)]) {
+        return [delegate textFieldShouldClear:textField];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (nil != delegate && [delegate respondsToSelector:@selector(textFieldShouldReturn:)]) {
+        return [delegate textFieldShouldReturn:textField];
+    }
+    return YES;
+}
+
+@end
+
+#pragma mark - DPTextField
+
 @interface DPTextField ()
+@property (strong, nonatomic) DPTextFieldInternalDelegate *internalDelegate;
 @property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
 @property (readonly, nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
@@ -53,6 +131,9 @@ const NSUInteger kNextButtonIndex       = 1;
 }
 
 - (void)configureControl {
+    // Always have an internal delegate.
+    [self installInternalDelegate:nil];
+    
     // Set option defaults.
     [self setInputAccessoryViewHidden:NO];
 }
@@ -67,6 +148,37 @@ const NSUInteger kNextButtonIndex       = 1;
     _nextField = nextField;
     [self updateToolbarAnimated:NO];
     [self updatePreviousNextButtons];
+}
+
+#pragma mark - Internal delegate
+
+- (void)installInternalDelegate:(DPTextFieldInternalDelegate *)delegate {
+    // If an internal delegate is already set, replace it.
+    if (nil != [self internalDelegate] && (nil != delegate)) {
+        if (nil != [[self internalDelegate] delegate]) {
+            [delegate setDelegate:[[self internalDelegate] delegate]];
+        }
+        [self setInternalDelegate:delegate];
+    }
+    // If no internal delegate is set, create one.
+    if (nil == [self internalDelegate]) {
+        [self setInternalDelegate:(nil != delegate ? delegate : [[DPTextFieldInternalDelegate alloc] init])];
+    }
+    [super setDelegate:[self internalDelegate]];
+}
+
+- (id<UITextFieldDelegate>)delegate {
+    [self installInternalDelegate:nil];
+    return [super delegate];
+}
+
+- (void)setDelegate:(id<UITextFieldDelegate>)delegate {
+    if ([delegate isKindOfClass:[DPTextFieldInternalDelegate class]]) {
+        [self installInternalDelegate:delegate];
+    } else {
+        [self installInternalDelegate:nil];
+        [[self internalDelegate] setDelegate:delegate];
+    }
 }
 
 #pragma mark - Responder status

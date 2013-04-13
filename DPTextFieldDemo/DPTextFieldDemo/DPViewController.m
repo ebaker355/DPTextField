@@ -23,6 +23,8 @@
 //    [self.field1 setDoneBarButtonHidden:YES];
 //    [self.field2 setDoneBarButtonEnabled:NO];
 //    [self.field3 setInputAccessoryViewHidden:YES];
+
+    [self.field2 setMaximumLength:4];
 }
 
 @end

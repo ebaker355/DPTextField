@@ -60,3 +60,25 @@ A Done button is also displayed in the toolbar by default. When tapped, it
 simply tells the DPTextField to `resignFirstResponder`. It can be removed by
 setting the `doneBarButtonItemHidden` property to `YES`. Alternatively, it can
 be enabled/disabled via the `doneBarButtonItemEnabled` property.
+
+## About the delegate...
+
+In order for a DPTextField to gain a measure of control over its superclass
+object, it must instantiate its own internal delegate object that conforms to
+the `UITextFieldDelegate` protocol. This does not prevent you from assigning
+your own custom delegate object, either in code or in Interface Builder. The
+internal delegate will defer to your custom delegate.
+
+The only caveat is if you want to get a reference back to your custom delegate
+from the DPTextField control (which you should rarely, if ever, need to do). If
+you simply call the DPTextField's `delegate` property, you'll receive its
+internal delegate instance. In order to retrieve your custom delegate, use code
+like this:
+
+```
+// assuming 'field' is a DPTextField instance...
+id<DPTextFieldDelegate>fieldDelegate = (id<DPTextFieldDelegate>)[field delegate];
+id<UITextFieldDelegate>myDelegate = [fieldDelegate delegate];
+
+// myDelegate now references your custom delegate object
+```

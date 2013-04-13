@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class DPTextFieldToolbar;
+@protocol DPTextFieldDelegate <NSObject>
+@required
+@property (assign, nonatomic) id<UITextFieldDelegate> delegate;
+@end
 
 @interface DPTextField : UITextField
-
 @property (weak, nonatomic) IBOutlet UIResponder *previousField, *nextField;
 
 @property (assign, nonatomic) BOOL inputAccessoryViewHidden;
@@ -19,5 +21,7 @@
 
 @property (assign, nonatomic) BOOL doneBarButtonHidden;
 @property (assign, nonatomic) BOOL doneBarButtonEnabled;
+
+@property (assign, nonatomic) NSUInteger maximumLength;
 
 @end
