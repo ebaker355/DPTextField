@@ -12,6 +12,7 @@ const NSUInteger kPreviousButtonIndex   = 0;
 const NSUInteger kNextButtonIndex       = 1;
 
 @interface DPTextField ()
+@property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
 @property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
 @end
 
@@ -150,6 +151,38 @@ const NSUInteger kNextButtonIndex       = 1;
 }
 
 #pragma mark - Previous|Next toolbar buttons
+
+- (BOOL)previousBarButtonEnabled {
+    if (nil != _previousNextBarButtonItem) {
+        UISegmentedControl *segControl = (UISegmentedControl *)[_previousNextBarButtonItem customView];
+        return [segControl isEnabledForSegmentAtIndex:kPreviousButtonIndex];
+    }
+    return NO;
+}
+
+- (void)setPreviousBarButtonEnabled:(BOOL)previousBarButtonEnabled {
+    if (nil != _previousNextBarButtonItem) {
+        previousBarButtonEnabled = (previousBarButtonEnabled && (nil != self.previousField));
+        UISegmentedControl *segControl = (UISegmentedControl *)[_previousNextBarButtonItem customView];
+        [segControl setEnabled:previousBarButtonEnabled forSegmentAtIndex:kPreviousButtonIndex];
+    }
+}
+
+- (BOOL)nextBarButtonEnabled {
+    if (nil != _previousNextBarButtonItem) {
+        UISegmentedControl *segControl = (UISegmentedControl *)[_previousNextBarButtonItem customView];
+        return [segControl isEnabledForSegmentAtIndex:kNextButtonIndex];
+    }
+    return NO;
+}
+
+- (void)setNextBarButtonEnabled:(BOOL)nextBarButtonEnabled {
+    if (nil != _previousNextBarButtonItem) {
+        nextBarButtonEnabled = (nextBarButtonEnabled && (nil != self.nextField));
+        UISegmentedControl *segControl = (UISegmentedControl *)[_previousNextBarButtonItem customView];
+        [segControl setEnabled:nextBarButtonEnabled forSegmentAtIndex:kNextButtonIndex];
+    }
+}
 
 - (UIBarButtonItem *)previousNextBarButtonItem {
     if (nil == _previousNextBarButtonItem) {

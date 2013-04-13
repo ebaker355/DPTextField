@@ -9,6 +9,10 @@
 #import "Kiwi.h"
 #import "DPTextField.h"
 
+@interface DPTextField ()
+@property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
+@end
+
 SPEC_BEGIN(DPTextFieldPreviousNextButtonSpecs)
 
 describe(@"The previous and next toolbar buttons", ^{
@@ -96,6 +100,34 @@ describe(@"The previous and next toolbar buttons", ^{
 
         it(@"should enable the previous button", ^{
             [[@([segControl isEnabledForSegmentAtIndex:prevSegIndex]) should] beYes];
+        });
+
+        it(@"should keep the previousBarButtonEnabled property updated", ^{
+            [segControl setEnabled:YES forSegmentAtIndex:prevSegIndex];
+            [[@(field.previousBarButtonEnabled) should] equal:@([segControl isEnabledForSegmentAtIndex:prevSegIndex])];
+
+            [segControl setEnabled:NO forSegmentAtIndex:prevSegIndex];
+            [[@(field.previousBarButtonEnabled) should] equal:@([segControl isEnabledForSegmentAtIndex:prevSegIndex])];
+
+            [field setPreviousBarButtonEnabled:NO];
+            [[@([segControl isEnabledForSegmentAtIndex:prevSegIndex]) should] equal:@([field previousBarButtonEnabled])];
+
+            [field setPreviousBarButtonEnabled:YES];
+            [[@([segControl isEnabledForSegmentAtIndex:prevSegIndex]) should] equal:@([field previousBarButtonEnabled])];
+        });
+
+        it(@"should keep the nextBarButtonEnabled property updated", ^{
+            [segControl setEnabled:YES forSegmentAtIndex:nextSegIndex];
+            [[@(field.nextBarButtonEnabled) should] equal:@([segControl isEnabledForSegmentAtIndex:nextSegIndex])];
+
+            [segControl setEnabled:NO forSegmentAtIndex:prevSegIndex];
+            [[@(field.nextBarButtonEnabled) should] equal:@([segControl isEnabledForSegmentAtIndex:nextSegIndex])];
+
+            [field setNextBarButtonEnabled:NO];
+            [[@([segControl isEnabledForSegmentAtIndex:nextSegIndex]) should] equal:@([field nextBarButtonEnabled])];
+
+            [field setNextBarButtonEnabled:YES];
+            [[@([segControl isEnabledForSegmentAtIndex:nextSegIndex]) should] equal:@([field nextBarButtonEnabled])];
         });
 
         context(@"when the previous button is tapped", ^{

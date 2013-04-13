@@ -38,4 +38,19 @@ DPTextField *field = [[DPTextField alloc] init];
 [field setInputAccessoryViewHidden:YES];
 ```
 
-### Previous/Next buttons
+### Previous|Next buttons
+
+A DPTextField has IBOutlets for sibling fields, called `previousField` and
+`nextField`. These can be connected to other `UIResponder` controls using
+Interface Builder.
+
+When these outlets are connected, DPTextField will display Previous and Next
+buttons in its toolbar. These will switch the first responder field in the view,
+if allowed.
+
+The previous and next buttons are only enabled when the outlets are connected.
+If neither outlet is connected, the buttons are not displayed in the toolbar.
+The buttons can also be manually enabled/disabled by set the
+`previousBarButtonEnabled` and `nextBarButtonEnabled` boolean properties. (Note
+that settings these properties to YES only enables the button if the respective
+outlet is connected.)

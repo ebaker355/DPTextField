@@ -12,8 +12,7 @@
 
 @interface DPTextField : UITextField
 
-@property (readonly, nonatomic) UIBarButtonItem *previousNextBarButtonItem;
-
+@property (assign, nonatomic) BOOL previousBarButtonEnabled, nextBarButtonEnabled;
 @property (weak, nonatomic) IBOutlet UIResponder *previousField, *nextField;
 
 @property (assign, nonatomic) BOOL inputAccessoryViewHidden;
