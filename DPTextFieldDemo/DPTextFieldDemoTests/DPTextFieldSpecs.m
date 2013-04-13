@@ -8,130 +8,78 @@
 
 #import "Kiwi.h"
 #import "DPTextField.h"
-#import "DPTextFieldToolbar.h"
+#import <objc/runtime.h>
 
 SPEC_BEGIN(DPTextFieldSpecs)
 
-describe(@"DPTextField", ^{
-    context(@"class", ^{
-        it(@"should subclass UITextField", ^{
-            [[[DPTextField class] should] beSubclassOfClass:[UITextField class]];
-        });
-    });
-
-    __block DPTextField *textField;
-    __block DPTextField *prevTextField;
-    __block DPTextField *nextTextField;
-
+describe(@"A DPTextField", ^{
+    __block DPTextField *field;
     beforeEach(^{
-        textField = [[DPTextField alloc] init];
-        prevTextField = [[DPTextField alloc] init];
-        nextTextField = [[DPTextField alloc] init];
+        field = [[DPTextField alloc] init];
     });
 
-#pragma mark - Toolbar tests
-
-    it(@"should have a readonly toolbar property", ^{
-        [[textField should] respondToSelector:@selector(toolbar)];
-        [[textField shouldNot] respondToSelector:@selector(setToolbar:)];
+    it(@"should use correct default settings", ^{
+        [[@([field toolbarHidden]) should] beNo];
     });
 
-    it(@"should instantiate the toolbar when inited", ^{
-        [[textField toolbar] shouldNotBeNil];
+    it(@"should use a UIToolbar as its inputAccessoryView", ^{
+        [[@([field toolbarHidden]) should] beNo];
+        [[field toolbar] shouldNotBeNil];
+        [[field inputAccessoryView] shouldNotBeNil];
+        [[[field toolbar] should] beIdenticalTo:[field inputAccessoryView]];
+        [[[field toolbar] should] beKindOfClass:[UIToolbar class]];
     });
 
-    it(@"should use a DPTextFieldToolbar", ^{
-        [[[textField toolbar] should] beKindOfClass:[DPTextFieldToolbar class]];
+    it(@"should be able to show and hide the toolbar", ^{
+        [[@([field toolbarHidden]) should] beNo];
+        [[field toolbar] shouldNotBeNil];
+
+        [field setToolbarHidden:YES];
+        [[field toolbar] shouldBeNil];
+
+        [field setToolbarHidden:NO];
+        [[field toolbar] shouldNotBeNil];
     });
 
-    it(@"should set the toolbar as its inputAccessoryView", ^{
-        [[[textField inputAccessoryView] should] beIdenticalTo:[textField toolbar]];
+    it(@"should style the toolbar to match the keyboard", ^{
+        [field setToolbarHidden:YES];
+        [field setKeyboardAppearance:UIKeyboardAppearanceDefault];
+        [field setToolbarHidden:NO];
+        [[@([[field toolbar] barStyle]) should] equal:@(UIBarStyleDefault)];
+
+        [field setToolbarHidden:YES];
+        [field setKeyboardAppearance:UIKeyboardAppearanceAlert];
+        [field setToolbarHidden:NO];
+        [[@([[field toolbar] barStyle]) should] equal:@(UIBarStyleBlackTranslucent)];
     });
 
-    it(@"should have a readonly previousNextBarButtonItem property", ^{
-        [[textField should] respondToSelector:@selector(previousNextBarButtonItem)];
-        [[textField shouldNot] respondToSelector:@selector(setPreviousNextBarButtonItem:)];
-    });
-
-    it(@"should instantiate the previousNextBarButtonItem when inited", ^{
-        [[textField previousNextBarButtonItem] shouldNotBeNil];
-    });
-
-    it(@"should use a UISegmentedControl with 2 segments for the previousNextBarButtonItem custom view", ^{
-        [[[[textField previousNextBarButtonItem] customView] should] beKindOfClass:[UISegmentedControl class]];
-        [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] numberOfSegments]) should] equal:@2];
-    });
-
-    it(@"should disable the previous and next buttons by default", ^{
-        [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:0]) should] beNo];
-        [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:1]) should] beNo];
-    });
-
-    it(@"should have a readonly doneBarButtonItem property", ^{
-        [[textField should] respondToSelector:@selector(doneBarButtonItem)];
-        [[textField shouldNot] respondToSelector:@selector(setDoneBarButtonItem:)];
-    });
-
-    it(@"should instantiate the doneBarButtonItem when inited", ^{
-        [[textField doneBarButtonItem] shouldNotBeNil];
-    });
-
-#pragma mark - Previous and Next field tests
-
-    it(@"should have a previousField property", ^{
-        [[textField should] respondToSelector:@selector(previousField)];
-        [[textField should] respondToSelector:@selector(setPreviousField:)];
-    });
-
-    it(@"should have a nextField property", ^{
-        [[textField should] respondToSelector:@selector(nextField)];
-        [[textField should] respondToSelector:@selector(setNextField:)];
-    });
-
-    context(@"with only a previous field assigned", ^{
-
+    context(@"with a previous and next field", ^{
+        __block DPTextField *previousField, *nextField;
         beforeEach(^{
-            [textField setPreviousField:prevTextField];
+            previousField = [[DPTextField alloc] init];
+            nextField = [[DPTextField alloc] init];
+            [field setPreviousField:previousField];
+            [field setNextField:nextField];
         });
 
-        it(@"should have the previousField property set correctly", ^{
-            [[[textField previousField] should] beIdenticalTo:prevTextField];
-            [[textField nextField] shouldBeNil];
-        });
+        it(@"should include a Previous|Next segmented control in the toolbar", ^{
+            BOOL foundPrevNextButtons = NO;
+            for (UIBarButtonItem *item in [[field toolbar] items]) {
+                // Look for bar button items with a UISegmentedControl as their custom view.
+                if ([[item customView] isKindOfClass:[UISegmentedControl class]]) {
+                    UISegmentedControl *segControl = (UISegmentedControl *)[item customView];
+                    // Our segControl should have 2 segments.
+                    if (2 == [segControl numberOfSegments]) {
+                        // Our segControl should be wired to the proper selector.
+                        NSArray *actions = [segControl actionsForTarget:field forControlEvent:UIControlEventValueChanged];
+                        if ([actions containsObject:NSStringFromSelector(@selector(makePreviousOrNextFieldFirstResponder:))]) {
+                            foundPrevNextButtons = YES;
+                        }
+                    }
+                }
+            }
 
-        it(@"should enable the previous button, and disable the next button", ^{
-            [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:0]) should] beYes];
-            [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:1]) should] beNo];
-        });
-    });
-
-    context(@"with only a next field assigned", ^{
-
-        beforeEach(^{
-            [textField setNextField:nextTextField];
-        });
-
-        it(@"should have the nextField property set correctly", ^{
-            [[[textField nextField] should] beIdenticalTo:nextTextField];
-            [[textField previousField] shouldBeNil];
-        });
-
-        it(@"should disable the previous button, and enable the next button", ^{
-            [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:0]) should] beNo];
-            [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:1]) should] beYes];
-        });
-    });
-
-    context(@"with a previous field and a next field assigned", ^{
-
-        beforeEach(^{
-            [textField setPreviousField:prevTextField];
-            [textField setNextField:nextTextField];
-        });
-
-        it(@"should enable the previous button and the next button", ^{
-            [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:0]) should] beYes];
-            [[@([(UISegmentedControl *)[[textField previousNextBarButtonItem] customView] isEnabledForSegmentAtIndex:1]) should] beYes];
+            [[@(foundPrevNextButtons) should] beYes];
         });
     });
 });

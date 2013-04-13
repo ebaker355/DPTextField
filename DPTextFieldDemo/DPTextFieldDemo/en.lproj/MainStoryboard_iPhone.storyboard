@@ -53,7 +53,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="jPN-J6-nUu"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
                                                     <connections>
                                                         <outlet property="nextField" destination="g4H-0z-RtA" id="QHD-ev-ynC"/>
                                                         <outlet property="previousField" destination="FSX-eb-QlG" id="1iE-1a-NvR"/>
