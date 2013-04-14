@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DPTextFieldAutoFillDataSource.h"
 
-@interface DPTextField : UITextField <UIInputViewAudioFeedback>
+@interface DPTextField : UITextField 
 @property (readonly, nonatomic) id<UITextFieldDelegate> customDelegate;
 
 @property (assign, nonatomic) BOOL inputAccessoryViewHidden;
@@ -28,7 +28,5 @@
 @property (assign, nonatomic) BOOL doneBarButtonEnabled;
 
 @property (assign, nonatomic) NSUInteger maximumLength;
-
-@property (assign, nonatomic) BOOL enableInputClicksWhenVisible;
 
 @end

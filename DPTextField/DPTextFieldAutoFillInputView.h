@@ -10,7 +10,7 @@
 
 @class DPTextField;
 
-@interface DPTextFieldAutoFillInputView : UIView
+@interface DPTextFieldAutoFillInputView : UIView <UIInputViewAudioFeedback>
 
 - (void)presentForTextField:(DPTextField *)textField;
 - (void)dismiss;

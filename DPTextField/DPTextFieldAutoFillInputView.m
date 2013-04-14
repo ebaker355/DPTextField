@@ -13,6 +13,7 @@
 @interface DPTextField ()
 @property (readonly, nonatomic) NSArray *autoFillStrings;
 @property (readonly, nonatomic) CGFloat toolbarHeight;
+- (void)removeAutoFillString:(NSString *)string;
 @end
 
 @interface DPTextFieldAutoFillInputView () <UIInputViewAudioFeedback, UITableViewDataSource, UITableViewDelegate>
@@ -96,7 +97,7 @@
 #pragma mark - UIInputViewAudioFeedback
 
 - (BOOL)enableInputClicksWhenVisible {
-    return [_textField enableInputClicksWhenVisible];
+    return YES;
 }
 
 #pragma mark - Keyboard image
@@ -205,12 +206,36 @@
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *string = [[_textField autoFillStrings] objectAtIndex:[indexPath row]];
+
+    if (([[_textField autoFillDataSource] respondsToSelector:@selector(textField:canRemoveAutoFillString:atIndexPath:)]) &&
+        ([[_textField autoFillDataSource] respondsToSelector:@selector(textField:removeAutoFillString:atIndexPath:)])) {
+        return [[_textField autoFillDataSource] textField:_textField canRemoveAutoFillString:string atIndexPath:indexPath];
+    }
+
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (UITableViewCellEditingStyleDelete == editingStyle) {
+        // Update the data source.
+        NSString *string = [[_textField autoFillStrings] objectAtIndex:[indexPath row]];
+        [[_textField autoFillDataSource] textField:_textField removeAutoFillString:string atIndexPath:indexPath];
+        [_textField removeAutoFillString:string];
+
+        // Update the table.
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *string = [[_textField autoFillStrings] objectAtIndex:[indexPath row]];
     [_textField setText:string];
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:_textField userInfo:nil];
+    [[UIDevice currentDevice] playInputClick];
 }
 
 @end

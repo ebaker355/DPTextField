@@ -145,11 +145,11 @@
 		7167B80E16FCF89600A3C2A2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7167B80F16FCF89600A3C2A2 /* UIKit.framework */,
-				7167B81116FCF89600A3C2A2 /* Foundation.framework */,
 				7167B81316FCF89600A3C2A2 /* CoreGraphics.framework */,
-				7167B83616FCF89600A3C2A2 /* SenTestingKit.framework */,
+				7167B81116FCF89600A3C2A2 /* Foundation.framework */,
 				A32D55A04B0145CBA17400E2 /* libPods-test.a */,
+				7167B83616FCF89600A3C2A2 /* SenTestingKit.framework */,
+				7167B80F16FCF89600A3C2A2 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

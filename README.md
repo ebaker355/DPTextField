@@ -87,15 +87,15 @@ however, sort the matches. So its a good idea to pre-sort.
 ```
 // Return all appropriate auto-fill strings for the given string.
 - (NSArray *)textField:(DPTextField *)textField autoFillStringsForString:(NSString *)string {
-    NSArray *autoFillStrings = [source allAvailableAutoFillStrings];    // Read from some serialized source
-    
+    NSArray *autoFillStrings = [self allAvailableAutoFillStrings];    // Read from some serialized source
+
     NSMutableArray *matches = [NSMutableArray array];
-    
+
     // Pre-sort the autoFillStrings array.
     NSArray *sortedAutoFillStrings = [autoFillStrings sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [(NSString *)obj1 compare:(NSString *)obj2];
     }];
-    
+
     // If the search string is nil or empty, just return all auto-fill strings.
     if (nil != string && [string length] > 0) {
         // Match the given string.
@@ -115,10 +115,56 @@ however, sort the matches. So its a good idea to pre-sort.
                 [matches addObject:possibleMatch];
             }
         }
+    } else {
+        // Return all available autoFillStrings.
+        [matches addObjectsFromArray:sortedAutoFillStrings];
     }
     return matches;
 }
 ```
+
+You can require that a minimum number of characters are entered into the field
+before the data source is queried for auto fill strings. Implement the
+`minimumLengthForAutoFillQueryForTextField:` method in your data source, like
+this:
+
+```
+- (NSUInteger)minimumLengthForAutoFillQueryForTextField:(DPTextField *)textField {
+    // Require at least 3 characters for autoFill in all fields, except field1.
+    if (self.field1 == textField) {
+        return 1;
+    }
+    return 3;
+}
+```
+
+Its nice for your user to be able to remove items from the auto fill strings
+list. You can enable this ability by providing implementations for the methods
+`textField:canRemoveAutoFillString:atIndexPath:` and
+`textField:removeAutoFillString:atIndexPath:`. The user may use the familiar
+horizontal swipe gesture to remove strings. Here's an example:
+
+```
+- (BOOL)textField:(DPTextField *)textField canRemoveAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
+    // So long as the string is not one that should never be removed...
+    return YES;
+}
+
+- (void)textField:(DPTextField *)textField removeAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
+    // Remove the string from the serialized data source.
+    // NOTE: Remove only 1 string! If the string count remaining does not match
+    // what the auto fill table view expects, then crashes may occur!
+
+    [[self autoFillStrings] removeObject:string];
+}
+```
+
+### Auto-correction
+
+For fields that implement auto fill, it is usually a good idea to disable
+auto-correction. This can be done in Interface Builder. It may not always be
+necessary. I suggest testing your interface with correction enabled and disabled
+to see which works best for the type of data you're working with.
 
 ## About the delegate...
 

@@ -10,6 +10,8 @@
 #import "DPTextField.h"
 
 @interface DPViewController () <DPTextFieldAutoFillDataSource>
+@property (strong, readonly, nonatomic) NSMutableArray *autoFillStrings;
+
 @property (weak, nonatomic) IBOutlet DPTextField *field1;
 @property (weak, nonatomic) IBOutlet DPTextField *field2;
 @property (weak, nonatomic) IBOutlet DPTextField *field3;
@@ -30,17 +32,21 @@
 #pragma mark - DPTextFieldAutoFillDataSource
 
 - (NSArray *)allAvailableAutoFillStrings {
-    return @[ @"Zero", @"One",
-              @"Two", @"Twenty",
-              @"Three", @"Thirty",
-              @"Four", @"Forty",
-              @"Five", @"Fifty",
-              @"Six", @"Sixty",
-              @"Seven", @"Seventy",
-              @"Eight", @"Eighty",
-              @"Nine", @"Ninety",
-              @"Ten", @"One hundred",
-              @"One thousand", @"Ten thousand" ];
+    if (nil == _autoFillStrings) {
+        _autoFillStrings = [NSMutableArray arrayWithArray:@[
+                            @"Zero", @"One",
+                            @"Two", @"Twenty",
+                            @"Three", @"Thirty",
+                            @"Four", @"Forty",
+                            @"Five", @"Fifty",
+                            @"Six", @"Sixty",
+                            @"Seven", @"Seventy",
+                            @"Eight", @"Eighty",
+                            @"Nine", @"Ninety",
+                            @"Ten", @"One hundred",
+                            @"One thousand", @"Ten thousand" ]];
+    }
+    return _autoFillStrings;
 }
 
 // Return all appropriate auto-fill strings for the given string.
@@ -73,6 +79,9 @@
                 [matches addObject:possibleMatch];
             }
         }
+    } else {
+        // Return all available autoFillStrings.
+        [matches addObjectsFromArray:sortedAutoFillStrings];
     }
     return matches;
 }
@@ -82,6 +91,14 @@
         return 2;
     }
     return 0;
+}
+
+- (BOOL)textField:(DPTextField *)textField canRemoveAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)textField:(DPTextField *)textField removeAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
+    [[self autoFillStrings] removeObject:string];
 }
 
 @end

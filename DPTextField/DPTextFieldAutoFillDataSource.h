@@ -15,7 +15,7 @@
 @optional
 - (NSUInteger)minimumLengthForAutoFillQueryForTextField:(DPTextField *)textField;
 - (UITableViewCell *)textField:(DPTextField *)textField tableView:(UITableView *)tableView cellForAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath;
-- (BOOL)textField:(DPTextField *)textField tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)textField:(DPTextField *)textField canRemoveAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath;
 - (void)textField:(DPTextField *)textField removeAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath;
 
 @required

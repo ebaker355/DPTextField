@@ -27,7 +27,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="7Qo-6N-f1B"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
                                                         <outlet property="autoFillDataSource" destination="XdK-Yz-2XM" id="Wf8-BL-GxO"/>
                                                         <outlet property="nextField" destination="5uj-wa-EuU" id="kzK-es-YCw"/>
@@ -54,7 +54,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="DUE-lA-l03"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
                                                         <outlet property="autoFillDataSource" destination="XdK-Yz-2XM" id="P99-Xf-Fcr"/>
                                                         <outlet property="nextField" destination="M6q-Pf-Sw6" id="BPz-AW-rdU"/>
@@ -82,7 +82,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="Uzb-Zo-djb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
                                                         <outlet property="autoFillDataSource" destination="XdK-Yz-2XM" id="wa5-Vy-qxz"/>
                                                         <outlet property="nextField" destination="fOK-d6-Kmj" id="EuR-tO-NYX"/>
@@ -110,7 +110,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="ErH-PN-w7k"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
                                                         <outlet property="autoFillDataSource" destination="XdK-Yz-2XM" id="o14-OI-kui"/>
                                                         <outlet property="previousField" destination="M6q-Pf-Sw6" id="W3x-c6-8Yj"/>
@@ -145,28 +145,6 @@
             <point key="canvasLocation" x="2" y="-229"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="DPTextField" superclassName="UITextField">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DPTextField.h"/>
-            <relationships>
-                <relationship kind="outlet" name="autoFillDataSource"/>
-                <relationship kind="outlet" name="nextField" candidateClass="UIResponder"/>
-                <relationship kind="outlet" name="previousField" candidateClass="UIResponder"/>
-            </relationships>
-        </class>
-        <class className="DPViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DPViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="field1" candidateClass="DPTextField"/>
-                <relationship kind="outlet" name="field2" candidateClass="DPTextField"/>
-                <relationship kind="outlet" name="field3" candidateClass="DPTextField"/>
-                <relationship kind="outlet" name="field4" candidateClass="DPTextField"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

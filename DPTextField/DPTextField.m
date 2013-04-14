@@ -145,7 +145,6 @@ const NSUInteger kNextButtonIndex       = 1;
     
     // Set option defaults.
     [self setInputAccessoryViewHidden:NO];
-    [self setEnableInputClicksWhenVisible:YES];
 }
 
 - (void)setPreviousField:(UIResponder *)previousField {
@@ -539,10 +538,22 @@ const NSUInteger kNextButtonIndex       = 1;
     [[self autoFillInputView] dismiss];
     _autoFillInputView = nil;
     [self updateToolbarAnimated:YES];
+    // Re-query data source, since it is editable - all items may have been
+    // removed.
+    [self queryAutoFillDataSource];
 }
 
 - (void)cancelAutoFill:(id)sender {
     [self dismissAutoFillInputView];
+}
+
+- (void)removeAutoFillString:(NSString *)string {
+    [[self autoFillStrings] removeObject:string];
+    // If we removed all items, cancel auto fill.
+    if (([[self autoFillStrings] count] < 1) &&
+        (nil != [self autoFillInputView])) {
+        [self dismissAutoFillInputView];
+    }
 }
 
 #pragma mark - Done toolbar button and functionality
