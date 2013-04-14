@@ -94,11 +94,29 @@
 }
 
 - (BOOL)textField:(DPTextField *)textField canRemoveAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return (!([string isEqualToString:@"Eight"]) &&
+            !([string isEqualToString:@"Eighty"]) &&
+            !([string isEqualToString:@"Zero"]));
 }
 
 - (void)textField:(DPTextField *)textField removeAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
     [[self autoFillStrings] removeObject:string];
+}
+
+- (UITableViewCell *)textField:(DPTextField *)textField tableView:(UITableView *)tableView cellForAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"TextFieldAutoFillCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (nil == cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+
+    [[cell textLabel] setText:string];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+
+    BOOL editable = [self textField:textField canRemoveAutoFillString:string atIndexPath:indexPath];
+    [[cell textLabel] setTextColor:(editable ? [UIColor blackColor] : [UIColor blueColor])];
+
+    return cell;
 }
 
 @end

@@ -138,10 +138,10 @@ this:
 }
 ```
 
-Its nice for your user to be able to remove items from the auto fill strings
+Its nice for your users to be able to remove items from the auto fill strings
 list. You can enable this ability by providing implementations for the methods
 `textField:canRemoveAutoFillString:atIndexPath:` and
-`textField:removeAutoFillString:atIndexPath:`. The user may use the familiar
+`textField:removeAutoFillString:atIndexPath:`. Users may now use the familiar
 horizontal swipe gesture to remove strings. Here's an example:
 
 ```
@@ -156,6 +156,33 @@ horizontal swipe gesture to remove strings. Here's an example:
     // what the auto fill table view expects, then crashes may occur!
 
     [[self autoFillStrings] removeObject:string];
+}
+```
+
+Finally, you can provide your own custom table view cells for the auto fill list
+by implementing the method
+`textField:tableView:cellForAutoFillString:atIndexPath:`. This allows you to
+style the cells after a particular theme used by your app. If you do not provide
+this method, then cells use the `UITableViewCellStyleDefault` style, with the
+`UITableViewCellSelectionStyleGray` selection style, by default. Your
+implementation may look something like this: (Note that non-editable cells are
+colored blue.)
+
+```
+- (UITableViewCell *)textField:(DPTextField *)textField tableView:(UITableView *)tableView cellForAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"TextFieldAutoFillCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (nil == cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+
+    [[cell textLabel] setText:string];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+
+    BOOL editable = [self textField:textField canRemoveAutoFillString:string atIndexPath:indexPath];
+    [[cell textLabel] setTextColor:(editable ? [UIColor blackColor] : [UIColor blueColor])];
+
+    return cell;
 }
 ```
 
