@@ -251,23 +251,31 @@ const NSUInteger kNextButtonIndex       = 1;
     
     NSMutableArray *barItems = [NSMutableArray array];
 
-    // Previous|Next buttons
-    UIBarButtonItem *barItem = [self previousNextBarButtonItem];
-    if (nil != barItem) {
-        [barItems addObject:barItem];
-    }
+    if (nil == [self autoFillInputView]) {
+        // Standard configuration.
 
-    // AutoFill button
-    if (nil != [self autoFillDataSource]) {
-        if ([barItems count] > 0) {
-            [barItems addObject:[self flexibleSpaceBarButtonItem]];
+        // Previous|Next buttons
+        UIBarButtonItem *barItem = [self previousNextBarButtonItem];
+        if (nil != barItem) {
+            [barItems addObject:barItem];
         }
-        [barItems addObject:[self autoFillBarButtonItem]];
-    }
 
-    // Done button
-    if (NO == [self doneBarButtonHidden]) {
-        [barItems addObjectsFromArray:@[[self flexibleSpaceBarButtonItem], [self doneBarButtonItem]]];
+        // AutoFill button
+        if (nil != [self autoFillDataSource]) {
+            if ([barItems count] > 0) {
+                [barItems addObject:[self flexibleSpaceBarButtonItem]];
+            }
+            [barItems addObject:[self autoFillBarButtonItem]];
+        }
+
+        // Done button
+        if (NO == [self doneBarButtonHidden]) {
+            [barItems addObjectsFromArray:@[[self flexibleSpaceBarButtonItem], [self doneBarButtonItem]]];
+        }
+    } else {
+        // Auto-fill configuration.
+        [barItems addObjectsFromArray:@[[self flexibleSpaceBarButtonItem],
+                                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAutoFill:)]]];
     }
 
     [[self toolbar] setItems:barItems animated:animated];
@@ -530,6 +538,7 @@ const NSUInteger kNextButtonIndex       = 1;
 - (void)dismissAutoFillInputView {
     [[self autoFillInputView] dismiss];
     _autoFillInputView = nil;
+    [self updateToolbarAnimated:YES];
 }
 
 - (void)cancelAutoFill:(id)sender {
