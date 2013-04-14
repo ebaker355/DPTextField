@@ -46,7 +46,13 @@ space is being reused, DPTextField can be used with any UI layout.
 
 ## Installation
 
-[insert installation instructions here]
+In the near future, I will make this available through CocoaPods.
+
+Until then, you can clone this repo and use the 5 files in the DPTextField
+directory in your project. Be sure to `#import "DPTextField.h"`. Then, in
+Interface Builder, you can set your UITextField controls to use the DPTextField
+class. Your view controller can be the auto fill data source, so long as it
+implements the `DPTextFieldAutoFillDataSource` protocol.
 
 ## Usage 
 
@@ -59,7 +65,7 @@ it will appear with a standard styled `UIToolbar` for normal keyboards, and with
 a black transluscent style for alert keyboards. At any time, the toolbar can be
 hidden by setting the `inputAccessoryViewHidden` property to `YES`.
 
-```
+```objc
 DPTextField *field = [[DPTextField alloc] init];
 [field.toolbar setBarStyle:UIBarStyleBlackOpaque];
 [field setInputAccessoryViewHidden:YES];
@@ -111,7 +117,7 @@ the entered text. There is no need to worry about duplicates in the matches
 array. DPTextField will automatically filter any duplicates. It will not,
 however, sort the matches. So its a good idea to pre-sort.
 
-```
+```objc
 // Return all appropriate auto-fill strings for the given string.
 - (NSArray *)textField:(DPTextField *)textField autoFillStringsForString:(NSString *)string {
     NSArray *autoFillStrings = [self allAvailableAutoFillStrings];    // Read from some serialized source
@@ -155,7 +161,7 @@ before the data source is queried for auto fill strings. Implement the
 `minimumLengthForAutoFillQueryForTextField:` method in your data source, like
 this:
 
-```
+```objc
 - (NSUInteger)minimumLengthForAutoFillQueryForTextField:(DPTextField *)textField {
     // Require at least 3 characters for autoFill in all fields, except field1.
     if (self.field1 == textField) {
@@ -171,7 +177,7 @@ list. You can enable this ability by providing implementations for the methods
 `textField:removeAutoFillString:atIndexPath:`. Users may now use the familiar
 horizontal swipe gesture to remove strings. Here's an example:
 
-```
+```objc
 - (BOOL)textField:(DPTextField *)textField canRemoveAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
     // So long as the string is not one that should never be removed...
     return YES;
@@ -195,7 +201,7 @@ this method, then cells use the `UITableViewCellStyleDefault` style, with the
 implementation may look something like this: (Note that non-editable cells are
 colored blue.)
 
-```
+```objc
 - (UITableViewCell *)textField:(DPTextField *)textField tableView:(UITableView *)tableView cellForAutoFillString:(NSString *)string atIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"TextFieldAutoFillCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -224,7 +230,7 @@ to see which works best for the type of data you're working with.
 
 You can specify a maximum-allowed string length for your field, like this:
 
-```
+```objc
 [field setMaximumLength:4];
 ```
 
@@ -243,7 +249,7 @@ do). If you simply call the DPTextField's `delegate` property, you'll receive
 its internal delegate instance. In order to retrieve your custom delegate, use
 the `customDelegate` property, like this:
 
-```
+```objc
 // assuming 'field' is a DPTextField instance...
 
 id<UITextFieldDelegate> myDelegate = [[NSObject alloc] init];
@@ -253,3 +259,21 @@ id delegate = [field delegate];     // Returns internal delegate!
 
 id customDelegate = [field customDelegate]; // Returns myDelegate.
 ```
+
+## Contributing
+
+Feel free to fork and send pull requests. It might be nice to have different
+keyboard transitions to choose from.
+
+## App Store Safe?
+
+As of yet, unknown. I plan to submit an app to the App Store very soon, which
+will include this control. If Apple approves the app, I will update this section
+of the README. __Until then, use at your own risk.__ If you use this control in
+an app that gets approved, please let me know!
+
+## Credit
+
+A mention would be nice, but is by no means required. At the very least, shoot
+me an email and let me know if you've gotten any good use out of this control,
+or if you have any ideas for improvements.
