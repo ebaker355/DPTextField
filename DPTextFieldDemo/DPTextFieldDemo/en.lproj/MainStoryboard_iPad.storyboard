@@ -29,6 +29,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <outlet property="autoFillDataSource" destination="XdK-Yz-2XM" id="Wf8-BL-GxO"/>
                                                         <outlet property="nextField" destination="5uj-wa-EuU" id="kzK-es-YCw"/>
                                                     </connections>
                                                 </textField>
@@ -55,6 +56,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <outlet property="autoFillDataSource" destination="XdK-Yz-2XM" id="P99-Xf-Fcr"/>
                                                         <outlet property="nextField" destination="M6q-Pf-Sw6" id="BPz-AW-rdU"/>
                                                         <outlet property="previousField" destination="GAT-Qf-KHP" id="EqZ-oS-USt"/>
                                                     </connections>
@@ -82,6 +84,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <outlet property="autoFillDataSource" destination="XdK-Yz-2XM" id="wa5-Vy-qxz"/>
                                                         <outlet property="nextField" destination="fOK-d6-Kmj" id="EuR-tO-NYX"/>
                                                         <outlet property="previousField" destination="5uj-wa-EuU" id="SDm-BJ-CkL"/>
                                                     </connections>
@@ -109,6 +112,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <outlet property="autoFillDataSource" destination="XdK-Yz-2XM" id="o14-OI-kui"/>
                                                         <outlet property="previousField" destination="M6q-Pf-Sw6" id="W3x-c6-8Yj"/>
                                                     </connections>
                                                 </textField>
@@ -145,6 +149,7 @@
         <class className="DPTextField" superclassName="UITextField">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DPTextField.h"/>
             <relationships>
+                <relationship kind="outlet" name="autoFillDataSource"/>
                 <relationship kind="outlet" name="nextField" candidateClass="UIResponder"/>
                 <relationship kind="outlet" name="previousField" candidateClass="UIResponder"/>
             </relationships>

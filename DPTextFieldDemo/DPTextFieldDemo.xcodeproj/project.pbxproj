@@ -31,6 +31,7 @@
 		71C8ABCA16FD06A00086EF86 /* DPTextFieldSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABC916FD06A00086EF86 /* DPTextFieldSpecs.m */; };
 		71C8ABD516FFDC500086EF86 /* DPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ABD416FFDC500086EF86 /* DPViewController.m */; };
 		71E738151719EB6900415F22 /* DPTextFieldAutoFillSpecs.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E738141719EB6900415F22 /* DPTextFieldAutoFillSpecs.m */; };
+		71E73818171A105000415F22 /* DPTextFieldAutoFillInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E73817171A105000415F22 /* DPTextFieldAutoFillInputView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		71E244A5171795C60083C878 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		71E738131719E58D00415F22 /* DPTextFieldAutoFillDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPTextFieldAutoFillDataSource.h; sourceTree = "<group>"; };
 		71E738141719EB6900415F22 /* DPTextFieldAutoFillSpecs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldAutoFillSpecs.m; sourceTree = "<group>"; };
+		71E73816171A105000415F22 /* DPTextFieldAutoFillInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPTextFieldAutoFillInputView.h; sourceTree = "<group>"; };
+		71E73817171A105000415F22 /* DPTextFieldAutoFillInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldAutoFillInputView.m; sourceTree = "<group>"; };
 		A32D55A04B0145CBA17400E2 /* libPods-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -110,6 +113,8 @@
 				713D8A0916FD025C00F568DE /* DPTextField.h */,
 				713D8A0A16FD025C00F568DE /* DPTextField.m */,
 				71E738131719E58D00415F22 /* DPTextFieldAutoFillDataSource.h */,
+				71E73816171A105000415F22 /* DPTextFieldAutoFillInputView.h */,
+				71E73817171A105000415F22 /* DPTextFieldAutoFillInputView.m */,
 			);
 			name = DPTextField;
 			path = ../DPTextField;
@@ -331,6 +336,7 @@
 				7167B82016FCF89600A3C2A2 /* DPAppDelegate.m in Sources */,
 				713D8A0B16FD025C00F568DE /* DPTextField.m in Sources */,
 				71C8ABD516FFDC500086EF86 /* DPViewController.m in Sources */,
+				71E73818171A105000415F22 /* DPTextFieldAutoFillInputView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

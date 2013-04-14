@@ -85,6 +85,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
+                                                        <outlet property="autoFillDataSource" destination="oj2-D8-3fc" id="hd2-1N-myz"/>
                                                         <outlet property="nextField" destination="X88-JH-Ekv" id="uMk-jk-7kH"/>
                                                         <outlet property="previousField" destination="bBD-mJ-DUH" id="1uM-5P-oCE"/>
                                                     </connections>
@@ -112,6 +113,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
+                                                        <outlet property="autoFillDataSource" destination="oj2-D8-3fc" id="2zl-Iv-v5o"/>
                                                         <outlet property="previousField" destination="g4H-0z-RtA" id="DZ8-bu-TWV"/>
                                                     </connections>
                                                 </textField>

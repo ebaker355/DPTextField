@@ -7,6 +7,7 @@
 //
 
 #import "DPTextField.h"
+#import "DPTextFieldAutoFillInputView.h"
 
 const NSUInteger kPreviousButtonIndex   = 0;
 const NSUInteger kNextButtonIndex       = 1;
@@ -92,6 +93,9 @@ const NSUInteger kNextButtonIndex       = 1;
 @property (strong, nonatomic) DPTextFieldInternalDelegate *internalDelegate;
 @property (strong, nonatomic) NSMutableArray *autoFillStrings;
 @property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
+@property (strong, nonatomic) DPTextFieldAutoFillInputView *autoFillInputView;
+@property (assign, nonatomic) CGRect autoFillInputViewFrame;
+@property (assign, nonatomic) BOOL autoFillInputViewIsUndocked;
 @end
 
 @implementation DPTextField
@@ -103,6 +107,8 @@ const NSUInteger kNextButtonIndex       = 1;
 @synthesize autoFillBarButtonItem = _autoFillBarButtonItem;
 @synthesize autoFillBarButtonHidden = _autoFillBarButtonHidden;
 @synthesize autoFillBarButtonEnabled = _autoFillBarButtonEnabled;
+@synthesize autoFillInputViewFrame = _autoFillInputViewFrame;
+@synthesize autoFillInputViewIsUndocked = _autoFillInputViewIsUndocked;
 @synthesize doneBarButtonItem = _doneBarButtonItem;
 @synthesize doneBarButtonHidden = _doneBarButtonHidden;
 @synthesize resizeToolbarWhenKeyboardFrameChanges = _resizeToolbarWhenKeyboardFrameChanges;
@@ -195,17 +201,17 @@ const NSUInteger kNextButtonIndex       = 1;
     // make sure to do it after [super becomeFirstResponder]
     BOOL result;
     if ([self canBecomeFirstResponder]) {
+
+        [self setNotificationsEnabled:YES];
         result = [super becomeFirstResponder];
         if (result) {
             if (![self inputAccessoryViewHidden]) {
                 [self setResizeToolbarWhenKeyboardFrameChanges:YES];
             }
-
-            // Watch for text changes.
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self];
-
             // Initialize auto-fill.
             [self queryAutoFillDataSource];
+        } else {
+            [self setNotificationsEnabled:NO];
         }
         return result;
     }
@@ -216,10 +222,28 @@ const NSUInteger kNextButtonIndex       = 1;
     if ([self canResignFirstResponder]) {
         [self setResizeToolbarWhenKeyboardFrameChanges:NO];
 
-        // Stop watching text changes.
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self];
+        [self setNotificationsEnabled:NO];
+
+        // If the autofill view is shown, remove it.
+        if (nil != [self autoFillInputView]) {
+            [self setInputView:nil];
+            [self setAutoFillInputView:nil];
+            [self reloadInputViews];
+        }
     }
     return [super resignFirstResponder];
+}
+
+- (void)setNotificationsEnabled:(BOOL)enabled {
+    if (enabled) {
+        // Set up notifications.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    } else {
+        // Stop receiving notifications.
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+    }
 }
 
 #pragma mark - Toolbar
@@ -273,6 +297,13 @@ const NSUInteger kNextButtonIndex       = 1;
 
 - (UIToolbar *)toolbar {
     return (UIToolbar *)[self inputAccessoryView];
+}
+
+- (CGFloat)toolbarHeight {
+    if (nil != [self toolbar]) {
+        return CGRectGetHeight([[self toolbar] frame]);
+    }
+    return 0;
 }
 
 - (void)setInputAccessoryViewHidden:(BOOL)inputAccessoryViewHidden {
@@ -497,7 +528,16 @@ const NSUInteger kNextButtonIndex       = 1;
 }
 
 - (void)presentAutoFillInputView {
-    NSLog(@"presetAutoFill with string: %@", _autoFillStrings);
+    if (nil == [self autoFillInputView]) {
+        [self setAutoFillInputView:[[DPTextFieldAutoFillInputView alloc] initWithFrame:[self autoFillInputViewFrame]]];
+        if (_autoFillInputViewIsUndocked) {
+            [[self autoFillInputView] setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        } else {
+            [[self autoFillInputView] setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight)];
+        }
+        [[self autoFillInputView] presentForTextField:self];
+        [self updateToolbarAnimated:YES];
+    }
 }
 
 - (void)dismissAutoFillInputView {
@@ -538,6 +578,66 @@ const NSUInteger kNextButtonIndex       = 1;
 
 - (void)textDidChange:(NSNotification *)notification {
     [self queryAutoFillDataSource];
+}
+
+- (void)keyboardDidChangeFrame:(NSNotification *)notification {
+    // Keep the autoFillInputViewFrame up to date.
+
+    // The iPad doesn't send UIKeyboardDidShow notifications when the keyboard
+    // is undocked. So this method seems the best way to get the keyboard's
+    // current frame, on both iPad and iPhone.
+
+    // We also cannot always reliably tell the device orientation (at least,
+    // not on the simulator). So we will figure it out from the frame and screen
+    // dimensions.
+
+    // Get all of the measurements we need.
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    CGRect frameEnd;
+    [[notification userInfo][UIKeyboardFrameEndUserInfoKey] getValue:&frameEnd];
+    CGFloat toolbarHeight = [self toolbarHeight];
+
+    // Determine orientation by comparing frameEndSize to screenSize.
+    BOOL orientationIsPortrait = (frameEnd.size.width == screenSize.width);
+    // The keyboard is always docked on the iPhone.
+    BOOL keyboardIsUndocked = NO;
+
+    // Check for undocked keyboard on iPad
+    if (UIUserInterfaceIdiomPad == UI_USER_INTERFACE_IDIOM()) {
+        if (frameEnd.origin.x > 0 || frameEnd.origin.y > 0) {
+            if (orientationIsPortrait) {
+                keyboardIsUndocked = ((frameEnd.origin.y + frameEnd.size.height) < screenSize.height);
+            } else {
+                keyboardIsUndocked = ((frameEnd.origin.x + frameEnd.size.width) < screenSize.width);
+            }
+        }
+    }
+
+    // Determine state.
+    if (orientationIsPortrait) {
+        [self setAutoFillInputViewFrame:CGRectMake(0, 0, frameEnd.size.width, frameEnd.size.height - toolbarHeight)];
+    } else {
+        [self setAutoFillInputViewFrame:CGRectMake(0, 0, frameEnd.size.height, frameEnd.size.width - toolbarHeight)];
+    }
+    [self setAutoFillInputViewIsUndocked:keyboardIsUndocked];
+}
+
+- (void)setAutoFillInputViewFrame:(CGRect)autoFillInputViewFrame {
+    _autoFillInputViewFrame = autoFillInputViewFrame;
+    if (nil != [self autoFillInputView]) {
+        [[self autoFillInputView] setFrame:_autoFillInputViewFrame];
+    }
+}
+
+- (void)setAutoFillInputViewIsUndocked:(BOOL)autoFillInputViewIsUndocked {
+    _autoFillInputViewIsUndocked = autoFillInputViewIsUndocked;
+    if (nil != [self autoFillInputView]) {
+        if (_autoFillInputViewIsUndocked) {
+            [[self autoFillInputView] setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        } else {
+            [[self autoFillInputView] setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight)];
+        }
+    }
 }
 
 @end
