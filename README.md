@@ -10,6 +10,7 @@ Interface Builder)
 - a Done toolbar button, and swipe gesture, to remove the keyboard without
 submitting a form
 - set maximum characters allowed in field
+- automatic handling of Next and Done return key types
 - proper device rotation handling for iPhone and iPad
 - correct handling of iPad's undocked keyboard
 
@@ -233,6 +234,20 @@ You can specify a maximum-allowed string length for your field, like this:
 ```objc
 [field setMaximumLength:4];
 ```
+
+### Return key
+
+If your field uses a `UIReturnKeyNext` return key, and the Next toolbar button
+is available, then the field will make the next field the first responder when
+the Next return key is tapped.
+
+If your field uses a `UIReturnKeyDone` return key, and the Done toolbar button
+is available, then the keyboard will be dismissed when the Done return key is
+tapped.
+
+These behaviors can be overridden in a custom delegate. All other special
+handling of the different return key types must be implemented in a custom
+delegate.
 
 ## About the delegate...
 

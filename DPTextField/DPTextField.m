@@ -12,11 +12,22 @@
 const NSUInteger kPreviousButtonIndex   = 0;
 const NSUInteger kNextButtonIndex       = 1;
 
-#pragma mark - DPTextFieldInternalDelegate
-
 @interface DPTextFieldInternalDelegate : NSObject <UITextFieldDelegate>
 @property (assign, nonatomic) id<UITextFieldDelegate> delegate;
 @end
+
+@interface DPTextField ()
+@property (strong, nonatomic) DPTextFieldInternalDelegate *internalDelegate;
+@property (strong, nonatomic) NSMutableArray *autoFillStrings;
+@property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
+@property (strong, nonatomic) DPTextFieldAutoFillInputView *autoFillInputView;
+@property (assign, nonatomic) CGRect autoFillInputViewFrame;
+@property (assign, nonatomic) BOOL autoFillInputViewIsUndocked;
+- (void)makePreviousOrNextFieldFirstResponder:(id)sender;
+- (void)done:(id)sender;
+@end
+
+#pragma mark - DPTextFieldInternalDelegate
 
 @implementation DPTextFieldInternalDelegate
 @synthesize delegate;
@@ -82,21 +93,39 @@ const NSUInteger kNextButtonIndex       = 1;
     if (nil != delegate && [delegate respondsToSelector:@selector(textFieldShouldReturn:)]) {
         return [delegate textFieldShouldReturn:textField];
     }
+
+    DPTextField *field = nil;
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        field = (DPTextField *)textField;
+    }
+    if (field) {
+        switch ([field returnKeyType]) {
+            case UIReturnKeyNext: {
+                UISegmentedControl *segControl = (UISegmentedControl *)[[field previousNextBarButtonItem] customView];
+                if ([segControl isEnabledForSegmentAtIndex:kNextButtonIndex]) {
+                    [segControl setSelectedSegmentIndex:kNextButtonIndex];
+                    [field makePreviousOrNextFieldFirstResponder:segControl];
+                }
+            }
+                break;
+
+            case UIReturnKeyDone: {
+                UIBarButtonItem *doneButton = [field doneBarButtonItem];
+                if ([doneButton isEnabled]) {
+                    [field done:doneButton];
+                }
+            }
+
+            default:
+                break;
+        }
+    }
     return YES;
 }
 
 @end
 
 #pragma mark - DPTextField
-
-@interface DPTextField ()
-@property (strong, nonatomic) DPTextFieldInternalDelegate *internalDelegate;
-@property (strong, nonatomic) NSMutableArray *autoFillStrings;
-@property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
-@property (strong, nonatomic) DPTextFieldAutoFillInputView *autoFillInputView;
-@property (assign, nonatomic) CGRect autoFillInputViewFrame;
-@property (assign, nonatomic) BOOL autoFillInputViewIsUndocked;
-@end
 
 @implementation DPTextField
 @synthesize previousField = _previousField;

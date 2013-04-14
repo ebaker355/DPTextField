@@ -27,7 +27,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="cHf-hm-zG9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="autoFillDataSource" destination="oj2-D8-3fc" id="fzO-mH-Rd4"/>
                                                         <outlet property="delegate" destination="oj2-D8-3fc" id="xHt-Ug-Fyh"/>
@@ -55,7 +55,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="jPN-J6-nUu"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="autoFillDataSource" destination="oj2-D8-3fc" id="asd-bC-kc3"/>
                                                         <outlet property="nextField" destination="g4H-0z-RtA" id="QHD-ev-ynC"/>
@@ -83,7 +83,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="rvv-rc-Zp3"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="autoFillDataSource" destination="oj2-D8-3fc" id="hd2-1N-myz"/>
                                                         <outlet property="nextField" destination="X88-JH-Ekv" id="uMk-jk-7kH"/>
@@ -111,7 +111,7 @@
                                                         <constraint firstAttribute="height" constant="30" type="user" id="2Vn-dS-pJY"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                                     <connections>
                                                         <outlet property="autoFillDataSource" destination="oj2-D8-3fc" id="2zl-Iv-v5o"/>
                                                         <outlet property="previousField" destination="g4H-0z-RtA" id="DZ8-bu-TWV"/>
