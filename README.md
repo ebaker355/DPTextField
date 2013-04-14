@@ -227,7 +227,7 @@ auto-correction. This can be done in Interface Builder. It may not always be
 necessary. I suggest testing your interface with correction enabled and disabled
 to see which works best for the type of data you're working with.
 
-## Maximum string length
+### Maximum string length
 
 You can specify a maximum-allowed string length for your field, like this:
 
