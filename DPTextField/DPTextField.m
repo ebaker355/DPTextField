@@ -227,9 +227,7 @@ const NSUInteger kNextButtonIndex       = 1;
 
         // If the autofill view is shown, remove it.
         if (nil != [self autoFillInputView]) {
-            [self setInputView:nil];
-            [self setAutoFillInputView:nil];
-            [self reloadInputViews];
+            [self dismissAutoFillInputView];
         }
     }
     return [super resignFirstResponder];

@@ -18,7 +18,6 @@
 @interface DPTextFieldAutoFillInputView () <UIInputViewAudioFeedback, UITableViewDataSource, UITableViewDelegate>
 @property (assign, nonatomic) DPTextField *textField;
 @property (strong, nonatomic) UIImageView *keyboardImageView;
-//@property (strong, nonatomic) UIImage *backgroundImage;
 @property (strong, nonatomic) UITableView *tableView;
 @end
 
@@ -31,24 +30,17 @@
     // If we were able to find the keyboard window and get the image, then
     // transition in the "cool" way.
     // Otherwise, do it in the "safe" way.
-//    [self presentSelfAnimated:(nil != [self keyboardImageView])];
-//* - TEST CODE START
-#warning Active test code
-#pragma mark - Test code
-    {
-        [self presentSelfAnimated:NO];
-    }
-    // TEST CODE END */
+    [self presentSelfAnimated:(nil != [self keyboardImageView])];
 }
 
 - (void)dismiss {
-    //* - TEST CODE START
-#warning Active test code
-#pragma mark - Test code
-    {
+    if (nil != [self keyboardImageView]) {
+        // See if our frame still matches the keyboard image size.
+        BOOL sameSize = CGSizeEqualToSize([[self keyboardImageView] frame].size, [self frame].size);
+        [self dismissSelfAnimated:sameSize];
+    } else {
         [self dismissSelfAnimated:NO];
     }
-    // TEST CODE END */
 }
 
 - (void)configure {
@@ -58,7 +50,23 @@
 
 - (void)presentSelfAnimated:(BOOL)animated {
     if (animated) {
+        // Add the keyboard image as the top layer. This makes a seamless
+        // tranition when we set ourself as the inputview.
+        [self addSubview:[self keyboardImageView]];
+        [_textField setInputView:self];
+        [_textField reloadInputViews];
 
+        // Animate the keyboard image out of the way.
+        // TODO: support different transition types.
+        CGFloat centerX = [[self keyboardImageView] center].x;
+        CGFloat centerY = [[self keyboardImageView] center].y;
+        CGFloat toolbarHeight = [_textField toolbarHeight];
+        [[self layer] setMasksToBounds:YES];
+        [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            [[self keyboardImageView] setCenter:CGPointMake(centerX, (-centerY) - toolbarHeight)];
+        } completion:^(BOOL finished) {
+            [[self keyboardImageView] setAlpha:0];
+        }];
     } else {
         // Just set ourself as the input view. No animations.
         [_textField setInputView:self];
@@ -68,7 +76,16 @@
 
 - (void)dismissSelfAnimated:(BOOL)animated {
     if (animated) {
-
+        [[self keyboardImageView] setAlpha:1];
+        CGFloat centerX = [[self keyboardImageView] center].x;
+        CGFloat centerY = [[self keyboardImageView] center].y;
+        CGFloat toolbarHeight = [_textField toolbarHeight];
+        [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [[self keyboardImageView] setCenter:CGPointMake(centerX, (-centerY) - toolbarHeight)];
+        } completion:^(BOOL finished) {
+            [_textField setInputView:nil];
+            [_textField reloadInputViews];
+        }];
     } else {
         // Just remove ourself as the input view. No animations.
         [_textField setInputView:nil];
@@ -92,20 +109,26 @@
     if (nil == keyboardLayer) return;
 
     CGFloat scale = [[UIScreen mainScreen] scale];
+    CGFloat toolbarHeight = [_textField toolbarHeight];
 
     // Grab an image of the system keyboard so we can animate it out of the way
     // during our presentation.
     UIGraphicsBeginImageContextWithOptions(keyboardLayer.bounds.size, keyboardWindow.opaque, scale);
     [keyboardLayer renderInContext:UIGraphicsGetCurrentContext()];
-    [self setKeyboardImageView:[[UIImageView alloc] initWithImage:UIGraphicsGetImageFromCurrentImageContext()]];
+    CGRect rect = CGRectMake(0, toolbarHeight * scale, keyboardLayer.bounds.size.width * scale, (keyboardLayer.bounds.size.height - toolbarHeight) * scale);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([UIGraphicsGetImageFromCurrentImageContext() CGImage], rect);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.frame];
+    [imageView setImage:[UIImage imageWithCGImage:imageRef]];
+    [self setKeyboardImageView:imageView];
+    CGImageRelease(imageRef);
     UIGraphicsEndImageContext();
 
     // Grab a slice of the keyboard image, 1 px wide, minus the toolbar, to use
     // as the background image. This will make it match the system keyboard's
     // background.
-    CGRect rect = CGRectMake(0, [_textField toolbarHeight] * scale, 1 * scale, keyboardLayer.bounds.size.height * scale);
-    CGImageRef imageRef = CGImageCreateWithImageInRect([[[self keyboardImageView] image] CGImage], rect);
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, keyboardLayer.bounds.size.width, keyboardLayer.bounds.size.height - [_textField toolbarHeight])];
+    rect = CGRectMake(0, 0, 1, [imageView image].size.height);
+    imageRef = CGImageCreateWithImageInRect([[[self keyboardImageView] image] CGImage], rect);
+    imageView = [[UIImageView alloc] initWithFrame:self.frame];
     [imageView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight)];
     [imageView setImage:[UIImage imageWithCGImage:imageRef]];
     CGImageRelease(imageRef);
