@@ -28,13 +28,52 @@
     _textField = textField;
     [self configure];
 
-    [textField setInputView:self];
-    [textField reloadInputViews];
+    // If we were able to find the keyboard window and get the image, then
+    // transition in the "cool" way.
+    // Otherwise, do it in the "safe" way.
+//    [self presentSelfAnimated:(nil != [self keyboardImageView])];
+//* - TEST CODE START
+#warning Active test code
+#pragma mark - Test code
+    {
+        [self presentSelfAnimated:NO];
+    }
+    // TEST CODE END */
+}
+
+- (void)dismiss {
+    //* - TEST CODE START
+#warning Active test code
+#pragma mark - Test code
+    {
+        [self dismissSelfAnimated:NO];
+    }
+    // TEST CODE END */
 }
 
 - (void)configure {
     [self captureKeyboardImage];
     [self buildTableView];
+}
+
+- (void)presentSelfAnimated:(BOOL)animated {
+    if (animated) {
+
+    } else {
+        // Just set ourself as the input view. No animations.
+        [_textField setInputView:self];
+        [_textField reloadInputViews];
+    }
+}
+
+- (void)dismissSelfAnimated:(BOOL)animated {
+    if (animated) {
+
+    } else {
+        // Just remove ourself as the input view. No animations.
+        [_textField setInputView:nil];
+        [_textField reloadInputViews];
+    }
 }
 
 #pragma mark - UIInputViewAudioFeedback
@@ -107,6 +146,7 @@
 - (void)buildTableView {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 2, self.frame.size.width, self.frame.size.height - 2) style:UITableViewStyleGrouped];
     [_tableView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight)];
+    [_tableView setAllowsMultipleSelection:NO];
     [_tableView setDataSource:self];
     [_tableView setDelegate:self];
 
@@ -136,10 +176,18 @@
         }
 
         [[cell textLabel] setText:string];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+
         return cell;
     }
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *string = [[_textField autoFillStrings] objectAtIndex:[indexPath row]];
+    [_textField setText:string];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:_textField userInfo:nil];
+}
 
 @end

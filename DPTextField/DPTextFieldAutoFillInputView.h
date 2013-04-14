@@ -13,5 +13,6 @@
 @interface DPTextFieldAutoFillInputView : UIView
 
 - (void)presentForTextField:(DPTextField *)textField;
+- (void)dismiss;
 
 @end

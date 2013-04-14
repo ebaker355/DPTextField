@@ -530,11 +530,12 @@ const NSUInteger kNextButtonIndex       = 1;
 }
 
 - (void)dismissAutoFillInputView {
-
+    [[self autoFillInputView] dismiss];
+    _autoFillInputView = nil;
 }
 
 - (void)cancelAutoFill:(id)sender {
-
+    [self dismissAutoFillInputView];
 }
 
 #pragma mark - Done toolbar button and functionality
@@ -578,6 +579,9 @@ const NSUInteger kNextButtonIndex       = 1;
 }
 
 - (void)textDidChange:(NSNotification *)notification {
+    if (nil != [self autoFillInputView]) {
+        [self dismissAutoFillInputView];
+    }
     [self queryAutoFillDataSource];
 }
 
