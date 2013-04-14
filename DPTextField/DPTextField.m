@@ -145,6 +145,7 @@ const NSUInteger kNextButtonIndex       = 1;
     
     // Set option defaults.
     [self setInputAccessoryViewHidden:NO];
+    [self setEnableInputClicksWhenVisible:YES];
 }
 
 - (void)setPreviousField:(UIResponder *)previousField {
@@ -232,18 +233,6 @@ const NSUInteger kNextButtonIndex       = 1;
         }
     }
     return [super resignFirstResponder];
-}
-
-- (void)setNotificationsEnabled:(BOOL)enabled {
-    if (enabled) {
-        // Set up notifications.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    } else {
-        // Stop receiving notifications.
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
-    }
 }
 
 #pragma mark - Toolbar
@@ -576,6 +565,18 @@ const NSUInteger kNextButtonIndex       = 1;
 
 #pragma mark - Notifications
 
+- (void)setNotificationsEnabled:(BOOL)enabled {
+    if (enabled) {
+        // Set up notifications.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    } else {
+        // Stop receiving notifications.
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+    }
+}
+
 - (void)textDidChange:(NSNotification *)notification {
     [self queryAutoFillDataSource];
 }
@@ -624,9 +625,7 @@ const NSUInteger kNextButtonIndex       = 1;
 
 - (void)setAutoFillInputViewFrame:(CGRect)autoFillInputViewFrame {
     _autoFillInputViewFrame = autoFillInputViewFrame;
-    if (nil != [self autoFillInputView]) {
-        [[self autoFillInputView] setFrame:_autoFillInputViewFrame];
-    }
+    // Do not update the auto fill input view frame while it is displayed.
 }
 
 - (void)setAutoFillInputViewIsUndocked:(BOOL)autoFillInputViewIsUndocked {
