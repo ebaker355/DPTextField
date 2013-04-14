@@ -145,6 +145,7 @@ const NSUInteger kNextButtonIndex       = 1;
     
     // Set option defaults.
     [self setInputAccessoryViewHidden:NO];
+    [self setAllowSwipeToDismissKeyboard:YES];
 }
 
 - (void)setPreviousField:(UIResponder *)previousField {
@@ -241,7 +242,17 @@ const NSUInteger kNextButtonIndex       = 1;
         [toolbar setBarStyle:[self barStyleMatchingKeyboard]];
         [self setInputAccessoryView:toolbar];
         [toolbar sizeToFit];
+        // Add swipe gesture recognizer.
+        UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipedKeyboard:)];
+        [swipe setDirection:UISwipeGestureRecognizerDirectionDown];
+        [toolbar addGestureRecognizer:swipe];
         [self updateToolbarAnimated:NO];
+    }
+}
+
+- (void)swipedKeyboard:(id)sender {
+    if ([self allowSwipeToDismissKeyboard]) {
+        [self done:sender];
     }
 }
 

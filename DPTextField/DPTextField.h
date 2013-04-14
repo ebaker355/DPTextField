@@ -29,4 +29,6 @@
 
 @property (assign, nonatomic) NSUInteger maximumLength;
 
+@property (assign, nonatomic) BOOL allowSwipeToDismissKeyboard;
+
 @end
