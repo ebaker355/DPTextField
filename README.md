@@ -15,7 +15,34 @@ submitting a form
 
 ## Preview
 
-[insert images here]
+![Auto fill](https://raw.github.com/ebaker355/DPTextField/master/DPTextFieldAutoFill.gif "Auto fill")
+
+## Motivation
+
+Auto fill makes filling out forms much simpler, especially for mobile devices.
+There are several excellent UITextField-based controls available for iOS that
+implement an auto fill feature. However, of the ones that I personally have
+tried, most of them assume that your form layout has ample space around the text
+fields to accommodate displaying a list of auto fill strings below it, similar
+to the way Google Search's auto complete works.
+
+I do not want to have to design my UI in such a way as to accommodate auto fill.
+Rather, I'd like to re-use the space that I'm already expecting to be used for
+input - the iOS keyboard window.
+
+Fortunately, Apple provides the `inputView` property on `UITextField` instances.
+You can set any view you want to this property, and iOS will display it instead
+of the standard keyboard. Great!
+
+But... simply setting a custom input view causes the keyboard to disappear
+instantly, and the new input view to be displayed instantly. It is rather abrupt
+in an otherwise smoothly-animated OS. DPTextField addresses this.
+
+When the auto fill list is presented, the iOS keyboard "appears" to slide out of
+the way, revealing the strings list below. After a string is selected (or if the
+auto fill is canceled), the iOS keyboard "appears" to slide back into place.
+This gives your users a much nicer-feeling transition. Since the iOS keyboard
+space is being reused, DPTextField can be used with any UI layout.
 
 ## Installation
 
@@ -192,6 +219,14 @@ For fields that implement auto fill, it is usually a good idea to disable
 auto-correction. This can be done in Interface Builder. It may not always be
 necessary. I suggest testing your interface with correction enabled and disabled
 to see which works best for the type of data you're working with.
+
+## Maximum string length
+
+You can specify a maximum-allowed string length for your field, like this:
+
+```
+[field setMaximumLength:4];
+```
 
 ## About the delegate...
 
