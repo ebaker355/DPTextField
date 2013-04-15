@@ -235,6 +235,7 @@
     NSString *string = [[_textField autoFillStrings] objectAtIndex:[indexPath row]];
     [_textField setText:string];
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:_textField userInfo:nil];
+    [_textField sendActionsForControlEvents:UIControlEventEditingChanged];
     [[UIDevice currentDevice] playInputClick];
 }
 

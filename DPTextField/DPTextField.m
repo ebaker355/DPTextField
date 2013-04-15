@@ -552,6 +552,7 @@ const NSUInteger kNextButtonIndex       = 1;
     [self setText:string];
     // We seem to have to post this notification manually.
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:self userInfo:nil];
+    [self sendActionsForControlEvents:UIControlEventEditingChanged];
 
     // Close the auto-fill input view if presented.
     if (nil != [self inputView]) {
