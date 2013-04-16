@@ -126,9 +126,7 @@ however, sort the matches. So its a good idea to pre-sort.
     NSMutableArray *matches = [NSMutableArray array];
 
     // Pre-sort the autoFillStrings array.
-    NSArray *sortedAutoFillStrings = [autoFillStrings sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [(NSString *)obj1 compare:(NSString *)obj2];
-    }];
+    NSArray *sortedAutoFillStrings = [autoFillStrings sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 
     // If the search string is nil or empty, just return all auto-fill strings.
     if (nil != string && [string length] > 0) {
