@@ -73,6 +73,11 @@ const NSUInteger kNextButtonIndex       = 1;
         NSUInteger maxLength = [field maximumLength];
         if (maxLength > 0) {
             NSUInteger newLength = field.text.length + string.length - range.length;
+            // If the string is being shortened, allow it.
+            if (newLength < field.text.length)
+            {
+                return YES;
+            }
             if (newLength > maxLength) {
                 return NO;
             }
@@ -175,6 +180,8 @@ const NSUInteger kNextButtonIndex       = 1;
     // Set option defaults.
     [self setInputAccessoryViewHidden:NO];
     [self setAllowSwipeToDismissKeyboard:YES];
+    [self setPresentAutoFillAnimationDuration:0.2];
+    [self setDismissAutoFillAnimationDuration:0.15];
 }
 
 - (void)setPreviousField:(UIResponder *)previousField {
@@ -520,7 +527,11 @@ const NSUInteger kNextButtonIndex       = 1;
     for (NSString *string in strings) {
         NSString *filteredString = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if (NO == [filtered containsObject:filteredString]) {
-            [filtered addObject:filteredString];
+            // If the field has a max length restriction, do not allow strings
+            // that are too long.
+            if (([self maximumLength] < 1) || ([filteredString length] <= [self maximumLength])) {
+                [filtered addObject:filteredString];
+            }
         }
     }
     return filtered;
@@ -550,6 +561,9 @@ const NSUInteger kNextButtonIndex       = 1;
 
 - (void)applyAutoFillString:(NSString *)string {
     [self setText:string];
+
+    [[UIDevice currentDevice] playInputClick];
+
     // We seem to have to post this notification manually.
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:self userInfo:nil];
     [self sendActionsForControlEvents:UIControlEventEditingChanged];
@@ -559,7 +573,11 @@ const NSUInteger kNextButtonIndex       = 1;
         [self cancelAutoFill:self];
     }
 
-    [self queryAutoFillDataSource];
+    if ([self textFieldShouldReturnAfterAutoFill]) {
+        [self.internalDelegate textFieldShouldReturn:self];
+    } else {
+        [self queryAutoFillDataSource];
+    }
 }
 
 - (void)presentAutoFillInputView {

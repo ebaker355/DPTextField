@@ -22,6 +22,9 @@
 @property (readonly, nonatomic) UIBarButtonItem *autoFillBarButtonItem;
 @property (assign, nonatomic) BOOL autoFillBarButtonHidden;
 @property (assign, nonatomic) BOOL autoFillBarButtonEnabled;
+@property (assign, nonatomic) BOOL textFieldShouldReturnAfterAutoFill;
+@property (assign, nonatomic) CGFloat presentAutoFillAnimationDuration;
+@property (assign, nonatomic) CGFloat dismissAutoFillAnimationDuration;
 
 @property (readonly, nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (assign, nonatomic) BOOL doneBarButtonHidden;

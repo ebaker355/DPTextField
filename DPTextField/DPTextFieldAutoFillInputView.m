@@ -13,6 +13,7 @@
 @interface DPTextField ()
 @property (readonly, nonatomic) NSArray *autoFillStrings;
 @property (readonly, nonatomic) CGFloat toolbarHeight;
+- (void)applyAutoFillString:(NSString *)string;
 - (void)removeAutoFillString:(NSString *)string;
 @end
 
@@ -51,6 +52,9 @@
 
 - (void)presentSelfAnimated:(BOOL)animated {
     if (animated) {
+        // During the animation, do not allow the tableview to be tapped.
+        [self.tableView setAllowsSelection:NO];
+
         // Add the keyboard image as the top layer. This makes a seamless
         // tranition when we set ourself as the inputview.
         [self addSubview:[self keyboardImageView]];
@@ -63,10 +67,11 @@
         CGFloat centerY = [[self keyboardImageView] center].y;
         CGFloat toolbarHeight = [_textField toolbarHeight];
         [[self layer] setMasksToBounds:YES];
-        [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:[_textField presentAutoFillAnimationDuration] delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             [[self keyboardImageView] setCenter:CGPointMake(centerX, (-centerY) - toolbarHeight)];
         } completion:^(BOOL finished) {
             [[self keyboardImageView] setAlpha:0];
+            [self.tableView setAllowsSelection:YES];
         }];
     } else {
         // Just set ourself as the input view. No animations.
@@ -76,12 +81,13 @@
 }
 
 - (void)dismissSelfAnimated:(BOOL)animated {
+    [self.tableView setAllowsSelection:NO];
     if (animated) {
         [[self keyboardImageView] setAlpha:1];
         CGFloat centerX = [[self keyboardImageView] center].x;
         CGFloat centerY = [[self keyboardImageView] center].y;
         CGFloat toolbarHeight = [_textField toolbarHeight];
-        [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:[_textField dismissAutoFillAnimationDuration] delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             [[self keyboardImageView] setCenter:CGPointMake(centerX, (-centerY) - toolbarHeight)];
         } completion:^(BOOL finished) {
             [_textField setInputView:nil];
@@ -202,6 +208,16 @@
         [[cell textLabel] setText:string];
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
 
+        UIColor *textColor = [UIColor blackColor];
+        // Apply Apple's blue slate color to auto fill strings that cannot be
+        // removed.
+        if ([[_textField autoFillDataSource] respondsToSelector:@selector(textField:canRemoveAutoFillString:atIndexPath:)]) {
+            if (NO == [[_textField autoFillDataSource] textField:_textField canRemoveAutoFillString:string atIndexPath:indexPath]) {
+                textColor = [UIColor colorWithRed:51.0f/255.0f green:102.0f/255.0f blue:153.0f/255.0f alpha:1.0f];
+            }
+        }
+        [[cell textLabel] setTextColor:textColor];
+
         return cell;
     }
 }
@@ -233,10 +249,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *string = [[_textField autoFillStrings] objectAtIndex:[indexPath row]];
-    [_textField setText:string];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:_textField userInfo:nil];
-    [_textField sendActionsForControlEvents:UIControlEventEditingChanged];
-    [[UIDevice currentDevice] playInputClick];
+    [_textField applyAutoFillString:string];
 }
 
 @end
