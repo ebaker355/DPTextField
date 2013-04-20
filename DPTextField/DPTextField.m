@@ -445,6 +445,7 @@ const NSUInteger kNextButtonIndex       = 1;
                 [self makeFieldFirstResponder:self.nextField];
                 break;
         }
+        [segControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
     }
 }
 
