@@ -43,17 +43,34 @@ When the auto fill list is presented, the iOS keyboard "appears" to slide out of
 the way, revealing the strings list below. After a string is selected (or if the
 auto fill is canceled), the iOS keyboard "appears" to slide back into place.
 This gives your users a much nicer-feeling transition. Since the iOS keyboard
-space is being reused, DPTextField can be used with any UI layout.
+space is being reused, DPTextField can be used with any UI layout, without the
+need to consider extra spacing for auto fill suggestions.
 
 ## Installation
 
-In the near future, I will make this available through CocoaPods.
+### CocoaPods
 
-Until then, you can clone this repo and use the 5 files in the DPTextField
-directory in your project. Be sure to `#import "DPTextField.h"`. Then, in
-Interface Builder, you can set your UITextField controls to use the DPTextField
-class. Your view controller can be the auto fill data source, so long as it
-implements the `DPTextFieldAutoFillDataSource` protocol.
+The easiest and highly recommended way to add DPTextField to your project is
+to use [CocoaPods](http://cocoapods.org).
+
+Add the pod to your `Podfile`:
+
+```ruby
+platform :ios, '6.0'
+pod 'DPTextField'
+```
+
+then run `pod install`.
+
+Be sure to `#import "DPTextField.h"`. Then, in Interface Builder, you can set
+your UITextField controls to use the `DPTextField` class. Your view controller
+can be the auto fill data source, so long as it implements the
+`DPTextFieldAutoFillDataSource` protocol.
+
+### Source
+
+Alternatively, you can clone this repository and add the 5 files in the
+DPTextField directory to your project.
 
 ## Usage 
 
