@@ -285,6 +285,10 @@ will include this control. If Apple approves the app, I will update this section
 of the README. __Until then, use at your own risk.__ If you use this control in
 an app that gets approved, please let me know!
 
+## License
+
+Usage is provided under the [MIT License](http://http://opensource.org/licenses/mit-license.php).  See LICENSE for the full details.
+
 ## Credit
 
 A mention would be nice, but is by no means required. At the very least, shoot
