@@ -31,6 +31,11 @@
     [self.field3 setTextFieldShouldReturnAfterAutoFill:YES];
     [self.field4 setTextFieldShouldReturnAfterAutoFill:YES];
 
+    [self.field1 setTextFieldShouldSelectAllTextWhenBecomingFirstResponder:YES];
+    [self.field2 setTextFieldShouldSelectAllTextWhenBecomingFirstResponder:NO];
+    [self.field3 setTextFieldShouldSelectAllTextWhenBecomingFirstResponder:YES];
+    [self.field4 setTextFieldShouldSelectAllTextWhenBecomingFirstResponder:YES];
+
     [self.field2 setMaximumLength:4];
 }
 

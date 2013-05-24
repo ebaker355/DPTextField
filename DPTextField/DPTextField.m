@@ -146,6 +146,7 @@ const NSUInteger kNextButtonIndex       = 1;
 @synthesize doneBarButtonItem = _doneBarButtonItem;
 @synthesize doneBarButtonHidden = _doneBarButtonHidden;
 @synthesize resizeToolbarWhenKeyboardFrameChanges = _resizeToolbarWhenKeyboardFrameChanges;
+@synthesize textFieldShouldSelectAllTextWhenBecomingFirstResponder;
 
 #pragma mark - Initialization
 
@@ -242,6 +243,10 @@ const NSUInteger kNextButtonIndex       = 1;
         [self setNotificationsEnabled:YES];
         result = [super becomeFirstResponder];
         if (result) {
+            if (self.textFieldShouldSelectAllTextWhenBecomingFirstResponder) {
+                [self selectAllText];
+            }
+
             if (![self inputAccessoryViewHidden]) {
                 [self setResizeToolbarWhenKeyboardFrameChanges:YES];
             }
@@ -267,6 +272,10 @@ const NSUInteger kNextButtonIndex       = 1;
         }
     }
     return [super resignFirstResponder];
+}
+
+- (void)selectAllText {
+    [self setSelectedTextRange:[self textRangeFromPosition:[self beginningOfDocument] toPosition:[self endOfDocument]]];
 }
 
 #pragma mark - Toolbar

@@ -23,6 +23,7 @@
 @property (assign, nonatomic) BOOL autoFillBarButtonHidden;
 @property (assign, nonatomic) BOOL autoFillBarButtonEnabled;
 @property (assign, nonatomic) BOOL textFieldShouldReturnAfterAutoFill;
+@property (assign, nonatomic) BOOL textFieldShouldSelectAllTextWhenBecomingFirstResponder;
 @property (assign, nonatomic) CGFloat presentAutoFillAnimationDuration;
 @property (assign, nonatomic) CGFloat dismissAutoFillAnimationDuration;
 
@@ -33,5 +34,7 @@
 @property (assign, nonatomic) NSUInteger maximumLength;
 
 @property (assign, nonatomic) BOOL allowSwipeToDismissKeyboard;
+
+- (void)selectAllText;
 
 @end
