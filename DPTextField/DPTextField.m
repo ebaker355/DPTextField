@@ -20,6 +20,7 @@ const NSUInteger kNextButtonIndex       = 1;
 @property (strong, nonatomic) DPTextFieldInternalDelegate *internalDelegate;
 @property (strong, nonatomic) NSMutableArray *autoFillStrings;
 @property (assign, nonatomic) BOOL resizeToolbarWhenKeyboardFrameChanges;
+@property (assign, nonatomic) BOOL resizeToolbarWhenDeviceOrientationChanges;
 @property (strong, nonatomic) DPTextFieldAutoFillInputView *autoFillInputView;
 @property (assign, nonatomic) CGRect autoFillInputViewFrame;
 @property (assign, nonatomic) BOOL autoFillInputViewIsUndocked;
@@ -146,6 +147,7 @@ const NSUInteger kNextButtonIndex       = 1;
 @synthesize doneBarButtonItem = _doneBarButtonItem;
 @synthesize doneBarButtonHidden = _doneBarButtonHidden;
 @synthesize resizeToolbarWhenKeyboardFrameChanges = _resizeToolbarWhenKeyboardFrameChanges;
+@synthesize resizeToolbarWhenDeviceOrientationChanges = _resizeToolbarWhenDeviceOrientationChanges;
 @synthesize textFieldShouldSelectAllTextWhenBecomingFirstResponder;
 
 #pragma mark - Initialization
@@ -249,6 +251,7 @@ const NSUInteger kNextButtonIndex       = 1;
 
             if (![self inputAccessoryViewHidden]) {
                 [self setResizeToolbarWhenKeyboardFrameChanges:YES];
+                [self setResizeToolbarWhenDeviceOrientationChanges:YES];
             }
             // Initialize auto-fill.
             [self queryAutoFillDataSource];
@@ -263,6 +266,7 @@ const NSUInteger kNextButtonIndex       = 1;
 - (BOOL)resignFirstResponder {
     if ([self canResignFirstResponder]) {
         [self setResizeToolbarWhenKeyboardFrameChanges:NO];
+        [self setResizeToolbarWhenDeviceOrientationChanges:NO];
 
         [self setNotificationsEnabled:NO];
 
@@ -364,6 +368,7 @@ const NSUInteger kNextButtonIndex       = 1;
         [self installToolbar];
     }
     [self setResizeToolbarWhenKeyboardFrameChanges:!_inputAccessoryViewHidden];
+    [self setResizeToolbarWhenDeviceOrientationChanges:!_inputAccessoryViewHidden];
 }
 
 - (void)setResizeToolbarWhenKeyboardFrameChanges:(BOOL)resizeToolbarWhenKeyboardFrameChanges {
@@ -373,6 +378,16 @@ const NSUInteger kNextButtonIndex       = 1;
         [[self toolbar] sizeToFit];
     } else {
         [[NSNotificationCenter defaultCenter] removeObserver:self.toolbar name:UIKeyboardDidChangeFrameNotification object:nil];
+    }
+}
+
+- (void)setResizeToolbarWhenDeviceOrientationChanges:(BOOL)resizeToolbarWhenDeviceOrientationChanges {
+    _resizeToolbarWhenDeviceOrientationChanges = resizeToolbarWhenDeviceOrientationChanges;
+    if (_resizeToolbarWhenDeviceOrientationChanges) {
+        [[NSNotificationCenter defaultCenter] addObserver:self.toolbar selector:@selector(sizeToFit) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [[self toolbar] sizeToFit];
+    } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self.toolbar name:UIDeviceOrientationDidChangeNotification object:nil];
     }
 }
 
