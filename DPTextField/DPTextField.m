@@ -519,6 +519,7 @@ const NSUInteger kNextButtonIndex       = 1;
     if (nil != _autoFillDataSource && nil == _autoFillStrings) {
         _autoFillStrings = [[NSMutableArray alloc] init];
     }
+    [self updateToolbarAnimated:YES];
     [self queryAutoFillDataSource];
 }
 
