@@ -2,7 +2,7 @@
 //  DPAppDelegate.m
 //  DPTextFieldDemo
 //
-//  Created by Baker, Eric on 3/22/13.
+//  Created by Eric D. Baker on 9/13/13.
 //  Copyright (c) 2013 DuneParkSoftware, LLC. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 @implementation DPAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     return YES;
 }

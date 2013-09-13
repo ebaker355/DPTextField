@@ -2,11 +2,11 @@
 //  DPAppDelegate.h
 //  DPTextFieldDemo
 //
-//  Created by Baker, Eric on 3/22/13.
+//  Created by Eric D. Baker on 9/13/13.
 //  Copyright (c) 2013 DuneParkSoftware, LLC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface DPAppDelegate : UIResponder <UIApplicationDelegate>
 

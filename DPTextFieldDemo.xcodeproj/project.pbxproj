@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		71C6230817E3517D00C76908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6230717E3517D00C76908 /* Foundation.framework */; };
+		71C6230A17E3517D00C76908 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6230917E3517D00C76908 /* CoreGraphics.framework */; };
+		71C6230C17E3517D00C76908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6230B17E3517D00C76908 /* UIKit.framework */; };
+		71C6231217E3517D00C76908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71C6231017E3517D00C76908 /* InfoPlist.strings */; };
+		71C6231417E3517D00C76908 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C6231317E3517D00C76908 /* main.m */; };
+		71C6231817E3517D00C76908 /* DPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C6231717E3517D00C76908 /* DPAppDelegate.m */; };
+		71C6231B17E3517D00C76908 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C6231917E3517D00C76908 /* Main_iPhone.storyboard */; };
+		71C6231E17E3517D00C76908 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C6231C17E3517D00C76908 /* Main_iPad.storyboard */; };
+		71C6232117E3517D00C76908 /* DPDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C6232017E3517D00C76908 /* DPDemoViewController.m */; };
+		71C6232317E3517D00C76908 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C6232217E3517D00C76908 /* Images.xcassets */; };
+		71C6232A17E3517D00C76908 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6232917E3517D00C76908 /* XCTest.framework */; };
+		71C6232B17E3517D00C76908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6230717E3517D00C76908 /* Foundation.framework */; };
+		71C6232C17E3517D00C76908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6230B17E3517D00C76908 /* UIKit.framework */; };
+		71C6233417E3517D00C76908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71C6233217E3517D00C76908 /* InfoPlist.strings */; };
+		71C6233617E3517D00C76908 /* DPTextFieldDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C6233517E3517D00C76908 /* DPTextFieldDemoTests.m */; };
+		71C6234617E351B400C76908 /* DPTextField_AngleLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 71C6234017E351B400C76908 /* DPTextField_AngleLeft.png */; };
+		71C6234717E351B400C76908 /* DPTextField_AngleLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71C6234117E351B400C76908 /* DPTextField_AngleLeft@2x.png */; };
+		71C6234817E351B400C76908 /* DPTextField_AngleRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 71C6234217E351B400C76908 /* DPTextField_AngleRight.png */; };
+		71C6234917E351B400C76908 /* DPTextField_AngleRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71C6234317E351B400C76908 /* DPTextField_AngleRight@2x.png */; };
+		71C6234A17E351B400C76908 /* DPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C6234517E351B400C76908 /* DPTextField.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		71C6232D17E3517D00C76908 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71C622FC17E3517D00C76908 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 71C6230317E3517D00C76908;
+			remoteInfo = DPTextFieldDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		71C6230417E3517D00C76908 /* DPTextFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DPTextFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71C6230717E3517D00C76908 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		71C6230917E3517D00C76908 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		71C6230B17E3517D00C76908 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		71C6230F17E3517D00C76908 /* DPTextFieldDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DPTextFieldDemo-Info.plist"; sourceTree = "<group>"; };
+		71C6231117E3517D00C76908 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		71C6231317E3517D00C76908 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		71C6231517E3517D00C76908 /* DPTextFieldDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DPTextFieldDemo-Prefix.pch"; sourceTree = "<group>"; };
+		71C6231617E3517D00C76908 /* DPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPAppDelegate.h; sourceTree = "<group>"; };
+		71C6231717E3517D00C76908 /* DPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPAppDelegate.m; sourceTree = "<group>"; };
+		71C6231A17E3517D00C76908 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		71C6231D17E3517D00C76908 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		71C6231F17E3517D00C76908 /* DPDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPDemoViewController.h; sourceTree = "<group>"; };
+		71C6232017E3517D00C76908 /* DPDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPDemoViewController.m; sourceTree = "<group>"; };
+		71C6232217E3517D00C76908 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		71C6232817E3517D00C76908 /* DPTextFieldDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DPTextFieldDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71C6232917E3517D00C76908 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		71C6233117E3517D00C76908 /* DPTextFieldDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DPTextFieldDemoTests-Info.plist"; sourceTree = "<group>"; };
+		71C6233317E3517D00C76908 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		71C6233517E3517D00C76908 /* DPTextFieldDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldDemoTests.m; sourceTree = "<group>"; };
+		71C6234017E351B400C76908 /* DPTextField_AngleLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPTextField_AngleLeft.png; sourceTree = "<group>"; };
+		71C6234117E351B400C76908 /* DPTextField_AngleLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DPTextField_AngleLeft@2x.png"; sourceTree = "<group>"; };
+		71C6234217E351B400C76908 /* DPTextField_AngleRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPTextField_AngleRight.png; sourceTree = "<group>"; };
+		71C6234317E351B400C76908 /* DPTextField_AngleRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DPTextField_AngleRight@2x.png"; sourceTree = "<group>"; };
+		71C6234417E351B400C76908 /* DPTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPTextField.h; sourceTree = "<group>"; };
+		71C6234517E351B400C76908 /* DPTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextField.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		71C6230117E3517D00C76908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C6230A17E3517D00C76908 /* CoreGraphics.framework in Frameworks */,
+				71C6230C17E3517D00C76908 /* UIKit.framework in Frameworks */,
+				71C6230817E3517D00C76908 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71C6232517E3517D00C76908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C6232A17E3517D00C76908 /* XCTest.framework in Frameworks */,
+				71C6232C17E3517D00C76908 /* UIKit.framework in Frameworks */,
+				71C6232B17E3517D00C76908 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		71C622FB17E3517D00C76908 = {
+			isa = PBXGroup;
+			children = (
+				71C6233F17E3519000C76908 /* DPTextField */,
+				71C6230D17E3517D00C76908 /* DPTextFieldDemo */,
+				71C6232F17E3517D00C76908 /* DPTextFieldDemoTests */,
+				71C6230617E3517D00C76908 /* Frameworks */,
+				71C6230517E3517D00C76908 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		71C6230517E3517D00C76908 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71C6230417E3517D00C76908 /* DPTextFieldDemo.app */,
+				71C6232817E3517D00C76908 /* DPTextFieldDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		71C6230617E3517D00C76908 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				71C6230717E3517D00C76908 /* Foundation.framework */,
+				71C6230917E3517D00C76908 /* CoreGraphics.framework */,
+				71C6230B17E3517D00C76908 /* UIKit.framework */,
+				71C6232917E3517D00C76908 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		71C6230D17E3517D00C76908 /* DPTextFieldDemo */ = {
+			isa = PBXGroup;
+			children = (
+				71C6231617E3517D00C76908 /* DPAppDelegate.h */,
+				71C6231717E3517D00C76908 /* DPAppDelegate.m */,
+				71C6231917E3517D00C76908 /* Main_iPhone.storyboard */,
+				71C6231C17E3517D00C76908 /* Main_iPad.storyboard */,
+				71C6231F17E3517D00C76908 /* DPDemoViewController.h */,
+				71C6232017E3517D00C76908 /* DPDemoViewController.m */,
+				71C6232217E3517D00C76908 /* Images.xcassets */,
+				71C6230E17E3517D00C76908 /* Supporting Files */,
+			);
+			path = DPTextFieldDemo;
+			sourceTree = "<group>";
+		};
+		71C6230E17E3517D00C76908 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				71C6230F17E3517D00C76908 /* DPTextFieldDemo-Info.plist */,
+				71C6231017E3517D00C76908 /* InfoPlist.strings */,
+				71C6231317E3517D00C76908 /* main.m */,
+				71C6231517E3517D00C76908 /* DPTextFieldDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		71C6232F17E3517D00C76908 /* DPTextFieldDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				71C6233517E3517D00C76908 /* DPTextFieldDemoTests.m */,
+				71C6233017E3517D00C76908 /* Supporting Files */,
+			);
+			path = DPTextFieldDemoTests;
+			sourceTree = "<group>";
+		};
+		71C6233017E3517D00C76908 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				71C6233117E3517D00C76908 /* DPTextFieldDemoTests-Info.plist */,
+				71C6233217E3517D00C76908 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		71C6233F17E3519000C76908 /* DPTextField */ = {
+			isa = PBXGroup;
+			children = (
+				71C6234417E351B400C76908 /* DPTextField.h */,
+				71C6234517E351B400C76908 /* DPTextField.m */,
+				71C6234017E351B400C76908 /* DPTextField_AngleLeft.png */,
+				71C6234117E351B400C76908 /* DPTextField_AngleLeft@2x.png */,
+				71C6234217E351B400C76908 /* DPTextField_AngleRight.png */,
+				71C6234317E351B400C76908 /* DPTextField_AngleRight@2x.png */,
+			);
+			path = DPTextField;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		71C6230317E3517D00C76908 /* DPTextFieldDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71C6233917E3517D00C76908 /* Build configuration list for PBXNativeTarget "DPTextFieldDemo" */;
+			buildPhases = (
+				71C6230017E3517D00C76908 /* Sources */,
+				71C6230117E3517D00C76908 /* Frameworks */,
+				71C6230217E3517D00C76908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DPTextFieldDemo;
+			productName = DPTextFieldDemo;
+			productReference = 71C6230417E3517D00C76908 /* DPTextFieldDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		71C6232717E3517D00C76908 /* DPTextFieldDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71C6233C17E3517D00C76908 /* Build configuration list for PBXNativeTarget "DPTextFieldDemoTests" */;
+			buildPhases = (
+				71C6232417E3517D00C76908 /* Sources */,
+				71C6232517E3517D00C76908 /* Frameworks */,
+				71C6232617E3517D00C76908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71C6232E17E3517D00C76908 /* PBXTargetDependency */,
+			);
+			name = DPTextFieldDemoTests;
+			productName = DPTextFieldDemoTests;
+			productReference = 71C6232817E3517D00C76908 /* DPTextFieldDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		71C622FC17E3517D00C76908 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DP;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "DuneParkSoftware, LLC";
+				TargetAttributes = {
+					71C6232717E3517D00C76908 = {
+						TestTargetID = 71C6230317E3517D00C76908;
+					};
+				};
+			};
+			buildConfigurationList = 71C622FF17E3517D00C76908 /* Build configuration list for PBXProject "DPTextFieldDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 71C622FB17E3517D00C76908;
+			productRefGroup = 71C6230517E3517D00C76908 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				71C6230317E3517D00C76908 /* DPTextFieldDemo */,
+				71C6232717E3517D00C76908 /* DPTextFieldDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		71C6230217E3517D00C76908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C6231E17E3517D00C76908 /* Main_iPad.storyboard in Resources */,
+				71C6232317E3517D00C76908 /* Images.xcassets in Resources */,
+				71C6234817E351B400C76908 /* DPTextField_AngleRight.png in Resources */,
+				71C6234917E351B400C76908 /* DPTextField_AngleRight@2x.png in Resources */,
+				71C6231B17E3517D00C76908 /* Main_iPhone.storyboard in Resources */,
+				71C6231217E3517D00C76908 /* InfoPlist.strings in Resources */,
+				71C6234617E351B400C76908 /* DPTextField_AngleLeft.png in Resources */,
+				71C6234717E351B400C76908 /* DPTextField_AngleLeft@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71C6232617E3517D00C76908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C6233417E3517D00C76908 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		71C6230017E3517D00C76908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C6231817E3517D00C76908 /* DPAppDelegate.m in Sources */,
+				71C6234A17E351B400C76908 /* DPTextField.m in Sources */,
+				71C6232117E3517D00C76908 /* DPDemoViewController.m in Sources */,
+				71C6231417E3517D00C76908 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71C6232417E3517D00C76908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C6233617E3517D00C76908 /* DPTextFieldDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		71C6232E17E3517D00C76908 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 71C6230317E3517D00C76908 /* DPTextFieldDemo */;
+			targetProxy = 71C6232D17E3517D00C76908 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		71C6231017E3517D00C76908 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71C6231117E3517D00C76908 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		71C6231917E3517D00C76908 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71C6231A17E3517D00C76908 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		71C6231C17E3517D00C76908 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71C6231D17E3517D00C76908 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		71C6233217E3517D00C76908 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71C6233317E3517D00C76908 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		71C6233717E3517D00C76908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		71C6233817E3517D00C76908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		71C6233A17E3517D00C76908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DPTextFieldDemo/DPTextFieldDemo-Prefix.pch";
+				INFOPLIST_FILE = "DPTextFieldDemo/DPTextFieldDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		71C6233B17E3517D00C76908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DPTextFieldDemo/DPTextFieldDemo-Prefix.pch";
+				INFOPLIST_FILE = "DPTextFieldDemo/DPTextFieldDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		71C6233D17E3517D00C76908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DPTextFieldDemo.app/DPTextFieldDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DPTextFieldDemo/DPTextFieldDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DPTextFieldDemoTests/DPTextFieldDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		71C6233E17E3517D00C76908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DPTextFieldDemo.app/DPTextFieldDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DPTextFieldDemo/DPTextFieldDemo-Prefix.pch";
+				INFOPLIST_FILE = "DPTextFieldDemoTests/DPTextFieldDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		71C622FF17E3517D00C76908 /* Build configuration list for PBXProject "DPTextFieldDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71C6233717E3517D00C76908 /* Debug */,
+				71C6233817E3517D00C76908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71C6233917E3517D00C76908 /* Build configuration list for PBXNativeTarget "DPTextFieldDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71C6233A17E3517D00C76908 /* Debug */,
+				71C6233B17E3517D00C76908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71C6233C17E3517D00C76908 /* Build configuration list for PBXNativeTarget "DPTextFieldDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71C6233D17E3517D00C76908 /* Debug */,
+				71C6233E17E3517D00C76908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 71C622FC17E3517D00C76908 /* Project object */;
+}
