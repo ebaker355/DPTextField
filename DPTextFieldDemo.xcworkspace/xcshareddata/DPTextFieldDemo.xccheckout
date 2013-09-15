@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>00F27E6E-7886-4CAC-BD4B-2594C1A5422C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DPTextFieldDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D881B513-1DE5-41D6-BD6F-31AC14D17118</key>
+		<string>https://github.com/ebaker355/DPTextField.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DPTextFieldDemo.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D881B513-1DE5-41D6-BD6F-31AC14D17118</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ebaker355/DPTextField.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D881B513-1DE5-41D6-BD6F-31AC14D17118</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D881B513-1DE5-41D6-BD6F-31AC14D17118</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DPTextField</string>
+		</dict>
+	</array>
+</dict>
+</plist>
