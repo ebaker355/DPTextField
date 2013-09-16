@@ -126,4 +126,86 @@
     }
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        DPTextField *field = (DPTextField *)textField;
+
+        if (field.customDelegate && [field.customDelegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
+            [field.customDelegate textFieldDidEndEditing:textField];
+        }
+
+        if (field.didEndEditingBlock) {
+            field.didEndEditingBlock(field);
+        }
+    }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        DPTextField *field = (DPTextField *)textField;
+
+        if (field.customDelegate && [field.customDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
+            if (![field.customDelegate textFieldShouldBeginEditing:textField]) {
+                return NO;
+            }
+        }
+
+        if (field.shouldBeginEditingBlock) {
+            return field.shouldBeginEditingBlock(field);
+        }
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        DPTextField *field = (DPTextField *)textField;
+
+        if (field.customDelegate && [field.customDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
+            if (![field.customDelegate textFieldShouldClear:textField]) {
+                return NO;
+            }
+        }
+
+        if (field.shouldClearBlock) {
+            return field.shouldClearBlock(field);
+        }
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        DPTextField *field = (DPTextField *)textField;
+
+        if (field.customDelegate && [field.customDelegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
+            if (![field.customDelegate textFieldShouldEndEditing:textField]) {
+                return NO;
+            }
+        }
+
+        if (field.shouldEndEditingBlock) {
+            return field.shouldEndEditingBlock(field);
+        }
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        DPTextField *field = (DPTextField *)textField;
+
+        if (field.customDelegate && [field.customDelegate respondsToSelector:@selector(textFieldShouldReturn:)]) {
+            if (![field.customDelegate textFieldShouldReturn:textField]) {
+                return NO;
+            }
+        }
+
+        if (field.shouldReturnBlock) {
+            return field.shouldReturnBlock(field);
+        }
+    }
+    return YES;
+}
+
 @end

@@ -53,7 +53,6 @@
 
 - (void)testDPTextFieldInternalSharedDelegateCallsBlockDelegateMethods {
     __block BOOL blockCalled = NO;
-
     [self.sut setShouldChangeCharactersInRange_ReplacementString_Block:^BOOL(DPTextField *textField, NSRange range, NSString *string) {
         blockCalled = YES;
         return YES;
@@ -71,6 +70,55 @@
     [self.sut.delegate textFieldDidBeginEditing:self.sut];
 
     XCTAssertTrue(blockCalled, @"The DPTextFieldDidBeginEditing block should be called.");
+
+    blockCalled = NO;
+    [self.sut setDidEndEditingBlock:^(DPTextField *textField) {
+        blockCalled = YES;
+    }];
+
+    [self.sut.delegate textFieldDidEndEditing:self.sut];
+
+    XCTAssertTrue(blockCalled, @"The DPTextFieldDidEndEditing block should be called.");
+
+    blockCalled = NO;
+    [self.sut setShouldBeginEditingBlock:^BOOL(DPTextField *textField) {
+        blockCalled = YES;
+        return YES;
+    }];
+
+    [self.sut.delegate textFieldShouldBeginEditing:self.sut];
+
+    XCTAssertTrue(blockCalled, @"The DPTextFieldShouldBeginEditing block should be called.");
+
+    blockCalled = NO;
+    [self.sut setShouldClearBlock:^BOOL(DPTextField *textField) {
+        blockCalled = YES;
+        return YES;
+    }];
+
+    [self.sut.delegate textFieldShouldClear:self.sut];
+
+    XCTAssertTrue(blockCalled, @"The DPTextFieldShouldClear block should be called.");
+
+    blockCalled = NO;
+    [self.sut setShouldEndEditingBlock:^BOOL(DPTextField *textField) {
+        blockCalled = YES;
+        return YES;
+    }];
+
+    [self.sut.delegate textFieldShouldEndEditing:self.sut];
+
+    XCTAssertTrue(blockCalled, @"The DPTextFieldShouldEndEditing block should be called.");
+
+    blockCalled = NO;
+    [self.sut setShouldReturnBlock:^BOOL(DPTextField *textField) {
+        blockCalled = YES;
+        return YES;
+    }];
+
+    [self.sut.delegate textFieldShouldReturn:self.sut];
+
+    XCTAssertTrue(blockCalled, @"The DPTextFieldShouldReturn block should be called.");
 }
 
 @end
