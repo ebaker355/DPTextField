@@ -13,6 +13,105 @@
 		
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setCustomDelegate:</TokenIdentifier>
+			<Abstract type="html">The custom delegate set for the text field.
+Since DPTextField uses a custom internal delegate, a custom delegate cannot be accessed
+via the delegate property; use this property instead. You still use setDelegate: to set
+this delegate.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, nonatomic) id&lt;UITextFieldDelegate&gt; customDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/customDelegate</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/customDelegate</TokenIdentifier>
+			<Abstract type="html">The custom delegate set for the text field.
+Since DPTextField uses a custom internal delegate, a custom delegate cannot be accessed
+via the delegate property; use this property instead. You still use setDelegate: to set
+this delegate.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, nonatomic) id&lt;UITextFieldDelegate&gt; customDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/customDelegate</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/customDelegate</TokenIdentifier>
+			<Abstract type="html">The custom delegate set for the text field.
+Since DPTextField uses a custom internal delegate, a custom delegate cannot be accessed
+via the delegate property; use this property instead. You still use setDelegate: to set
+this delegate.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, nonatomic) id&lt;UITextFieldDelegate&gt; customDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/customDelegate</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldChangeCharactersInRange_ReplacementString_Block:</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textField:shouldChangeCharactersInRange:replacementString:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextField_ShouldChangeCharactersInRange_ReplacementString shouldChangeCharactersInRange_ReplacementString_Block</Declaration>
+			
+			
+			<Anchor>//api/name/shouldChangeCharactersInRange_ReplacementString_Block</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/shouldChangeCharactersInRange_ReplacementString_Block</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textField:shouldChangeCharactersInRange:replacementString:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextField_ShouldChangeCharactersInRange_ReplacementString shouldChangeCharactersInRange_ReplacementString_Block</Declaration>
+			
+			
+			<Anchor>//api/name/shouldChangeCharactersInRange_ReplacementString_Block</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/shouldChangeCharactersInRange_ReplacementString_Block</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textField:shouldChangeCharactersInRange:replacementString:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextField_ShouldChangeCharactersInRange_ReplacementString shouldChangeCharactersInRange_ReplacementString_Block</Declaration>
+			
+			
+			<Anchor>//api/name/shouldChangeCharactersInRange_ReplacementString_Block</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldChangeCharactersInRange_ReplacementString_Block:</TokenIdentifier>
+			<Abstract type="html">Setter for block version of textField:shouldChangeCharactersInRange:replacementString:
+for autocompletion.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>- (void)setShouldChangeCharactersInRange_ReplacementString_Block:(DPTextField_ShouldChangeCharactersInRange_ReplacementString)shouldChangeCharactersInRange_ReplacementString_Block</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>shouldChangeCharactersInRange_ReplacementString_Block</Name>
+					<Abstract type="html">The block.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setShouldChangeCharactersInRange_ReplacementString_Block:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setPreviousField:</TokenIdentifier>
 			<Abstract type="html">The previous responder in the responder chain.
 When this property is set, the previous bar button item (&lt;) will appear in the field&apos;s input accessory toolbar.

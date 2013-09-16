@@ -8,7 +8,57 @@
 
 #import "DPTextField.h"
 
+@interface DPTextFieldInternalSharedDelegate : NSObject <UITextFieldDelegate>
++ (instancetype)sharedDelegate;
+@end
+
+@interface DPTextField ()
+@property (assign, nonatomic) id<UITextFieldDelegate> customDelegate;
+@end
+
 @implementation DPTextField
+
+#pragma mark - Initialization
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self initSelf];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self initSelf];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initSelf];
+    }
+    return self;
+}
+
+- (void)initSelf {
+    [self setDelegate:[DPTextFieldInternalSharedDelegate sharedDelegate]];
+}
+
+#pragma mark - Custom delegate handling
+
+- (void)setDelegate:(id<UITextFieldDelegate>)delegate {
+    if ([delegate isKindOfClass:[DPTextFieldInternalSharedDelegate class]]) {
+        [super setDelegate:delegate];
+    } else {
+        [self setCustomDelegate:delegate];
+    }
+}
+
+#pragma mark - Responder chain
 
 - (BOOL)canMakePreviousFieldBecomeFirstResponder {
     return self.previousField && [self canResignFirstResponder] && [self.previousField canBecomeFirstResponder];
@@ -24,6 +74,56 @@
 
 - (BOOL)makeNextFieldBecomeFirstResponder {
     return [self canMakeNextFieldBecomeFirstResponder] && [self.nextField becomeFirstResponder];
+}
+
+@end
+
+
+
+#pragma mark - Internal Shared Delegate implementation
+
+@implementation DPTextFieldInternalSharedDelegate
+
++ (instancetype)sharedDelegate {
+    static DPTextFieldInternalSharedDelegate *_sharedDelegate = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedDelegate = [[DPTextFieldInternalSharedDelegate alloc] init];
+    });
+    return _sharedDelegate;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        DPTextField *field = (DPTextField *)textField;
+
+        if (field.customDelegate && [field.customDelegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
+            if (![field.customDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string]) {
+                return NO;
+            }
+        }
+
+        if (field.shouldChangeCharactersInRange_ReplacementString_Block) {
+            if (!field.shouldChangeCharactersInRange_ReplacementString_Block(field, range, string)) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([textField isKindOfClass:[DPTextField class]]) {
+        DPTextField *field = (DPTextField *)textField;
+
+        if (field.customDelegate && [field.customDelegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
+            [field.customDelegate textFieldDidBeginEditing:textField];
+        }
+
+        if (field.didBeginEditingBlock) {
+            field.didBeginEditingBlock(field);
+        }
+    }
 }
 
 @end

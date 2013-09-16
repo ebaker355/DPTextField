@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		06E54ABB27F441B4857ECEA6 /* libPods-DPTextFieldDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3F967976584A12B9936582 /* libPods-DPTextFieldDemoTests.a */; };
 		7149EF6B17E60C90005FFDD1 /* DPTextFieldResponderChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7149EF6A17E60C90005FFDD1 /* DPTextFieldResponderChainTests.m */; };
+		717E8F1017E690B9001673C1 /* DPTextFieldDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 717E8F0F17E690B9001673C1 /* DPTextFieldDelegateTests.m */; };
 		71C6230817E3517D00C76908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6230717E3517D00C76908 /* Foundation.framework */; };
 		71C6230A17E3517D00C76908 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6230917E3517D00C76908 /* CoreGraphics.framework */; };
 		71C6230C17E3517D00C76908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C6230B17E3517D00C76908 /* UIKit.framework */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		2B3F967976584A12B9936582 /* libPods-DPTextFieldDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DPTextFieldDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7149EF6A17E60C90005FFDD1 /* DPTextFieldResponderChainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldResponderChainTests.m; sourceTree = "<group>"; };
+		717E8F0F17E690B9001673C1 /* DPTextFieldDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPTextFieldDelegateTests.m; sourceTree = "<group>"; };
 		71C6230417E3517D00C76908 /* DPTextFieldDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DPTextFieldDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C6230717E3517D00C76908 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		71C6230917E3517D00C76908 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -174,8 +176,9 @@
 		71C6232F17E3517D00C76908 /* DPTextFieldDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				71C6233517E3517D00C76908 /* DPTextFieldTests.m */,
+				717E8F0F17E690B9001673C1 /* DPTextFieldDelegateTests.m */,
 				7149EF6A17E60C90005FFDD1 /* DPTextFieldResponderChainTests.m */,
+				71C6233517E3517D00C76908 /* DPTextFieldTests.m */,
 				71C6233017E3517D00C76908 /* Supporting Files */,
 			);
 			path = DPTextFieldDemoTests;
@@ -367,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				717E8F1017E690B9001673C1 /* DPTextFieldDelegateTests.m in Sources */,
 				7149EF6B17E60C90005FFDD1 /* DPTextFieldResponderChainTests.m in Sources */,
 				71C6233617E3517D00C76908 /* DPTextFieldTests.m in Sources */,
 			);
@@ -582,6 +586,7 @@
 				7149EF6717E6058E005FFDD1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71C622FF17E3517D00C76908 /* Build configuration list for PBXProject "DPTextFieldDemo" */ = {
 			isa = XCConfigurationList;
