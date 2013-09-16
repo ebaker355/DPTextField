@@ -120,8 +120,8 @@
             [field.customDelegate textFieldDidBeginEditing:textField];
         }
 
-        if (field.didBeginEditingBlock) {
-            field.didBeginEditingBlock(field);
+        if (field.didBeginEditing) {
+            field.didBeginEditing(field);
         }
     }
 }
@@ -134,8 +134,8 @@
             [field.customDelegate textFieldDidEndEditing:textField];
         }
 
-        if (field.didEndEditingBlock) {
-            field.didEndEditingBlock(field);
+        if (field.didEndEditing) {
+            field.didEndEditing(field);
         }
     }
 }
@@ -150,8 +150,8 @@
             }
         }
 
-        if (field.shouldBeginEditingBlock) {
-            return field.shouldBeginEditingBlock(field);
+        if (field.shouldBeginEditing) {
+            return field.shouldBeginEditing(field);
         }
     }
     return YES;
@@ -167,8 +167,8 @@
             }
         }
 
-        if (field.shouldClearBlock) {
-            return field.shouldClearBlock(field);
+        if (field.shouldClear) {
+            return field.shouldClear(field);
         }
     }
     return YES;
@@ -184,8 +184,8 @@
             }
         }
 
-        if (field.shouldEndEditingBlock) {
-            return field.shouldEndEditingBlock(field);
+        if (field.shouldEndEditing) {
+            return field.shouldEndEditing(field);
         }
     }
     return YES;
@@ -201,8 +201,8 @@
             }
         }
 
-        if (field.shouldReturnBlock) {
-            return field.shouldReturnBlock(field);
+        if (field.shouldReturn) {
+            return field.shouldReturn(field);
         }
     }
     return YES;

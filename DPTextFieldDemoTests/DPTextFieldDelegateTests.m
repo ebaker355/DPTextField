@@ -63,7 +63,7 @@
     XCTAssertTrue(blockCalled, @"The DPTextField_ShouldChangeCharactersInRange_ReplacementString block should be called.");
 
     blockCalled = NO;
-    [self.sut setDidBeginEditingBlock:^(DPTextField *textField) {
+    [self.sut setDidBeginEditing:^(DPTextField *textField) {
         blockCalled = YES;
     }];
 
@@ -72,7 +72,7 @@
     XCTAssertTrue(blockCalled, @"The DPTextFieldDidBeginEditing block should be called.");
 
     blockCalled = NO;
-    [self.sut setDidEndEditingBlock:^(DPTextField *textField) {
+    [self.sut setDidEndEditing:^(DPTextField *textField) {
         blockCalled = YES;
     }];
 
@@ -81,7 +81,7 @@
     XCTAssertTrue(blockCalled, @"The DPTextFieldDidEndEditing block should be called.");
 
     blockCalled = NO;
-    [self.sut setShouldBeginEditingBlock:^BOOL(DPTextField *textField) {
+    [self.sut setShouldBeginEditing:^BOOL(DPTextField *textField) {
         blockCalled = YES;
         return YES;
     }];
@@ -91,7 +91,7 @@
     XCTAssertTrue(blockCalled, @"The DPTextFieldShouldBeginEditing block should be called.");
 
     blockCalled = NO;
-    [self.sut setShouldClearBlock:^BOOL(DPTextField *textField) {
+    [self.sut setShouldClear:^BOOL(DPTextField *textField) {
         blockCalled = YES;
         return YES;
     }];
@@ -101,7 +101,7 @@
     XCTAssertTrue(blockCalled, @"The DPTextFieldShouldClear block should be called.");
 
     blockCalled = NO;
-    [self.sut setShouldEndEditingBlock:^BOOL(DPTextField *textField) {
+    [self.sut setShouldEndEditing:^BOOL(DPTextField *textField) {
         blockCalled = YES;
         return YES;
     }];
@@ -111,7 +111,7 @@
     XCTAssertTrue(blockCalled, @"The DPTextFieldShouldEndEditing block should be called.");
 
     blockCalled = NO;
-    [self.sut setShouldReturnBlock:^BOOL(DPTextField *textField) {
+    [self.sut setShouldReturn:^BOOL(DPTextField *textField) {
         blockCalled = YES;
         return YES;
     }];

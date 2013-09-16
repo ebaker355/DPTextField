@@ -55,74 +55,74 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 /**
  Block version of UITextFieldDelegate protocol method textFieldDidBeginEditing:
  */
-@property (copy, nonatomic) DPTextFieldDidBeginEditing didBeginEditingBlock;
+@property (copy, nonatomic) DPTextFieldDidBeginEditing didBeginEditing;
 
 /**
  Setter for block version of textFieldDidBeginEditing: for autocompletion.
  
- @param didBeginEditingBlock The block.
+ @param didBeginEditing The block.
  */
-- (void)setDidBeginEditingBlock:(DPTextFieldDidBeginEditing)didBeginEditingBlock;
+- (void)setDidBeginEditing:(DPTextFieldDidBeginEditing)didBeginEditingBlock;
 
 /**
  Block version of UITextFieldDelegate protocol method textFieldDidEndEditing:
  */
-@property (copy, nonatomic) DPTextFieldDidEndEditing didEndEditingBlock;
+@property (copy, nonatomic) DPTextFieldDidEndEditing didEndEditing;
 
 /**
  Setter for block version of textFieldDidEndEditing: for autocompletion.
 
- @param didEndEditingBlock The block.
+ @param didEndEditing The block.
  */
-- (void)setDidEndEditingBlock:(DPTextFieldDidEndEditing)didEndEditingBlock;
+- (void)setDidEndEditing:(DPTextFieldDidEndEditing)didEndEditingBlock;
 
 /**
  Block version of UITextFieldDelegate protocol method textFieldShouldBeginEditing:
  */
-@property (copy, nonatomic) DPTextFieldShouldBeginEditing shouldBeginEditingBlock;
+@property (copy, nonatomic) DPTextFieldShouldBeginEditing shouldBeginEditing;
 
 /**
  Setter for block version of textFieldShouldBeginEditing: for autocompletion.
 
- @param shouldBeginEditingBlock The block.
+ @param shouldBeginEditing The block.
  */
-- (void)setShouldBeginEditingBlock:(DPTextFieldShouldBeginEditing)shouldBeginEditingBlock;
+- (void)setShouldBeginEditing:(DPTextFieldShouldBeginEditing)shouldBeginEditingBlock;
 
 /**
  Block version of UITextFieldDelegate protocol method textFieldShouldClear:
  */
-@property (copy, nonatomic) DPTextFieldShouldClear shouldClearBlock;
+@property (copy, nonatomic) DPTextFieldShouldClear shouldClear;
 
 /**
  Setter for block version of textFieldShouldClear: for autocompletion.
 
- @param shouldClearBlock The block.
+ @param shouldClear The block.
  */
-- (void)setShouldClearBlock:(DPTextFieldShouldClear)shouldClearBlock;
+- (void)setShouldClear:(DPTextFieldShouldClear)shouldClearBlock;
 
 /**
  Block version of UITextFieldDelegate protocol method textFieldShouldEndEditing:
  */
-@property (copy, nonatomic) DPTextFieldShouldEndEditing shouldEndEditingBlock;
+@property (copy, nonatomic) DPTextFieldShouldEndEditing shouldEndEditing;
 
 /**
  Setter for block version of textFieldShouldEndEditing: for autocompletion.
 
- @param shouldEndEditingBlock The block.
+ @param shouldEndEditing The block.
  */
-- (void)setShouldEndEditingBlock:(DPTextFieldShouldEndEditing)shouldEndEditingBlock;
+- (void)setShouldEndEditing:(DPTextFieldShouldEndEditing)shouldEndEditingBlock;
 
 /**
  Block version of UITextFieldDelegate protocol method textFieldShouldReturn:
  */
-@property (copy, nonatomic) DPTextFieldShouldReturn shouldReturnBlock;
+@property (copy, nonatomic) DPTextFieldShouldReturn shouldReturn;
 
 /**
  Setter for block version of textFieldShouldReturn: for autocompletion.
 
- @param shouldReturnBlock The block.
+ @param shouldReturn The block.
  */
-- (void)setShouldReturnBlock:(DPTextFieldShouldReturn)shouldReturnBlock;
+- (void)setShouldReturn:(DPTextFieldShouldReturn)shouldReturnBlock;
 
 /**
  The previous responder in the responder chain.
