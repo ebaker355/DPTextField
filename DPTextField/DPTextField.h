@@ -60,7 +60,7 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 /**
  Setter for block version of textFieldDidBeginEditing: for autocompletion.
  
- @param didBeginEditing The block.
+ @param didBeginEditingBlock The block.
  */
 - (void)setDidBeginEditing:(DPTextFieldDidBeginEditing)didBeginEditingBlock;
 
@@ -72,7 +72,7 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 /**
  Setter for block version of textFieldDidEndEditing: for autocompletion.
 
- @param didEndEditing The block.
+ @param didEndEditingBlock The block.
  */
 - (void)setDidEndEditing:(DPTextFieldDidEndEditing)didEndEditingBlock;
 
@@ -84,7 +84,7 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 /**
  Setter for block version of textFieldShouldBeginEditing: for autocompletion.
 
- @param shouldBeginEditing The block.
+ @param shouldBeginEditingBlock The block.
  */
 - (void)setShouldBeginEditing:(DPTextFieldShouldBeginEditing)shouldBeginEditingBlock;
 
@@ -96,7 +96,7 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 /**
  Setter for block version of textFieldShouldClear: for autocompletion.
 
- @param shouldClear The block.
+ @param shouldClearBlock The block.
  */
 - (void)setShouldClear:(DPTextFieldShouldClear)shouldClearBlock;
 
@@ -108,7 +108,7 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 /**
  Setter for block version of textFieldShouldEndEditing: for autocompletion.
 
- @param shouldEndEditing The block.
+ @param shouldEndEditingBlock The block.
  */
 - (void)setShouldEndEditing:(DPTextFieldShouldEndEditing)shouldEndEditingBlock;
 
@@ -120,7 +120,7 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 /**
  Setter for block version of textFieldShouldReturn: for autocompletion.
 
- @param shouldReturn The block.
+ @param shouldReturnBlock The block.
  */
 - (void)setShouldReturn:(DPTextFieldShouldReturn)shouldReturnBlock;
 
@@ -162,5 +162,11 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
  Gets or sets the maximum number of characters allowed in the field's text property.
  */
 @property (assign, nonatomic) NSUInteger maximumTextLength;
+
+/**
+ Gets or sets whether the text field's text should be automatically selected when the field becomes
+ the first responder.
+ */
+@property (assign, nonatomic) BOOL shouldSelectAllTextWhenBecomingFirstResponder;
 
 @end

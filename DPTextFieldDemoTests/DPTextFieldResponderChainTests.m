@@ -149,4 +149,12 @@
     XCTAssertNoThrow([mockNextField verify], @"Next field should become first responder.");
 }
 
+- (void)testSelectsAllTextWhenBecomingFirstResponderIfShould {
+    [self.sut setText:@"foobar"];
+    [self.sut becomeFirstResponder];
+    UITextRange *range = [self.sut selectedTextRange];
+    XCTAssertEqualObjects(range.start, self.sut.beginningOfDocument, @"Selection range should be at start of text.");
+    XCTAssertEqualObjects(range.end, self.sut.endOfDocument, @"Selection range should be at end of text.");
+}
+
 @end

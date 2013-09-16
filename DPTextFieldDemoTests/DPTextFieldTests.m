@@ -46,4 +46,9 @@
     XCTAssertTrue([self.sut respondsToSelector:@selector(setMaximumTextLength:)], @"DPTextField should have a settable maximumTextLength property.");
 }
 
+- (void)testHasShouldSelectAllTextWhenBecomingFirstResponderProperty {
+    XCTAssertTrue([self.sut respondsToSelector:@selector(shouldSelectAllTextWhenBecomingFirstResponder)], @"DPTextField should have a readable shouldSelectAllTextWhenBecomingFirstResponder property.");
+    XCTAssertTrue([self.sut respondsToSelector:@selector(setShouldSelectAllTextWhenBecomingFirstResponder:)], @"DPTextField should have a settable shouldSelectAllTextWhenBecomingFirstResponder property.");
+}
+
 @end

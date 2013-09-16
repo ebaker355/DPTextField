@@ -1,4 +1,4 @@
 Documentation set was installed to Xcode!
 
 Path: /Users/s6eab/Library/Developer/Shared/Documentation/DocSets/com.duneparksoftware.DPTextField.docset
-Time: 2013-09-16 02:18:42 +0000
+Time: 2013-09-16 18:13:31 +0000

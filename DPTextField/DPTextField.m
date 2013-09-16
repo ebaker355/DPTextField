@@ -76,6 +76,23 @@
     return [self canMakeNextFieldBecomeFirstResponder] && [self.nextField becomeFirstResponder];
 }
 
+- (BOOL)becomeFirstResponder {
+    BOOL retVal = [super becomeFirstResponder];
+    if (retVal && self.shouldSelectAllTextWhenBecomingFirstResponder) {
+        // NOTE: Unless we wrap the setSelectedTextRange call in a dispatch_after block,
+        // it will fail 50% of the time. Is this a UITextField bug?
+        double delayInSeconds = 0.01;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
+            UITextRange *range = [strongSelf textRangeFromPosition:strongSelf.beginningOfDocument toPosition:strongSelf.endOfDocument];
+            [strongSelf setSelectedTextRange:range];
+        });
+    }
+    return retVal;
+}
+
 @end
 
 

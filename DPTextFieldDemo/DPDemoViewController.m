@@ -20,4 +20,12 @@
 
 @implementation DPDemoViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self.field1 setShouldSelectAllTextWhenBecomingFirstResponder:YES];
+    [self.field2 setShouldSelectAllTextWhenBecomingFirstResponder:YES];
+    [self.field3 setShouldSelectAllTextWhenBecomingFirstResponder:YES];
+    [self.field4 setShouldSelectAllTextWhenBecomingFirstResponder:YES];
+}
 @end

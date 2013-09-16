@@ -112,6 +112,324 @@ for autocompletion.</Abstract>
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setDidBeginEditing:</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldDidBeginEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldDidBeginEditing didBeginEditing</Declaration>
+			
+			
+			<Anchor>//api/name/didBeginEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/didBeginEditing</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldDidBeginEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldDidBeginEditing didBeginEditing</Declaration>
+			
+			
+			<Anchor>//api/name/didBeginEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/didBeginEditing</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldDidBeginEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldDidBeginEditing didBeginEditing</Declaration>
+			
+			
+			<Anchor>//api/name/didBeginEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setDidBeginEditing:</TokenIdentifier>
+			<Abstract type="html">Setter for block version of textFieldDidBeginEditing: for autocompletion.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>- (void)setDidBeginEditing:(DPTextFieldDidBeginEditing)didBeginEditingBlock</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>didBeginEditingBlock</Name>
+					<Abstract type="html">The block.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setDidBeginEditing:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setDidEndEditing:</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldDidEndEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldDidEndEditing didEndEditing</Declaration>
+			
+			
+			<Anchor>//api/name/didEndEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/didEndEditing</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldDidEndEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldDidEndEditing didEndEditing</Declaration>
+			
+			
+			<Anchor>//api/name/didEndEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/didEndEditing</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldDidEndEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldDidEndEditing didEndEditing</Declaration>
+			
+			
+			<Anchor>//api/name/didEndEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setDidEndEditing:</TokenIdentifier>
+			<Abstract type="html">Setter for block version of textFieldDidEndEditing: for autocompletion.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>- (void)setDidEndEditing:(DPTextFieldDidEndEditing)didEndEditingBlock</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>didEndEditingBlock</Name>
+					<Abstract type="html">The block.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setDidEndEditing:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldBeginEditing:</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldBeginEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldBeginEditing shouldBeginEditing</Declaration>
+			
+			
+			<Anchor>//api/name/shouldBeginEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/shouldBeginEditing</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldBeginEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldBeginEditing shouldBeginEditing</Declaration>
+			
+			
+			<Anchor>//api/name/shouldBeginEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/shouldBeginEditing</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldBeginEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldBeginEditing shouldBeginEditing</Declaration>
+			
+			
+			<Anchor>//api/name/shouldBeginEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldBeginEditing:</TokenIdentifier>
+			<Abstract type="html">Setter for block version of textFieldShouldBeginEditing: for autocompletion.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>- (void)setShouldBeginEditing:(DPTextFieldShouldBeginEditing)shouldBeginEditingBlock</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>shouldBeginEditingBlock</Name>
+					<Abstract type="html">The block.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setShouldBeginEditing:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldClear:</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldClear:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldClear shouldClear</Declaration>
+			
+			
+			<Anchor>//api/name/shouldClear</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/shouldClear</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldClear:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldClear shouldClear</Declaration>
+			
+			
+			<Anchor>//api/name/shouldClear</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/shouldClear</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldClear:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldClear shouldClear</Declaration>
+			
+			
+			<Anchor>//api/name/shouldClear</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldClear:</TokenIdentifier>
+			<Abstract type="html">Setter for block version of textFieldShouldClear: for autocompletion.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>- (void)setShouldClear:(DPTextFieldShouldClear)shouldClearBlock</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>shouldClearBlock</Name>
+					<Abstract type="html">The block.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setShouldClear:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldEndEditing:</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldEndEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldEndEditing shouldEndEditing</Declaration>
+			
+			
+			<Anchor>//api/name/shouldEndEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/shouldEndEditing</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldEndEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldEndEditing shouldEndEditing</Declaration>
+			
+			
+			<Anchor>//api/name/shouldEndEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/shouldEndEditing</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldEndEditing:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldEndEditing shouldEndEditing</Declaration>
+			
+			
+			<Anchor>//api/name/shouldEndEditing</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldEndEditing:</TokenIdentifier>
+			<Abstract type="html">Setter for block version of textFieldShouldEndEditing: for autocompletion.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>- (void)setShouldEndEditing:(DPTextFieldShouldEndEditing)shouldEndEditingBlock</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>shouldEndEditingBlock</Name>
+					<Abstract type="html">The block.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setShouldEndEditing:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldReturn:</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldReturn:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldReturn shouldReturn</Declaration>
+			
+			
+			<Anchor>//api/name/shouldReturn</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/shouldReturn</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldReturn:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldReturn shouldReturn</Declaration>
+			
+			
+			<Anchor>//api/name/shouldReturn</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/shouldReturn</TokenIdentifier>
+			<Abstract type="html">Block version of UITextFieldDelegate protocol method textFieldShouldReturn:</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (copy, nonatomic) DPTextFieldShouldReturn shouldReturn</Declaration>
+			
+			
+			<Anchor>//api/name/shouldReturn</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldReturn:</TokenIdentifier>
+			<Abstract type="html">Setter for block version of textFieldShouldReturn: for autocompletion.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>- (void)setShouldReturn:(DPTextFieldShouldReturn)shouldReturnBlock</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>shouldReturnBlock</Name>
+					<Abstract type="html">The block.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setShouldReturn:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setPreviousField:</TokenIdentifier>
 			<Abstract type="html">The previous responder in the responder chain.
 When this property is set, the previous bar button item (&lt;) will appear in the field&apos;s input accessory toolbar.
@@ -240,6 +558,81 @@ This property may be set in Interface Builder.</Abstract>
 			
 			
 			<Anchor>//api/name/makeNextFieldBecomeFirstResponder</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setMaximumTextLength:</TokenIdentifier>
+			<Abstract type="html">Gets or sets the maximum number of characters allowed in the field&apos;s text property.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (assign, nonatomic) NSUInteger maximumTextLength</Declaration>
+			
+			
+			<Anchor>//api/name/maximumTextLength</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/maximumTextLength</TokenIdentifier>
+			<Abstract type="html">Gets or sets the maximum number of characters allowed in the field&apos;s text property.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (assign, nonatomic) NSUInteger maximumTextLength</Declaration>
+			
+			
+			<Anchor>//api/name/maximumTextLength</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/maximumTextLength</TokenIdentifier>
+			<Abstract type="html">Gets or sets the maximum number of characters allowed in the field&apos;s text property.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (assign, nonatomic) NSUInteger maximumTextLength</Declaration>
+			
+			
+			<Anchor>//api/name/maximumTextLength</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/setShouldSelectAllTextWhenBecomingFirstResponder:</TokenIdentifier>
+			<Abstract type="html">Gets or sets whether the text field&apos;s text should be automatically selected when the field becomes
+the first responder.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (assign, nonatomic) BOOL shouldSelectAllTextWhenBecomingFirstResponder</Declaration>
+			
+			
+			<Anchor>//api/name/shouldSelectAllTextWhenBecomingFirstResponder</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DPTextField/shouldSelectAllTextWhenBecomingFirstResponder</TokenIdentifier>
+			<Abstract type="html">Gets or sets whether the text field&apos;s text should be automatically selected when the field becomes
+the first responder.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (assign, nonatomic) BOOL shouldSelectAllTextWhenBecomingFirstResponder</Declaration>
+			
+			
+			<Anchor>//api/name/shouldSelectAllTextWhenBecomingFirstResponder</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DPTextField/shouldSelectAllTextWhenBecomingFirstResponder</TokenIdentifier>
+			<Abstract type="html">Gets or sets whether the text field&apos;s text should be automatically selected when the field becomes
+the first responder.</Abstract>
+			<DeclaredIn>DPTextField.h</DeclaredIn>
+			
+			<Declaration>@property (assign, nonatomic) BOOL shouldSelectAllTextWhenBecomingFirstResponder</Declaration>
+			
+			
+			<Anchor>//api/name/shouldSelectAllTextWhenBecomingFirstResponder</Anchor>
             <NodeRef refid="1"/>
 		</Token>
 		
