@@ -212,7 +212,19 @@
         }
 
         if (field.shouldReturn) {
-            return field.shouldReturn(field);
+            if (!field.shouldReturn(field)) {
+                return NO;
+            }
+        }
+
+        switch (field.returnKeyType) {
+            case UIReturnKeyNext:
+                return [field makeNextFieldBecomeFirstResponder];
+                break;
+                
+            default:
+                return [field resignFirstResponder];
+                break;
         }
     }
     return YES;

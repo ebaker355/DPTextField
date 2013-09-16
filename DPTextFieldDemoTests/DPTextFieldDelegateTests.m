@@ -130,4 +130,29 @@
     XCTAssertTrue([self.sut.delegate textField:self.sut shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@"foo"], @"The text length should be allowed to be <= maximumTextLength.");
 }
 
+- (void)testDelegateMakesNextFieldFirstResponderWhenReturnKeyIsNext {
+    id mockField = [OCMockObject niceMockForClass:[DPTextField class]];
+    [self.sut setNextField:mockField];
+
+    [[[mockField expect] andReturnValue:@YES] canBecomeFirstResponder];
+    [[[mockField expect] andReturnValue:@YES] becomeFirstResponder];
+
+    [self.sut setReturnKeyType:UIReturnKeyNext];
+    [self.sut.delegate textFieldShouldReturn:self.sut];
+
+    XCTAssertNoThrow([mockField verify], @"The next field should become the first responder when the current field returns and has a Next type return key..");
+}
+
+- (void)testDelegateResignsFirstResponderWhenReturnKeyIsNotNext {
+    [self.sut setReturnKeyType:UIReturnKeyDefault];
+
+    id delegate = self.sut.delegate;
+    id mockSut = [OCMockObject partialMockForObject:self.sut];
+    [[[mockSut expect] andReturnValue:@YES] resignFirstResponder];
+
+    [delegate textFieldShouldReturn:mockSut];
+
+    XCTAssertNoThrow([mockSut verify], @"The field should resign first responder when return key is selected and is not Next.");
+}
+
 @end
