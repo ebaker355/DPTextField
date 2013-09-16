@@ -108,6 +108,16 @@
                 return NO;
             }
         }
+
+        NSUInteger maximumTextLength = field.maximumTextLength;
+        if (maximumTextLength > 0) {
+            NSUInteger newLength = field.text.length + string.length - range.length;
+            // If the string is being shortened, allow it.
+            if (newLength < field.text.length) {
+                return YES;
+            }
+            return newLength <= maximumTextLength;
+        }
     }
     return YES;
 }

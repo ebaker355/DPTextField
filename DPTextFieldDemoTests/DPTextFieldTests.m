@@ -41,4 +41,9 @@
     XCTAssertTrue([self.sut respondsToSelector:@selector(setNextField:)], @"DPTextField should have a settable nextField property.");
 }
 
+- (void)testHasMaximumTextLengthProperty {
+    XCTAssertTrue([self.sut respondsToSelector:@selector(maximumTextLength)], @"DPTextField should have a readable maximumTextLength property.");
+    XCTAssertTrue([self.sut respondsToSelector:@selector(setMaximumTextLength:)], @"DPTextField should have a settable maximumTextLength property.");
+}
+
 @end

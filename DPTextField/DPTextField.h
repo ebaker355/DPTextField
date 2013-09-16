@@ -158,4 +158,9 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
  */
 - (BOOL)makeNextFieldBecomeFirstResponder;
 
+/**
+ Gets or sets the maximum number of characters allowed in the field's text property.
+ */
+@property (assign, nonatomic) NSUInteger maximumTextLength;
+
 @end

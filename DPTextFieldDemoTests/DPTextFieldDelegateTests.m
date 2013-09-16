@@ -121,4 +121,13 @@
     XCTAssertTrue(blockCalled, @"The DPTextFieldShouldReturn block should be called.");
 }
 
+- (void)testDelegateHonorsMaximumTextLengthProperty {
+    [self.sut setMaximumTextLength:0];
+    XCTAssertTrue([self.sut.delegate textField:self.sut shouldChangeCharactersInRange:NSMakeRange(0, 6) replacementString:@"foobar"], @"The text length should not be restricted when maximumTextLength < 1.");
+
+    [self.sut setMaximumTextLength:3];
+    XCTAssertFalse([self.sut.delegate textField:self.sut shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@"foobar"], @"The text length should be restricted to maximumTextLength.");
+    XCTAssertTrue([self.sut.delegate textField:self.sut shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@"foo"], @"The text length should be allowed to be <= maximumTextLength.");
+}
+
 @end
