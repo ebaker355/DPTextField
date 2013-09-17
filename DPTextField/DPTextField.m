@@ -48,6 +48,24 @@
 - (void)initSelf {
     [self setDelegate:[DPTextFieldInternalSharedDelegate sharedDelegate]];
     [self updateToolbar];
+
+    __weak typeof(self) weakSelf = self;
+    self.textDidChangeObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf updateToolbar];
+
+        if (strongSelf.textDidChange) {
+            strongSelf.textDidChange(strongSelf);
+        }
+    }];
+}
+
+- (void)dealloc
+{
+    if (self.textDidChangeObserver) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self.textDidChangeObserver];
+        self.textDidChangeObserver = nil;
+    }
 }
 
 #pragma mark - Custom delegate handling
@@ -81,29 +99,10 @@
 - (BOOL)becomeFirstResponder {
     BOOL retVal = [super becomeFirstResponder];
     if (retVal) {
-        if (self.textDidChange) {
-            __weak typeof(self) weakSelf = self;
-            self.textDidChangeObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-                __strong __typeof(weakSelf) strongSelf = weakSelf;
-                strongSelf.textDidChange(strongSelf);
-            }];
-        }
+        [self updateToolbar];
 
         if (self.shouldSelectAllTextWhenBecomingFirstResponder) {
             [self selectAllText];
-        }
-
-        [self updateToolbar];
-    }
-    return retVal;
-}
-
-- (BOOL)resignFirstResponder {
-    BOOL retVal = [super resignFirstResponder];
-    if (retVal) {
-        if (self.textDidChangeObserver) {
-            [[NSNotificationCenter defaultCenter] removeObserver:self.textDidChangeObserver];
-            self.textDidChangeObserver = nil;
         }
     }
     return retVal;
@@ -158,7 +157,7 @@
     item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(resignFirstResponder)];
     [items addObject:item];
 
-    [toolbar setItems:items];
+    [toolbar setItems:items animated:NO];
     [toolbar sizeToFit];
 }
 
