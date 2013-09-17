@@ -186,4 +186,9 @@ typedef void(^DPTextFieldTextDidChange)(DPTextField *textField);
  */
 - (void)selectAllText;
 
+/**
+ Updates the keyboard toolbar.
+ */
+- (void)updateToolbar;
+
 @end

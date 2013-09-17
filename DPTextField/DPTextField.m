@@ -47,6 +47,7 @@
 
 - (void)initSelf {
     [self setDelegate:[DPTextFieldInternalSharedDelegate sharedDelegate]];
+    [self updateToolbar];
 }
 
 #pragma mark - Custom delegate handling
@@ -91,6 +92,8 @@
         if (self.shouldSelectAllTextWhenBecomingFirstResponder) {
             [self selectAllText];
         }
+
+        [self updateToolbar];
     }
     return retVal;
 }
@@ -113,6 +116,50 @@
         UITextRange *range = [strongSelf textRangeFromPosition:strongSelf.beginningOfDocument toPosition:strongSelf.endOfDocument];
         [strongSelf setSelectedTextRange:range];
     });
+}
+
+#pragma mark - Toolbar
+
+- (void)updateToolbar {
+    UIToolbar *toolbar = nil;
+    if (!self.inputAccessoryView) {
+        toolbar = [[UIToolbar alloc] initWithFrame:CGRectZero];
+        switch (self.keyboardAppearance) {
+            case UIKeyboardAppearanceDark:
+                [toolbar setBarStyle:UIBarStyleBlack];
+                [toolbar setTintColor:[UIColor whiteColor]];
+                break;
+                
+            default:
+                [toolbar setBarStyle:UIBarStyleDefault];
+                break;
+        }
+        [self setInputAccessoryView:toolbar];
+    } else {
+        toolbar = (UIToolbar *)self.inputAccessoryView;
+    }
+
+    NSMutableArray *items = [NSMutableArray array];
+
+    UIBarButtonItem *item = nil;
+    if (self.previousField || self.nextField) {
+        item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"DPTextField_AngleLeft"] style:UIBarButtonItemStylePlain target:self action:@selector(makePreviousFieldBecomeFirstResponder)];
+        item.enabled = [self canMakePreviousFieldBecomeFirstResponder];
+        [items addObject:item];
+
+        item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"DPTextField_AngleRight"] style:UIBarButtonItemStylePlain target:self action:@selector(makeNextFieldBecomeFirstResponder)];
+        item.enabled = [self canMakeNextFieldBecomeFirstResponder];
+        [items addObject:item];
+    }
+
+    item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [items addObject:item];
+
+    item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(resignFirstResponder)];
+    [items addObject:item];
+
+    [toolbar setItems:items];
+    [toolbar sizeToFit];
 }
 
 @end
