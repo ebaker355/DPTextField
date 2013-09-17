@@ -14,6 +14,7 @@
 
 @interface DPTextField ()
 @property (assign, nonatomic) id<UITextFieldDelegate> customDelegate;
+@property (weak, nonatomic) id textDidChangeObserver;
 @end
 
 @implementation DPTextField
@@ -65,7 +66,7 @@
 }
 
 - (BOOL)makePreviousFieldBecomeFirstResponder {
-    return [self canMakePreviousFieldBecomeFirstResponder] && [self.previousField becomeFirstResponder];
+    return [self.previousField becomeFirstResponder];
 }
 
 - (BOOL)canMakeNextFieldBecomeFirstResponder {
@@ -73,24 +74,45 @@
 }
 
 - (BOOL)makeNextFieldBecomeFirstResponder {
-    return [self canMakeNextFieldBecomeFirstResponder] && [self.nextField becomeFirstResponder];
+    return [self.nextField becomeFirstResponder];
 }
 
 - (BOOL)becomeFirstResponder {
     BOOL retVal = [super becomeFirstResponder];
-    if (retVal && self.shouldSelectAllTextWhenBecomingFirstResponder) {
-        // NOTE: Unless we wrap the setSelectedTextRange call in a dispatch_after block,
-        // it will fail 50% of the time. Is this a UITextField bug?
-        double delayInSeconds = 0.01;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        __weak typeof(self) weakSelf = self;
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            __strong __typeof(weakSelf) strongSelf = weakSelf;
-            UITextRange *range = [strongSelf textRangeFromPosition:strongSelf.beginningOfDocument toPosition:strongSelf.endOfDocument];
-            [strongSelf setSelectedTextRange:range];
-        });
+    if (retVal) {
+        if (self.textDidChange) {
+            __weak typeof(self) weakSelf = self;
+            self.textDidChangeObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UITextFieldTextDidChangeNotification object:self queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+                __strong __typeof(weakSelf) strongSelf = weakSelf;
+                strongSelf.textDidChange(strongSelf);
+            }];
+        }
+
+        if (self.shouldSelectAllTextWhenBecomingFirstResponder) {
+            [self selectAllText];
+        }
     }
     return retVal;
+}
+
+- (BOOL)resignFirstResponder {
+    BOOL retVal = [super resignFirstResponder];
+    if (retVal) {
+        if (self.textDidChangeObserver) {
+            [[NSNotificationCenter defaultCenter] removeObserver:self.textDidChangeObserver];
+            self.textDidChangeObserver = nil;
+        }
+    }
+    return retVal;
+}
+
+- (void)selectAllText {
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        UITextRange *range = [strongSelf textRangeFromPosition:strongSelf.beginningOfDocument toPosition:strongSelf.endOfDocument];
+        [strongSelf setSelectedTextRange:range];
+    });
 }
 
 @end

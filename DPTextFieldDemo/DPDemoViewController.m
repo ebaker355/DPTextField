@@ -27,5 +27,9 @@
     [self.field2 setShouldSelectAllTextWhenBecomingFirstResponder:YES];
     [self.field3 setShouldSelectAllTextWhenBecomingFirstResponder:YES];
     [self.field4 setShouldSelectAllTextWhenBecomingFirstResponder:YES];
+
+    [self.field1 setTextDidChange:^(DPTextField *textField) {
+        NSLog(@"text changed for field 1: %@", textField.text);
+    }];
 }
 @end

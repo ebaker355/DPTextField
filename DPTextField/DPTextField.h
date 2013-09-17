@@ -24,6 +24,8 @@ typedef BOOL(^DPTextFieldShouldEndEditing)(DPTextField *textField);
 
 typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 
+typedef void(^DPTextFieldTextDidChange)(DPTextField *textField);
+
 /**
  UITextField subclass that adds extra functionality. If you're using Interface Builder, set the text field control's class to this class.
  */
@@ -125,6 +127,16 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
 - (void)setShouldReturn:(DPTextFieldShouldReturn)shouldReturnBlock;
 
 /**
+ Block version of UITextFieldTextDidChangeNotification receiver.
+ */
+@property (copy, nonatomic) DPTextFieldTextDidChange textDidChange;
+
+/**
+ Setter for block version of UITextFieldTextDidChangeNotification for autocompletion.
+ */
+- (void)setTextDidChange:(DPTextFieldTextDidChange)textDidChange;
+
+/**
  The previous responder in the responder chain.
  When this property is set, the previous bar button item (<) will appear in the field's input accessory toolbar.
  This property may be set in Interface Builder.
@@ -168,5 +180,10 @@ typedef BOOL(^DPTextFieldShouldReturn)(DPTextField *textField);
  the first responder.
  */
 @property (assign, nonatomic) BOOL shouldSelectAllTextWhenBecomingFirstResponder;
+
+/**
+ Causes all text in the field to be selected.
+ */
+- (void)selectAllText;
 
 @end
